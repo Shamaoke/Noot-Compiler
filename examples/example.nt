@@ -1,38 +1,36 @@
-start
+noot
 
 int a, b, c, d,l;
 char e;
-boolean f,g,k;
+bool f,g,k;
 
-a = b = 4;
-c = b + 3 * 2;
+a := b := 4;
+c := b + 3 * 2;
 
 read(d);
 
 print(d);
 
-e = 'e';
+e := 'e';
 
-f = a == 4 && b == 4 || d == 4;
+f := a == 4 && b == 4 || d == 4;
 
-g = {
+g := {
 		int h,i;
 		read(h,i);
-		(h > i);
-	} // compound expression with type boolean
+		//(h > i);
+	}; // compound expression with type boolean
 
-k = if g == true then {
+k := if g == true then {
 		int i,j;
-		j = 5;
-		(j > i);
+		j := 5;
+		//(j > i);
 	}
 else
-	false;
-fi // compound expression used with if statement
+	false
+fi; // compound expression used with if statement
 
 while k == true do {
-	l = l + 1;
-	if l > 10 then { k = false; } fi;
-} od
-
-end
+	l := l + 1;
+	if l > 10 then { k := false; } fi;
+} od;
