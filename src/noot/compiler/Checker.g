@@ -2,13 +2,12 @@ tree grammar Checker;
 
 options {
     tokenVocab=Noot;                    // import tokens from Calc.tokens
-    ASTLabelType=CommonTree;            // AST nodes are of type CommonTree
+    ASTLabelType=Node;            // AST nodes are of type CommonTree
 }
 
 @header {
     package noot.compiler;
-    import java.util.Set;
-    import java.util.HashSet;
+    import noot.ast.*;
 }
 
 // Alter code generation so catch-clauses get replaced with this action. 
@@ -24,35 +23,24 @@ options {
 }
 
 program
-    :   ^(NOOT (declaration | statement)+)
+    :   ^(NOOT (declaration | expression)+)
     ;
     
 declaration
-    :   ^(INT id=IDENTIFIER declaration_extention)
-        {   
-        }
-    |   ^(BOOL id=IDENTIFIER declaration_extention)
-        {   
-        }
-    |   ^(CHAR id=IDENTIFIER declaration_extention)
-        {   
+    :   ^(d=(INT | BOOL | CHAR) IDENTIFIER declaration_extention?)
+        {
+            checkerHelper.declare((DeclarationNode)d);
         }
     ;
     
 declaration_extention
-    :   ^(COMMA id=IDENTIFIER declaration_extention)
+    :   ^(d=COMMA id=IDENTIFIER declaration_extention?)
         {
+            checkerHelper.declare((DeclarationNode)d);
         }
-    ;
- 
-statement 
-    :   ^(BECOMES id=IDENTIFIER)
-        {   
-        }
-    |   
     ;
     
-expression 
+expression // All statements are expressions because they all have a return value
     :   operand
     |   ^(PLUS expression expression)
     |   ^(MINUS expression expression?)
@@ -68,19 +56,30 @@ expression
     |   ^(MORE expression expression)
     |   ^(AND expression expression)
     |   ^(OR expression expression)
-    |   ^(BECOMES id=IDENTIFIER expression) {
-        }
+    |   ^(BECOMES id=IDENTIFIER expression) // Assign statement
+    {
+        checkerHelper.linkToDeclaration((IdentifierNode)id);
+    }
+    |   ^(READ expression+) // Read statement
+    |   ^(PRINT expression+) // Print statement
+    |   ^(LCURLY {
+            checkerHelper.openScope();
+        } (declaration | expression)+)
+        {
+            checkerHelper.closeScope();
+        } // Compound expression
+    |   ^(IF expression expression expression?) // Conditional statement
+    |   ^(WHILE expression expression) // Loop statement
     ;
     
 operand
     :   id=IDENTIFIER 
-        {   
+        {
+          checkerHelper.linkToDeclaration((IdentifierNode)id);
         }
     |   n=NUMBER 
     |   TRUE
     |   FALSE
     |   c=CHARACTER
     ;
-    
-boolean_value
     

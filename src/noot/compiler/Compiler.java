@@ -3,6 +3,8 @@ package noot.compiler;
 import java.io.*;
 import java.util.*;
 
+import noot.ast.NodeAdaptor;
+
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
@@ -33,6 +35,7 @@ public class Compiler {
 			NootLexer lexer = new NootLexer(new ANTLRInputStream(in));
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NootParser parser = new NootParser(tokens);
+			parser.setTreeAdaptor(new NodeAdaptor());
 
 			NootParser.program_return result = parser.program();
 			CommonTree tree = (CommonTree) result.getTree();
@@ -40,10 +43,11 @@ public class Compiler {
 			// Printing the AST
 			System.out.println(tree.toStringTree());
 
-
-			//CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-			//Checker checker = new Checker(nodes);
-			//checker.program();
+			CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
+			Checker checker = new Checker(nodes);
+			checker.program();
+			
+			System.out.println(tree.toStringTree());
                         	
 			//            	TreeNodeStream nodes = new BufferedTreeNodeStream(tree);
 			//            	CalcGenerator generator = new CalcGenerator(nodes);

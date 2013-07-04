@@ -1,6 +1,7 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-04 12:03:43
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-04 16:24:07
 
   package noot.compiler;
+  import noot.ast.*;
 
 
 import org.antlr.runtime.*;
@@ -78,8 +79,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:11:5: ( '&&' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:11:7: '&&'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:12:5: ( '&&' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:12:7: '&&'
 			{
 			match("&&"); 
 
@@ -99,8 +100,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = APOSTROPHE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:12:12: ( '\\'' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:12:14: '\\''
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:13:12: ( '\\'' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:13:14: '\\''
 			{
 			match('\''); 
 			}
@@ -119,8 +120,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = BECOMES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:13:9: ( ':=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:13:11: ':='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:14:9: ( ':=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:14:11: ':='
 			{
 			match(":="); 
 
@@ -140,8 +141,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = BOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:14:6: ( 'bool' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:14:8: 'bool'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:15:6: ( 'bool' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:15:8: 'bool'
 			{
 			match("bool"); 
 
@@ -161,8 +162,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = CHAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:15:6: ( 'char' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:15:8: 'char'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:16:6: ( 'char' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:16:8: 'char'
 			{
 			match("char"); 
 
@@ -182,8 +183,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:16:7: ( ',' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:16:9: ','
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:17:7: ( ',' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:17:9: ','
 			{
 			match(','); 
 			}
@@ -202,8 +203,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = DEVIDE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:17:8: ( '/' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:17:10: '/'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:8: ( '/' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:10: '/'
 			{
 			match('/'); 
 			}
@@ -222,8 +223,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = DO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:4: ( 'do' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:6: 'do'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:4: ( 'do' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:6: 'do'
 			{
 			match("do"); 
 
@@ -243,8 +244,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = ELSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:6: ( 'else' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:8: 'else'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:6: ( 'else' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:8: 'else'
 			{
 			match("else"); 
 
@@ -264,8 +265,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:4: ( '==' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:6: '=='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:4: ( '==' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:6: '=='
 			{
 			match("=="); 
 
@@ -285,8 +286,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:7: ( 'false' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:9: 'false'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:7: ( 'false' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:9: 'false'
 			{
 			match("false"); 
 
@@ -306,8 +307,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = FI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:4: ( 'fi' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:6: 'fi'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:4: ( 'fi' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:6: 'fi'
 			{
 			match("fi"); 
 
@@ -327,8 +328,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = IF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:4: ( 'if' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:6: 'if'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:4: ( 'if' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:6: 'if'
 			{
 			match("if"); 
 
@@ -348,8 +349,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:5: ( 'int' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:7: 'int'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:5: ( 'int' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:7: 'int'
 			{
 			match("int"); 
 
@@ -369,8 +370,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:8: ( '{' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:10: '{'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:8: ( '{' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:10: '{'
 			{
 			match('{'); 
 			}
@@ -389,8 +390,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LESS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:6: ( '<' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:8: '<'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:6: ( '<' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:8: '<'
 			{
 			match('<'); 
 			}
@@ -409,8 +410,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LESSEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:8: ( '<=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:10: '<='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:8: ( '<=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:10: '<='
 			{
 			match("<="); 
 
@@ -430,8 +431,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:8: ( '(' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:10: '('
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:8: ( '(' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:10: '('
 			{
 			match('('); 
 			}
@@ -450,8 +451,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:7: ( '-' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:9: '-'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:7: ( '-' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:9: '-'
 			{
 			match('-'); 
 			}
@@ -470,8 +471,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MODULO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:8: ( '%' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:10: '%'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:8: ( '%' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:10: '%'
 			{
 			match('%'); 
 			}
@@ -490,8 +491,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MORE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:6: ( '>' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:8: '>'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:6: ( '>' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:8: '>'
 			{
 			match('>'); 
 			}
@@ -510,8 +511,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MOREEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:8: ( '>=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:10: '>='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:8: ( '>=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:10: '>='
 			{
 			match(">="); 
 
@@ -531,8 +532,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MULTIPLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:10: ( '*' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:12: '*'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:10: ( '*' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:12: '*'
 			{
 			match('*'); 
 			}
@@ -551,8 +552,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NEGATION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:10: ( '!' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:12: '!'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:10: ( '!' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:12: '!'
 			{
 			match('!'); 
 			}
@@ -571,8 +572,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:5: ( '!=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:7: '!='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:5: ( '!=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:7: '!='
 			{
 			match("!="); 
 
@@ -592,8 +593,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NOOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:6: ( 'noot' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:8: 'noot'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:6: ( 'noot' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:8: 'noot'
 			{
 			match("noot"); 
 
@@ -613,8 +614,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = OD;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:4: ( 'od' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:6: 'od'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:4: ( 'od' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:6: 'od'
 			{
 			match("od"); 
 
@@ -634,8 +635,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:4: ( '||' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:6: '||'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:4: ( '||' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:6: '||'
 			{
 			match("||"); 
 
@@ -655,8 +656,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:6: ( '+' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:8: '+'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:6: ( '+' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:8: '+'
 			{
 			match('+'); 
 			}
@@ -675,8 +676,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:7: ( 'print' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:9: 'print'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:7: ( 'print' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:9: 'print'
 			{
 			match("print"); 
 
@@ -696,8 +697,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = RCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:8: ( '}' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:10: '}'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:8: ( '}' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:10: '}'
 			{
 			match('}'); 
 			}
@@ -716,8 +717,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = READ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:6: ( 'read' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:8: 'read'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:6: ( 'read' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:8: 'read'
 			{
 			match("read"); 
 
@@ -737,8 +738,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:8: ( ')' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:10: ')'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:8: ( ')' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:10: ')'
 			{
 			match(')'); 
 			}
@@ -757,8 +758,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = SEMICOLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:11: ( ';' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:13: ';'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:11: ( ';' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:13: ';'
 			{
 			match(';'); 
 			}
@@ -777,8 +778,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = THEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:6: ( 'then' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:8: 'then'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:6: ( 'then' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:8: 'then'
 			{
 			match("then"); 
 
@@ -798,8 +799,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:6: ( 'true' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:8: 'true'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:6: ( 'true' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:8: 'true'
 			{
 			match("true"); 
 
@@ -819,8 +820,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = WHILE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:7: ( 'while' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:9: 'while'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:7: ( 'while' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:9: 'while'
 			{
 			match("while"); 
 
@@ -840,12 +841,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = IDENTIFIER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:162:5: ( LETTER ( LETTER | DIGIT )* )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:162:9: LETTER ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:5: ( LETTER ( LETTER | DIGIT )* )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:9: LETTER ( LETTER | DIGIT )*
 			{
 			mLETTER(); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:162:16: ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:16: ( LETTER | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -890,10 +891,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:166:5: ( ( DIGIT )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:166:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:5: ( ( DIGIT )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:9: ( DIGIT )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:166:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -942,8 +943,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = CHARACTER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:170:5: ( APOSTROPHE LETTER APOSTROPHE )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:170:8: APOSTROPHE LETTER APOSTROPHE
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:173:5: ( APOSTROPHE LETTER APOSTROPHE )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:173:8: APOSTROPHE LETTER APOSTROPHE
 			{
 			mAPOSTROPHE(); 
 
@@ -967,12 +968,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:174:5: ( '//' ( . )* '\\n' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:174:9: '//' ( . )* '\\n'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:5: ( '//' ( . )* '\\n' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:9: '//' ( . )* '\\n'
 			{
 			match("//"); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:174:14: ( . )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:14: ( . )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -986,7 +987,7 @@ public class NootLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:174:14: .
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:14: .
 					{
 					matchAny(); 
 					}
@@ -1015,10 +1016,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:179:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:179:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:179:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1066,7 +1067,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:183:17: ( ( '0' .. '9' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:186:17: ( ( '0' .. '9' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -1089,7 +1090,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:17: ( ( 'a' .. 'z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:187:17: ( ( 'a' .. 'z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1112,7 +1113,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:185:17: ( ( 'A' .. 'Z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:17: ( ( 'A' .. 'Z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -1135,7 +1136,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:186:17: ( LOWER | UPPER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:189:17: ( LOWER | UPPER )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
