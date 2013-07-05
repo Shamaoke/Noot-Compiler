@@ -19,11 +19,15 @@ public class Node extends CommonTree {
 		return NodeType.VOID;
 	}
 
-	public String toString() {
-		
+	public String toString()
+	{	
 		String s = super.toString();
-		//s = s + "{" + Integer.toString(this.getType()) + "}";
+		
+		if(this.getNodeType() != NodeType.VOID)
+		{
+			s = s + "{" + this.getNodeType() + "}";
+		}
+		
 		return s;
 	}
-	
 }

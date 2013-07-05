@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-04 16:24:06
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-05 13:25:58
 
   package noot.compiler;
   import noot.ast.*;
@@ -533,11 +533,11 @@ public class NootParser extends Parser {
 
 			BECOMES17=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_assignment997); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			BECOMES17_tree = (Node)adaptor.create(BECOMES17);
+			BECOMES17_tree = new TypeAdoptedNode(BECOMES17) ;
 			root_0 = (Node)adaptor.becomeRoot(BECOMES17_tree, root_0);
 			}
 
-			pushFollow(FOLLOW_assignment_extention_in_assignment1000);
+			pushFollow(FOLLOW_assignment_extention_in_assignment1003);
 			assignment_extention18=assignment_extention();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -620,19 +620,19 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					IDENTIFIER19=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_assignment_extention1030); if (state.failed) return retval;
+					IDENTIFIER19=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_assignment_extention1033); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					IDENTIFIER19_tree = new IdentifierNode(IDENTIFIER19) ;
 					adaptor.addChild(root_0, IDENTIFIER19_tree);
 					}
 
-					BECOMES20=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_assignment_extention1035); if (state.failed) return retval;
+					BECOMES20=(Token)match(input,BECOMES,FOLLOW_BECOMES_in_assignment_extention1038); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					BECOMES20_tree = (Node)adaptor.create(BECOMES20);
+					BECOMES20_tree = new TypeAdoptedNode(BECOMES20) ;
 					root_0 = (Node)adaptor.becomeRoot(BECOMES20_tree, root_0);
 					}
 
-					pushFollow(FOLLOW_assignment_extention_in_assignment_extention1038);
+					pushFollow(FOLLOW_assignment_extention_in_assignment_extention1044);
 					assignment_extention21=assignment_extention();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -646,7 +646,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_expression_in_assignment_extention1047);
+					pushFollow(FOLLOW_expression_in_assignment_extention1053);
 					expression22=expression();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -760,7 +760,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_assignment_in_expression1078);
+					pushFollow(FOLLOW_assignment_in_expression1084);
 					assignment23=assignment();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -774,7 +774,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_print_statement_in_expression1088);
+					pushFollow(FOLLOW_print_statement_in_expression1094);
 					print_statement24=print_statement();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -788,7 +788,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_read_statement_in_expression1098);
+					pushFollow(FOLLOW_read_statement_in_expression1104);
 					read_statement25=read_statement();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -802,7 +802,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_while_statement_in_expression1108);
+					pushFollow(FOLLOW_while_statement_in_expression1114);
 					while_statement26=while_statement();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -816,7 +816,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_if_statement_in_expression1118);
+					pushFollow(FOLLOW_if_statement_in_expression1124);
 					if_statement27=if_statement();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -830,7 +830,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_expression_level6_in_expression1128);
+					pushFollow(FOLLOW_expression_level6_in_expression1134);
 					expression_level628=expression_level6();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -894,20 +894,20 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			PRINT29=(Token)match(input,PRINT,FOLLOW_PRINT_in_print_statement1147); if (state.failed) return retval;
+			PRINT29=(Token)match(input,PRINT,FOLLOW_PRINT_in_print_statement1153); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			PRINT29_tree = (Node)adaptor.create(PRINT29);
+			PRINT29_tree = new TypeAdoptedNode(PRINT29) ;
 			root_0 = (Node)adaptor.becomeRoot(PRINT29_tree, root_0);
 			}
 
-			LPAREN30=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_print_statement1150); if (state.failed) return retval;
-			pushFollow(FOLLOW_expression_in_print_statement1153);
+			LPAREN30=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_print_statement1159); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_print_statement1162);
 			expression31=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression31.getTree());
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:110:35: ( COMMA ! expression )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:110:52: ( COMMA ! expression )*
 			loop7:
 			while (true) {
 				int alt7=2;
@@ -918,10 +918,10 @@ public class NootParser extends Parser {
 
 				switch (alt7) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:110:36: COMMA ! expression
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:110:53: COMMA ! expression
 					{
-					COMMA32=(Token)match(input,COMMA,FOLLOW_COMMA_in_print_statement1156); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_print_statement1159);
+					COMMA32=(Token)match(input,COMMA,FOLLOW_COMMA_in_print_statement1165); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_print_statement1168);
 					expression33=expression();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -935,7 +935,7 @@ public class NootParser extends Parser {
 				}
 			}
 
-			RPAREN34=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_print_statement1163); if (state.failed) return retval;
+			RPAREN34=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_print_statement1172); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -992,20 +992,20 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			READ35=(Token)match(input,READ,FOLLOW_READ_in_read_statement1188); if (state.failed) return retval;
+			READ35=(Token)match(input,READ,FOLLOW_READ_in_read_statement1197); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			READ35_tree = (Node)adaptor.create(READ35);
+			READ35_tree = new TypeAdoptedNode(READ35) ;
 			root_0 = (Node)adaptor.becomeRoot(READ35_tree, root_0);
 			}
 
-			LPAREN36=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_read_statement1191); if (state.failed) return retval;
-			pushFollow(FOLLOW_expression_in_read_statement1194);
+			LPAREN36=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_read_statement1203); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_read_statement1206);
 			expression37=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression37.getTree());
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:114:34: ( COMMA ! expression )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:114:51: ( COMMA ! expression )*
 			loop8:
 			while (true) {
 				int alt8=2;
@@ -1016,10 +1016,10 @@ public class NootParser extends Parser {
 
 				switch (alt8) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:114:35: COMMA ! expression
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:114:52: COMMA ! expression
 					{
-					COMMA38=(Token)match(input,COMMA,FOLLOW_COMMA_in_read_statement1197); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_read_statement1200);
+					COMMA38=(Token)match(input,COMMA,FOLLOW_COMMA_in_read_statement1209); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_read_statement1212);
 					expression39=expression();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1033,7 +1033,7 @@ public class NootParser extends Parser {
 				}
 			}
 
-			RPAREN40=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_read_statement1204); if (state.failed) return retval;
+			RPAREN40=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_read_statement1216); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -1088,26 +1088,26 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			WHILE41=(Token)match(input,WHILE,FOLLOW_WHILE_in_while_statement1229); if (state.failed) return retval;
+			WHILE41=(Token)match(input,WHILE,FOLLOW_WHILE_in_while_statement1241); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			WHILE41_tree = (Node)adaptor.create(WHILE41);
 			root_0 = (Node)adaptor.becomeRoot(WHILE41_tree, root_0);
 			}
 
-			pushFollow(FOLLOW_expression_in_while_statement1232);
+			pushFollow(FOLLOW_expression_in_while_statement1244);
 			expression42=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression42.getTree());
 
-			DO43=(Token)match(input,DO,FOLLOW_DO_in_while_statement1234); if (state.failed) return retval;
-			pushFollow(FOLLOW_expression_in_while_statement1237);
+			DO43=(Token)match(input,DO,FOLLOW_DO_in_while_statement1246); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_while_statement1249);
 			expression44=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression44.getTree());
 
-			OD45=(Token)match(input,OD,FOLLOW_OD_in_while_statement1239); if (state.failed) return retval;
+			OD45=(Token)match(input,OD,FOLLOW_OD_in_while_statement1251); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -1165,26 +1165,26 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			IF46=(Token)match(input,IF,FOLLOW_IF_in_if_statement1260); if (state.failed) return retval;
+			IF46=(Token)match(input,IF,FOLLOW_IF_in_if_statement1272); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			IF46_tree = (Node)adaptor.create(IF46);
+			IF46_tree = new TypeAdoptedNode(IF46) ;
 			root_0 = (Node)adaptor.becomeRoot(IF46_tree, root_0);
 			}
 
-			pushFollow(FOLLOW_expression_in_if_statement1263);
+			pushFollow(FOLLOW_expression_in_if_statement1278);
 			expression47=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression47.getTree());
 
-			THEN48=(Token)match(input,THEN,FOLLOW_THEN_in_if_statement1265); if (state.failed) return retval;
-			pushFollow(FOLLOW_expression_in_if_statement1268);
+			THEN48=(Token)match(input,THEN,FOLLOW_THEN_in_if_statement1280); if (state.failed) return retval;
+			pushFollow(FOLLOW_expression_in_if_statement1283);
 			expression49=expression();
 			state._fsp--;
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) adaptor.addChild(root_0, expression49.getTree());
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:122:41: ( ELSE ! expression )?
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:122:58: ( ELSE ! expression )?
 			int alt9=2;
 			int LA9_0 = input.LA(1);
 			if ( (LA9_0==ELSE) ) {
@@ -1192,10 +1192,10 @@ public class NootParser extends Parser {
 			}
 			switch (alt9) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:122:42: ELSE ! expression
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:122:59: ELSE ! expression
 					{
-					ELSE50=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_statement1271); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_if_statement1274);
+					ELSE50=(Token)match(input,ELSE,FOLLOW_ELSE_in_if_statement1286); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_if_statement1289);
 					expression51=expression();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1206,7 +1206,7 @@ public class NootParser extends Parser {
 
 			}
 
-			FI52=(Token)match(input,FI,FOLLOW_FI_in_if_statement1278); if (state.failed) return retval;
+			FI52=(Token)match(input,FI,FOLLOW_FI_in_if_statement1293); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -1258,13 +1258,13 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			LCURLY53=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_compound_expression1302); if (state.failed) return retval;
+			LCURLY53=(Token)match(input,LCURLY,FOLLOW_LCURLY_in_compound_expression1317); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			LCURLY53_tree = (Node)adaptor.create(LCURLY53);
+			LCURLY53_tree = new TypeAdoptedNode(LCURLY53) ;
 			root_0 = (Node)adaptor.becomeRoot(LCURLY53_tree, root_0);
 			}
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:126:17: ( command )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:126:34: ( command )*
 			loop10:
 			while (true) {
 				int alt10=2;
@@ -1275,9 +1275,9 @@ public class NootParser extends Parser {
 
 				switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:126:17: command
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:126:34: command
 					{
-					pushFollow(FOLLOW_command_in_compound_expression1305);
+					pushFollow(FOLLOW_command_in_compound_expression1323);
 					command54=command();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1291,7 +1291,7 @@ public class NootParser extends Parser {
 				}
 			}
 
-			RCURLY55=(Token)match(input,RCURLY,FOLLOW_RCURLY_in_compound_expression1308); if (state.failed) return retval;
+			RCURLY55=(Token)match(input,RCURLY,FOLLOW_RCURLY_in_compound_expression1326); if (state.failed) return retval;
 			}
 
 			retval.stop = input.LT(-1);
@@ -1361,7 +1361,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_expression_level5_in_expression_level61332);
+					pushFollow(FOLLOW_expression_level5_in_expression_level61350);
 					expression_level556=expression_level5();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1380,13 +1380,13 @@ public class NootParser extends Parser {
 						case 1 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:130:28: OR ^ expression_level5
 							{
-							OR57=(Token)match(input,OR,FOLLOW_OR_in_expression_level61335); if (state.failed) return retval;
+							OR57=(Token)match(input,OR,FOLLOW_OR_in_expression_level61353); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							OR57_tree = new BinaryExpressionNode(OR57) ;
 							root_0 = (Node)adaptor.becomeRoot(OR57_tree, root_0);
 							}
 
-							pushFollow(FOLLOW_expression_level5_in_expression_level61341);
+							pushFollow(FOLLOW_expression_level5_in_expression_level61359);
 							expression_level558=expression_level5();
 							state._fsp--;
 							if (state.failed) return retval;
@@ -1408,7 +1408,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					pushFollow(FOLLOW_compound_expression_in_expression_level61353);
+					pushFollow(FOLLOW_compound_expression_in_expression_level61371);
 					compound_expression59=compound_expression();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1466,7 +1466,7 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expression_level4_in_expression_level51376);
+			pushFollow(FOLLOW_expression_level4_in_expression_level51394);
 			expression_level460=expression_level4();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -1485,13 +1485,13 @@ public class NootParser extends Parser {
 				case 1 :
 					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:135:28: AND ^ expression_level4
 					{
-					AND61=(Token)match(input,AND,FOLLOW_AND_in_expression_level51379); if (state.failed) return retval;
+					AND61=(Token)match(input,AND,FOLLOW_AND_in_expression_level51397); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					AND61_tree = new BinaryExpressionNode(AND61) ;
 					root_0 = (Node)adaptor.becomeRoot(AND61_tree, root_0);
 					}
 
-					pushFollow(FOLLOW_expression_level4_in_expression_level51385);
+					pushFollow(FOLLOW_expression_level4_in_expression_level51403);
 					expression_level462=expression_level4();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1565,7 +1565,7 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expression_level3_in_expression_level41410);
+			pushFollow(FOLLOW_expression_level3_in_expression_level41428);
 			expression_level363=expression_level3();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -1627,7 +1627,7 @@ public class NootParser extends Parser {
 						case 1 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:29: LESS ^
 							{
-							LESS64=(Token)match(input,LESS,FOLLOW_LESS_in_expression_level41414); if (state.failed) return retval;
+							LESS64=(Token)match(input,LESS,FOLLOW_LESS_in_expression_level41432); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							LESS64_tree = new BinaryExpressionNode(LESS64) ;
 							root_0 = (Node)adaptor.becomeRoot(LESS64_tree, root_0);
@@ -1638,7 +1638,7 @@ public class NootParser extends Parser {
 						case 2 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:59: LESSEQ ^
 							{
-							LESSEQ65=(Token)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression_level41422); if (state.failed) return retval;
+							LESSEQ65=(Token)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression_level41440); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							LESSEQ65_tree = new BinaryExpressionNode(LESSEQ65) ;
 							root_0 = (Node)adaptor.becomeRoot(LESSEQ65_tree, root_0);
@@ -1649,7 +1649,7 @@ public class NootParser extends Parser {
 						case 3 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:91: EQ ^
 							{
-							EQ66=(Token)match(input,EQ,FOLLOW_EQ_in_expression_level41430); if (state.failed) return retval;
+							EQ66=(Token)match(input,EQ,FOLLOW_EQ_in_expression_level41448); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							EQ66_tree = new BinaryExpressionNode(EQ66) ;
 							root_0 = (Node)adaptor.becomeRoot(EQ66_tree, root_0);
@@ -1660,7 +1660,7 @@ public class NootParser extends Parser {
 						case 4 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:119: NEQ ^
 							{
-							NEQ67=(Token)match(input,NEQ,FOLLOW_NEQ_in_expression_level41438); if (state.failed) return retval;
+							NEQ67=(Token)match(input,NEQ,FOLLOW_NEQ_in_expression_level41456); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							NEQ67_tree = new BinaryExpressionNode(NEQ67) ;
 							root_0 = (Node)adaptor.becomeRoot(NEQ67_tree, root_0);
@@ -1671,7 +1671,7 @@ public class NootParser extends Parser {
 						case 5 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:148: MOREEQ ^
 							{
-							MOREEQ68=(Token)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression_level41446); if (state.failed) return retval;
+							MOREEQ68=(Token)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression_level41464); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							MOREEQ68_tree = new BinaryExpressionNode(MOREEQ68) ;
 							root_0 = (Node)adaptor.becomeRoot(MOREEQ68_tree, root_0);
@@ -1682,7 +1682,7 @@ public class NootParser extends Parser {
 						case 6 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:139:180: MORE ^
 							{
-							MORE69=(Token)match(input,MORE,FOLLOW_MORE_in_expression_level41454); if (state.failed) return retval;
+							MORE69=(Token)match(input,MORE,FOLLOW_MORE_in_expression_level41472); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							MORE69_tree = new BinaryExpressionNode(MORE69) ;
 							root_0 = (Node)adaptor.becomeRoot(MORE69_tree, root_0);
@@ -1693,7 +1693,7 @@ public class NootParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_expression_level3_in_expression_level41461);
+					pushFollow(FOLLOW_expression_level3_in_expression_level41479);
 					expression_level370=expression_level3();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1759,7 +1759,7 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expression_level2_in_expression_level31487);
+			pushFollow(FOLLOW_expression_level2_in_expression_level31505);
 			expression_level271=expression_level2();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -1799,7 +1799,7 @@ public class NootParser extends Parser {
 						case 1 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:143:29: PLUS ^
 							{
-							PLUS72=(Token)match(input,PLUS,FOLLOW_PLUS_in_expression_level31491); if (state.failed) return retval;
+							PLUS72=(Token)match(input,PLUS,FOLLOW_PLUS_in_expression_level31509); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							PLUS72_tree = new NumericalExpressionNode(PLUS72) ;
 							root_0 = (Node)adaptor.becomeRoot(PLUS72_tree, root_0);
@@ -1810,7 +1810,7 @@ public class NootParser extends Parser {
 						case 2 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:143:62: MINUS ^
 							{
-							MINUS73=(Token)match(input,MINUS,FOLLOW_MINUS_in_expression_level31499); if (state.failed) return retval;
+							MINUS73=(Token)match(input,MINUS,FOLLOW_MINUS_in_expression_level31517); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							MINUS73_tree = new NumericalExpressionNode(MINUS73) ;
 							root_0 = (Node)adaptor.becomeRoot(MINUS73_tree, root_0);
@@ -1821,7 +1821,7 @@ public class NootParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_expression_level2_in_expression_level31506);
+					pushFollow(FOLLOW_expression_level2_in_expression_level31524);
 					expression_level274=expression_level2();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -1889,7 +1889,7 @@ public class NootParser extends Parser {
 			root_0 = (Node)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expression_level1_in_expression_level21533);
+			pushFollow(FOLLOW_expression_level1_in_expression_level21551);
 			expression_level175=expression_level1();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -1936,7 +1936,7 @@ public class NootParser extends Parser {
 						case 1 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:147:29: MULTIPLY ^
 							{
-							MULTIPLY76=(Token)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression_level21537); if (state.failed) return retval;
+							MULTIPLY76=(Token)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression_level21555); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							MULTIPLY76_tree = new NumericalExpressionNode(MULTIPLY76) ;
 							root_0 = (Node)adaptor.becomeRoot(MULTIPLY76_tree, root_0);
@@ -1947,7 +1947,7 @@ public class NootParser extends Parser {
 						case 2 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:147:66: DEVIDE ^
 							{
-							DEVIDE77=(Token)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression_level21545); if (state.failed) return retval;
+							DEVIDE77=(Token)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression_level21563); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							DEVIDE77_tree = new NumericalExpressionNode(DEVIDE77) ;
 							root_0 = (Node)adaptor.becomeRoot(DEVIDE77_tree, root_0);
@@ -1958,7 +1958,7 @@ public class NootParser extends Parser {
 						case 3 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:147:101: MODULO ^
 							{
-							MODULO78=(Token)match(input,MODULO,FOLLOW_MODULO_in_expression_level21553); if (state.failed) return retval;
+							MODULO78=(Token)match(input,MODULO,FOLLOW_MODULO_in_expression_level21571); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							MODULO78_tree = new NumericalExpressionNode(MODULO78) ;
 							root_0 = (Node)adaptor.becomeRoot(MODULO78_tree, root_0);
@@ -1969,7 +1969,7 @@ public class NootParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_expression_level1_in_expression_level21560);
+					pushFollow(FOLLOW_expression_level1_in_expression_level21578);
 					expression_level179=expression_level1();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -2047,7 +2047,7 @@ public class NootParser extends Parser {
 				case 1 :
 					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:151:10: MINUS ^
 					{
-					MINUS80=(Token)match(input,MINUS,FOLLOW_MINUS_in_expression_level11588); if (state.failed) return retval;
+					MINUS80=(Token)match(input,MINUS,FOLLOW_MINUS_in_expression_level11606); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS80_tree = new NumericalExpressionNode(MINUS80) ;
 					root_0 = (Node)adaptor.becomeRoot(MINUS80_tree, root_0);
@@ -2058,7 +2058,7 @@ public class NootParser extends Parser {
 				case 2 :
 					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:151:44: NEGATION ^
 					{
-					NEGATION81=(Token)match(input,NEGATION,FOLLOW_NEGATION_in_expression_level11596); if (state.failed) return retval;
+					NEGATION81=(Token)match(input,NEGATION,FOLLOW_NEGATION_in_expression_level11614); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					NEGATION81_tree = new BinaryExpressionNode(NEGATION81) ;
 					root_0 = (Node)adaptor.becomeRoot(NEGATION81_tree, root_0);
@@ -2069,7 +2069,7 @@ public class NootParser extends Parser {
 
 			}
 
-			pushFollow(FOLLOW_operand_in_expression_level11604);
+			pushFollow(FOLLOW_operand_in_expression_level11622);
 			operand82=operand();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2193,7 +2193,7 @@ public class NootParser extends Parser {
 						case 1 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:155:10: TRUE
 							{
-							TRUE83=(Token)match(input,TRUE,FOLLOW_TRUE_in_operand1625); if (state.failed) return retval;
+							TRUE83=(Token)match(input,TRUE,FOLLOW_TRUE_in_operand1643); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							TRUE83_tree = new BinaryExpressionNode(TRUE83) ;
 							adaptor.addChild(root_0, TRUE83_tree);
@@ -2204,7 +2204,7 @@ public class NootParser extends Parser {
 						case 2 :
 							// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:155:39: FALSE
 							{
-							FALSE84=(Token)match(input,FALSE,FOLLOW_FALSE_in_operand1632); if (state.failed) return retval;
+							FALSE84=(Token)match(input,FALSE,FOLLOW_FALSE_in_operand1650); if (state.failed) return retval;
 							if ( state.backtracking==0 ) {
 							FALSE84_tree = new BinaryExpressionNode(FALSE84) ;
 							adaptor.addChild(root_0, FALSE84_tree);
@@ -2223,7 +2223,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					IDENTIFIER85=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1646); if (state.failed) return retval;
+					IDENTIFIER85=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1664); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					IDENTIFIER85_tree = new IdentifierNode(IDENTIFIER85) ;
 					adaptor.addChild(root_0, IDENTIFIER85_tree);
@@ -2237,7 +2237,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					NUMBER86=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_operand1659); if (state.failed) return retval;
+					NUMBER86=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_operand1677); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					NUMBER86_tree = new NumericalExpressionNode(NUMBER86) ;
 					adaptor.addChild(root_0, NUMBER86_tree);
@@ -2251,7 +2251,7 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					CHARACTER87=(Token)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1672); if (state.failed) return retval;
+					CHARACTER87=(Token)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1690); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					CHARACTER87_tree = (Node)adaptor.create(CHARACTER87);
 					adaptor.addChild(root_0, CHARACTER87_tree);
@@ -2265,14 +2265,14 @@ public class NootParser extends Parser {
 					root_0 = (Node)adaptor.nil();
 
 
-					LPAREN88=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_operand1682); if (state.failed) return retval;
-					pushFollow(FOLLOW_expression_in_operand1685);
+					LPAREN88=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_operand1700); if (state.failed) return retval;
+					pushFollow(FOLLOW_expression_in_operand1703);
 					expression89=expression();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) adaptor.addChild(root_0, expression89.getTree());
 
-					RPAREN90=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_operand1687); if (state.failed) return retval;
+					RPAREN90=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_operand1705); if (state.failed) return retval;
 					}
 					break;
 
@@ -2301,9 +2301,9 @@ public class NootParser extends Parser {
 		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:96:8: ( IDENTIFIER BECOMES )
 		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:96:9: IDENTIFIER BECOMES
 		{
-		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1_Noot1023); if (state.failed) return;
+		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1_Noot1026); if (state.failed) return;
 
-		match(input,BECOMES,FOLLOW_BECOMES_in_synpred1_Noot1025); if (state.failed) return;
+		match(input,BECOMES,FOLLOW_BECOMES_in_synpred1_Noot1028); if (state.failed) return;
 
 		}
 
@@ -2315,9 +2315,9 @@ public class NootParser extends Parser {
 		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:101:9: ( IDENTIFIER BECOMES )
 		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:101:10: IDENTIFIER BECOMES
 		{
-		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred2_Noot1071); if (state.failed) return;
+		match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred2_Noot1077); if (state.failed) return;
 
-		match(input,BECOMES,FOLLOW_BECOMES_in_synpred2_Noot1073); if (state.failed) return;
+		match(input,BECOMES,FOLLOW_BECOMES_in_synpred2_Noot1079); if (state.failed) return;
 
 		}
 
@@ -2374,81 +2374,81 @@ public class NootParser extends Parser {
 	public static final BitSet FOLLOW_declaration_extention_in_declaration_extention971 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_IDENTIFIER_in_assignment992 = new BitSet(new long[]{0x0000000000000040L});
 	public static final BitSet FOLLOW_BECOMES_in_assignment997 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_assignment_extention_in_assignment1000 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_assignment_extention1030 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_BECOMES_in_assignment_extention1035 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_assignment_extention_in_assignment_extention1038 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_in_assignment_extention1047 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_assignment_in_expression1078 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_print_statement_in_expression1088 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_read_statement_in_expression1098 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_while_statement_in_expression1108 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_if_statement_in_expression1118 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_level6_in_expression1128 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PRINT_in_print_statement1147 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LPAREN_in_print_statement1150 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_print_statement1153 = new BitSet(new long[]{0x0000080000000400L});
-	public static final BitSet FOLLOW_COMMA_in_print_statement1156 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_print_statement1159 = new BitSet(new long[]{0x0000080000000400L});
-	public static final BitSet FOLLOW_RPAREN_in_print_statement1163 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_READ_in_read_statement1188 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_LPAREN_in_read_statement1191 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_read_statement1194 = new BitSet(new long[]{0x0000080000000400L});
-	public static final BitSet FOLLOW_COMMA_in_read_statement1197 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_read_statement1200 = new BitSet(new long[]{0x0000080000000400L});
-	public static final BitSet FOLLOW_RPAREN_in_read_statement1204 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WHILE_in_while_statement1229 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_while_statement1232 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_DO_in_while_statement1234 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_while_statement1237 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_OD_in_while_statement1239 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IF_in_if_statement1260 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_if_statement1263 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_THEN_in_if_statement1265 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_if_statement1268 = new BitSet(new long[]{0x0000000000048000L});
-	public static final BitSet FOLLOW_ELSE_in_if_statement1271 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_if_statement1274 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_FI_in_if_statement1278 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LCURLY_in_compound_expression1302 = new BitSet(new long[]{0x00014712187A0380L});
-	public static final BitSet FOLLOW_command_in_compound_expression1305 = new BitSet(new long[]{0x00014712187A0380L});
-	public static final BitSet FOLLOW_RCURLY_in_compound_expression1308 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_level5_in_expression_level61332 = new BitSet(new long[]{0x0000004000000002L});
-	public static final BitSet FOLLOW_OR_in_expression_level61335 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_expression_level5_in_expression_level61341 = new BitSet(new long[]{0x0000004000000002L});
-	public static final BitSet FOLLOW_compound_expression_in_expression_level61353 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_level4_in_expression_level51376 = new BitSet(new long[]{0x0000000000000012L});
-	public static final BitSet FOLLOW_AND_in_expression_level51379 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_expression_level4_in_expression_level51385 = new BitSet(new long[]{0x0000000000000012L});
-	public static final BitSet FOLLOW_expression_level3_in_expression_level41410 = new BitSet(new long[]{0x00000004C1810002L});
-	public static final BitSet FOLLOW_LESS_in_expression_level41414 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_LESSEQ_in_expression_level41422 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_EQ_in_expression_level41430 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_NEQ_in_expression_level41438 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_MOREEQ_in_expression_level41446 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_MORE_in_expression_level41454 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_expression_level3_in_expression_level41461 = new BitSet(new long[]{0x00000004C1810002L});
-	public static final BitSet FOLLOW_expression_level2_in_expression_level31487 = new BitSet(new long[]{0x0000008010000002L});
-	public static final BitSet FOLLOW_PLUS_in_expression_level31491 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_MINUS_in_expression_level31499 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_expression_level2_in_expression_level31506 = new BitSet(new long[]{0x0000008010000002L});
-	public static final BitSet FOLLOW_expression_level1_in_expression_level21533 = new BitSet(new long[]{0x0000000120001002L});
-	public static final BitSet FOLLOW_MULTIPLY_in_expression_level21537 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_DEVIDE_in_expression_level21545 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_MODULO_in_expression_level21553 = new BitSet(new long[]{0x00004012180A0200L});
-	public static final BitSet FOLLOW_expression_level1_in_expression_level21560 = new BitSet(new long[]{0x0000000120001002L});
-	public static final BitSet FOLLOW_MINUS_in_expression_level11588 = new BitSet(new long[]{0x00004010080A0200L});
-	public static final BitSet FOLLOW_NEGATION_in_expression_level11596 = new BitSet(new long[]{0x00004010080A0200L});
-	public static final BitSet FOLLOW_operand_in_expression_level11604 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1625 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1632 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand1646 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_operand1659 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHARACTER_in_operand1672 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_operand1682 = new BitSet(new long[]{0x00014512185A0200L});
-	public static final BitSet FOLLOW_expression_in_operand1685 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_operand1687 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_synpred1_Noot1023 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_BECOMES_in_synpred1_Noot1025 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_synpred2_Noot1071 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_BECOMES_in_synpred2_Noot1073 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_assignment_extention_in_assignment1003 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_assignment_extention1033 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_assignment_extention1038 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_assignment_extention_in_assignment_extention1044 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_in_assignment_extention1053 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_assignment_in_expression1084 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_print_statement_in_expression1094 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_read_statement_in_expression1104 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_while_statement_in_expression1114 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_if_statement_in_expression1124 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_level6_in_expression1134 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PRINT_in_print_statement1153 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_LPAREN_in_print_statement1159 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_print_statement1162 = new BitSet(new long[]{0x0000080000000400L});
+	public static final BitSet FOLLOW_COMMA_in_print_statement1165 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_print_statement1168 = new BitSet(new long[]{0x0000080000000400L});
+	public static final BitSet FOLLOW_RPAREN_in_print_statement1172 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_READ_in_read_statement1197 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_LPAREN_in_read_statement1203 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_read_statement1206 = new BitSet(new long[]{0x0000080000000400L});
+	public static final BitSet FOLLOW_COMMA_in_read_statement1209 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_read_statement1212 = new BitSet(new long[]{0x0000080000000400L});
+	public static final BitSet FOLLOW_RPAREN_in_read_statement1216 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WHILE_in_while_statement1241 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_while_statement1244 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_DO_in_while_statement1246 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_while_statement1249 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_OD_in_while_statement1251 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IF_in_if_statement1272 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_if_statement1278 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_THEN_in_if_statement1280 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_if_statement1283 = new BitSet(new long[]{0x0000000000048000L});
+	public static final BitSet FOLLOW_ELSE_in_if_statement1286 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_if_statement1289 = new BitSet(new long[]{0x0000000000040000L});
+	public static final BitSet FOLLOW_FI_in_if_statement1293 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LCURLY_in_compound_expression1317 = new BitSet(new long[]{0x00014712187A0380L});
+	public static final BitSet FOLLOW_command_in_compound_expression1323 = new BitSet(new long[]{0x00014712187A0380L});
+	public static final BitSet FOLLOW_RCURLY_in_compound_expression1326 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_level5_in_expression_level61350 = new BitSet(new long[]{0x0000004000000002L});
+	public static final BitSet FOLLOW_OR_in_expression_level61353 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_expression_level5_in_expression_level61359 = new BitSet(new long[]{0x0000004000000002L});
+	public static final BitSet FOLLOW_compound_expression_in_expression_level61371 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_level4_in_expression_level51394 = new BitSet(new long[]{0x0000000000000012L});
+	public static final BitSet FOLLOW_AND_in_expression_level51397 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_expression_level4_in_expression_level51403 = new BitSet(new long[]{0x0000000000000012L});
+	public static final BitSet FOLLOW_expression_level3_in_expression_level41428 = new BitSet(new long[]{0x00000004C1810002L});
+	public static final BitSet FOLLOW_LESS_in_expression_level41432 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_LESSEQ_in_expression_level41440 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_EQ_in_expression_level41448 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_NEQ_in_expression_level41456 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_MOREEQ_in_expression_level41464 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_MORE_in_expression_level41472 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_expression_level3_in_expression_level41479 = new BitSet(new long[]{0x00000004C1810002L});
+	public static final BitSet FOLLOW_expression_level2_in_expression_level31505 = new BitSet(new long[]{0x0000008010000002L});
+	public static final BitSet FOLLOW_PLUS_in_expression_level31509 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_MINUS_in_expression_level31517 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_expression_level2_in_expression_level31524 = new BitSet(new long[]{0x0000008010000002L});
+	public static final BitSet FOLLOW_expression_level1_in_expression_level21551 = new BitSet(new long[]{0x0000000120001002L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression_level21555 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_DEVIDE_in_expression_level21563 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_MODULO_in_expression_level21571 = new BitSet(new long[]{0x00004012180A0200L});
+	public static final BitSet FOLLOW_expression_level1_in_expression_level21578 = new BitSet(new long[]{0x0000000120001002L});
+	public static final BitSet FOLLOW_MINUS_in_expression_level11606 = new BitSet(new long[]{0x00004010080A0200L});
+	public static final BitSet FOLLOW_NEGATION_in_expression_level11614 = new BitSet(new long[]{0x00004010080A0200L});
+	public static final BitSet FOLLOW_operand_in_expression_level11622 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1643 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1650 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1664 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_operand1677 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHARACTER_in_operand1690 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_operand1700 = new BitSet(new long[]{0x00014512185A0200L});
+	public static final BitSet FOLLOW_expression_in_operand1703 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_operand1705 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_synpred1_Noot1026 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_synpred1_Noot1028 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_synpred2_Noot1077 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_BECOMES_in_synpred2_Noot1079 = new BitSet(new long[]{0x0000000000000002L});
 }

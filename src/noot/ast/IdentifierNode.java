@@ -18,19 +18,11 @@ public class IdentifierNode extends Node {
 	
 	public NodeType getNodeType()
 	{
-		return this.declarationNode.getDeclaredType();
-	}
-	
-	public String toString() {
-		
-		String s = super.toString();
-		
 		if(this.declarationNode != null)
-		{
-			s = s + "{" + this.getNodeType() + "}";
+		{	
+			return this.declarationNode.getDeclaredType();
 		}
-		
-		return s;
+		return NodeType.VOID;
 	}
 	
 }

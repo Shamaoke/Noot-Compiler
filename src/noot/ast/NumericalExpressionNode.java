@@ -21,8 +21,8 @@ public class NumericalExpressionNode extends Node {
 		return NodeType.INT;
 	}
 
-	public String toString() {
-		
+	public String toString()
+	{	
 		String s = super.toString();
 		//s = s + " {NumExpr}";
 		return s;

@@ -89,11 +89,11 @@ declaration_extention
     ;
 
 assignment
-    :   IDENTIFIER<IdentifierNode> BECOMES^ assignment_extention
+    :   IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
     ;
     
 assignment_extention
-    :  (IDENTIFIER BECOMES) => IDENTIFIER<IdentifierNode> BECOMES^ assignment_extention
+    :  (IDENTIFIER BECOMES) => IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
     |  expression
     ;
     
@@ -107,11 +107,11 @@ expression
     ;
 
 print_statement
-    :   PRINT^ LPAREN! expression (COMMA! expression)* RPAREN!
+    :   PRINT<TypeAdoptedNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
     ; 
     
 read_statement
-    :   READ^ LPAREN! expression (COMMA! expression)* RPAREN!
+    :   READ<TypeAdoptedNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
     ; 
     
 while_statement
@@ -119,11 +119,11 @@ while_statement
     ; 
 
 if_statement
-    :   IF^ expression THEN! expression (ELSE! expression)? FI!
+    :   IF<TypeAdoptedNode>^ expression THEN! expression (ELSE! expression)? FI!
     ;
     
 compound_expression
-    :   LCURLY^ command* RCURLY!
+    :   LCURLY<TypeAdoptedNode>^ command* RCURLY!
     ;
     
 expression_level6

@@ -11,20 +11,20 @@ read(d);
 
 print(d);
 
-e := 'e';
+//e := 'e';
 
 f := a == 4 && b == 4 || d == 4;
 
 g := {
 		int h,i;
 		read(h,i);
-		//(h > i);
+		(h > i);
 	}; // compound expression with type boolean
 
 k := if g == true then {
 		int i,j;
 		j := 5;
-		//(j > i);
+		(j > i);
 	}
 else
 	false
