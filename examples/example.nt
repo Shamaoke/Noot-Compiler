@@ -9,9 +9,24 @@ c := b + 3 * 2;
 
 read(d);
 
-print(d);
+print(read(d),read(c),3 * print(4));
 
-//e := 'e';
+if {
+		int z; read(z);
+		(z > a);
+	} then {
+		int i;
+		i := 4;
+		z := 5;
+		(z > i);
+	}
+else
+	false
+fi;
+
+e := 'e';
+
+a := a + (b := 1) + b;
 
 f := a == 4 && b == 4 || d == 4;
 

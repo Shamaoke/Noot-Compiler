@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-05 13:25:59
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-05 15:02:38
 
     package noot.compiler;
     import noot.ast.*;
@@ -279,7 +279,7 @@ public class Checker extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:45:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS e1= expression e2= expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION e1= expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ ( expression )+ ) | ^(te= PRINT ( expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE e1= expression e2= expression ) );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:45:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS e1= expression e2= expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION e1= expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE e1= expression e2= expression ) );
 	public final Node expression() throws RecognitionException {
 		Node node =  null;;
 
@@ -289,12 +289,12 @@ public class Checker extends TreeParser {
 		Node op =null;
 		Node e1 =null;
 		Node e2 =null;
-		Node dc =null;
 		Node en =null;
+		Node dc =null;
 		Node e3 =null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:46:5: (op= operand | ^(te= PLUS e1= expression e2= expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION e1= expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ ( expression )+ ) | ^(te= PRINT ( expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE e1= expression e2= expression ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:46:5: (op= operand | ^(te= PLUS e1= expression e2= expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION e1= expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE e1= expression e2= expression ) )
 			int alt9=21;
 			switch ( input.LA(1) ) {
 			case CHARACTER:
@@ -774,28 +774,32 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 17 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:151:9: ^(te= READ ( expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:151:9: ^(te= READ (id= IDENTIFIER )+ )
 					{
 					te=(Node)match(input,READ,FOLLOW_READ_in_expression727); 
+
+					              ArrayList<IdentifierNode> identifiers = new ArrayList<IdentifierNode>();
+					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:151:19: ( expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:155:11: (id= IDENTIFIER )+
 					int cnt5=0;
 					loop5:
 					while (true) {
 						int alt5=2;
 						int LA5_0 = input.LA(1);
-						if ( (LA5_0==AND||LA5_0==BECOMES||LA5_0==CHARACTER||LA5_0==DEVIDE||(LA5_0 >= EQ && LA5_0 <= FALSE)||(LA5_0 >= IDENTIFIER && LA5_0 <= IF)||(LA5_0 >= LCURLY && LA5_0 <= LESSEQ)||(LA5_0 >= MINUS && LA5_0 <= NEQ)||LA5_0==NUMBER||(LA5_0 >= OR && LA5_0 <= PRINT)||LA5_0==READ||LA5_0==TRUE||LA5_0==WHILE) ) {
+						if ( (LA5_0==IDENTIFIER) ) {
 							alt5=1;
 						}
 
 						switch (alt5) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:151:19: expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:155:12: id= IDENTIFIER
 							{
-							pushFollow(FOLLOW_expression_in_expression729);
-							expression();
-							state._fsp--;
+							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression756); 
 
+							              checkerHelper.linkToDeclaration( (IdentifierNode) id );
+							              identifiers.add( (IdentifierNode) id );
+							            
 							}
 							break;
 
@@ -810,16 +814,23 @@ public class Checker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
+					        
+					          if(identifiers.size() == 1) // If only one argument is given let the read statement adopt its type
+					            ((TypeAdoptedNode) te).setTypeDefiningChild(identifiers.get(0));
+					          
 					          node = te;
 					        
 					}
 					break;
 				case 18 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:155:9: ^(te= PRINT ( expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:168:9: ^(te= PRINT (en= expression )+ )
 					{
-					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression755); 
+					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression808); 
+
+					              ArrayList<Node> expressions = new ArrayList<Node>();
+					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:155:20: ( expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:172:11: (en= expression )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -831,12 +842,15 @@ public class Checker extends TreeParser {
 
 						switch (alt6) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:155:20: expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:172:12: en= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression757);
-							expression();
+							pushFollow(FOLLOW_expression_in_expression837);
+							en=expression();
 							state._fsp--;
 
+
+							              expressions.add(en);
+							            
 							}
 							break;
 
@@ -851,20 +865,30 @@ public class Checker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
+					        
+					          if(expressions.size() == 1) // If only one argument is given let the print statement adopt its type
+					            ((TypeAdoptedNode) te).setTypeDefiningChild(expressions.get(0));
+					            
+					          for(Node argumentNode : expressions)
+					          {
+					            if(argumentNode.getNodeType() == Node.NodeType.VOID)
+					              throw new CheckerException("Expression on line:" + argumentNode.getLine() + " is a void expression, this is not allowed as an argument of print.");
+					          } 
+					          
 					          node = te;
 					        
 					}
 					break;
 				case 19 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:159:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:190:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
 					{
-					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression783); 
+					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression889); 
 
 					                checkerHelper.openScope();
 					                ArrayList<Node> commands = new ArrayList<Node>();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:164:11: (dc= declaration |en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:195:11: (dc= declaration |en= expression )+
 					int cnt7=0;
 					loop7:
 					while (true) {
@@ -879,9 +903,9 @@ public class Checker extends TreeParser {
 
 						switch (alt7) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:164:12: dc= declaration
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:195:12: dc= declaration
 							{
-							pushFollow(FOLLOW_declaration_in_expression812);
+							pushFollow(FOLLOW_declaration_in_expression918);
 							dc=declaration();
 							state._fsp--;
 
@@ -891,9 +915,9 @@ public class Checker extends TreeParser {
 							}
 							break;
 						case 2 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:168:14: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:199:14: en= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression843);
+							pushFollow(FOLLOW_expression_in_expression949);
 							en=expression();
 							state._fsp--;
 
@@ -924,25 +948,28 @@ public class Checker extends TreeParser {
 					              ((TypeAdoptedNode) te).setTypeDefiningChild(lastCommand);
 					            }
 					        
-					            checkerHelper.closeScope();
+					            checkerHelper.tryToCloseScope();
 					            node = te;
 					        
 					}
 					break;
 				case 20 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:187:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:218:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
 					{
-					te=(Node)match(input,IF,FOLLOW_IF_in_expression895); 
+					te=(Node)match(input,IF,FOLLOW_IF_in_expression1001); 
+
+					              checkerHelper.holdUpcommingScope();
+					            
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression899);
+					pushFollow(FOLLOW_expression_in_expression1029);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression903);
+					pushFollow(FOLLOW_expression_in_expression1033);
 					e2=expression();
 					state._fsp--;
 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:187:47: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:222:41: (e3= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -950,9 +977,9 @@ public class Checker extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:187:47: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:222:41: e3= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression907);
+							pushFollow(FOLLOW_expression_in_expression1037);
 							e3=expression();
 							state._fsp--;
 
@@ -964,36 +991,49 @@ public class Checker extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					        
+					          checkerHelper.releaseAndCloseScope();
+					          
+					          List<Node> condition = asList(e1);
+					          checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+					          
 					          if(e3 != null)
 					          {
-					            List<Node> nodes = asList(e2,e3);
-					            checkerHelper.checkExpressionsForEqualType(nodes,te);
+					            try {
+					              List<Node> nodes = asList(e2,e3);
+					              checkerHelper.checkExpressionsForEqualType(nodes,te);
+					            
+					              // This so the if statement has the same type as both options
+					              ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
+					            } catch (CheckerException ce) {
+					              // no defining type set, so remains void
+					            }
 					          }
-					          
-					          // This so the chaining of IF rules will occure with the correct type checking
-					          ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
 					          
 					          node = te;
 					        
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:201:9: ^(te= WHILE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:244:9: ^(te= WHILE e1= expression e2= expression )
 					{
-					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression933); 
+					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1063); 
+
+					              checkerHelper.holdUpcommingScope();
+					            
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression937);
+					pushFollow(FOLLOW_expression_in_expression1091);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression941);
+					pushFollow(FOLLOW_expression_in_expression1095);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
+					          checkerHelper.releaseAndCloseScope();
+					          
 					          node = te;
 					        
 					}
@@ -1016,7 +1056,7 @@ public class Checker extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:207:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:256:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1027,7 +1067,7 @@ public class Checker extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:208:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:257:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt10=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1062,9 +1102,9 @@ public class Checker extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:208:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:257:9: id= IDENTIFIER
 					{
-					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand982); 
+					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1136); 
 
 					          checkerHelper.linkToDeclaration( (IdentifierNode) id );
 					          node = id;
@@ -1072,36 +1112,36 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:213:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:262:9: n= NUMBER
 					{
-					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1005); 
+					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1159); 
 
 					          node = n;
 					        
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:217:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:266:9: b= TRUE
 					{
-					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1027); 
+					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1181); 
 
 					          node = b;
 					        
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:221:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:270:9: b= FALSE
 					{
-					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1049); 
+					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1203); 
 
 					          node = b;
 					        
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:225:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:274:9: c= CHARACTER
 					{
-					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1071); 
+					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1225); 
 
 					          node = c;
 					        
@@ -1181,22 +1221,22 @@ public class Checker extends TreeParser {
 	public static final BitSet FOLLOW_IDENTIFIER_in_expression698 = new BitSet(new long[]{0x000145D7F1DB1250L});
 	public static final BitSet FOLLOW_expression_in_expression702 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_READ_in_expression727 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression729 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_PRINT_in_expression755 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression757 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_LCURLY_in_expression783 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_declaration_in_expression812 = new BitSet(new long[]{0x000145D7F1FB13D8L});
-	public static final BitSet FOLLOW_expression_in_expression843 = new BitSet(new long[]{0x000145D7F1FB13D8L});
-	public static final BitSet FOLLOW_IF_in_expression895 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression899 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression903 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_expression_in_expression907 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WHILE_in_expression933 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression937 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression941 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand982 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_operand1005 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1027 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1049 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHARACTER_in_operand1071 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression756 = new BitSet(new long[]{0x0000000000080008L});
+	public static final BitSet FOLLOW_PRINT_in_expression808 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression837 = new BitSet(new long[]{0x000145D7F1DB1258L});
+	public static final BitSet FOLLOW_LCURLY_in_expression889 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_declaration_in_expression918 = new BitSet(new long[]{0x000145D7F1FB13D8L});
+	public static final BitSet FOLLOW_expression_in_expression949 = new BitSet(new long[]{0x000145D7F1FB13D8L});
+	public static final BitSet FOLLOW_IF_in_expression1001 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1029 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression1033 = new BitSet(new long[]{0x000145D7F1DB1258L});
+	public static final BitSet FOLLOW_expression_in_expression1037 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WHILE_in_expression1063 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1091 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression1095 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1136 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_operand1159 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1181 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1203 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHARACTER_in_operand1225 = new BitSet(new long[]{0x0000000000000002L});
 }

@@ -1,7 +1,7 @@
 grammar Noot;
 
 options {
-    k=1; // This is a requirement for the project to keep the compiler fast
+    k=1; // This is a requirement for the project, and also to keep the compiler fast
     language=Java;
     output=AST;
     ASTLabelType=Node;
@@ -99,36 +99,16 @@ assignment_extention
     
 expression
     :   (IDENTIFIER BECOMES) => assignment
-    |   print_statement
-    |   read_statement
     |   while_statement
-    |   if_statement
     |   expression_level6
     ;
-
-print_statement
-    :   PRINT<TypeAdoptedNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
-    ; 
-    
-read_statement
-    :   READ<TypeAdoptedNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
-    ; 
     
 while_statement
     :   WHILE^ expression DO! expression OD!
     ; 
-
-if_statement
-    :   IF<TypeAdoptedNode>^ expression THEN! expression (ELSE! expression)? FI!
-    ;
-    
-compound_expression
-    :   LCURLY<TypeAdoptedNode>^ command* RCURLY!
-    ;
     
 expression_level6
     :   expression_level5 (OR<BinaryExpressionNode>^ expression_level5)*
-    |   compound_expression
     ;
     
 expression_level5
@@ -155,8 +135,28 @@ operand
     :   (TRUE<BinaryExpressionNode> | FALSE<BinaryExpressionNode>)
     |   IDENTIFIER<IdentifierNode>
     |   NUMBER<NumericalExpressionNode>
-    |   CHARACTER
+    |   CHARACTER<CharacterNode>
     |   LPAREN! expression RPAREN!
+    |   print_statement
+    |   read_statement
+    |   compound_expression
+    |   if_statement
+    ;
+    
+print_statement
+    :   PRINT<TypeAdoptedNode>^ LPAREN! expression (COMMA! expression)* RPAREN!
+    ; 
+    
+read_statement
+    :   READ<TypeAdoptedNode>^ LPAREN! IDENTIFIER<IdentifierNode> (COMMA! IDENTIFIER<IdentifierNode>)* RPAREN!
+    ;
+    
+compound_expression
+    :   LCURLY<TypeAdoptedNode>^ command* RCURLY!
+    ; 
+
+if_statement
+    :   IF<TypeAdoptedNode>^ expression THEN! expression (ELSE! expression)? FI!
     ;
 
 // Lexer rules

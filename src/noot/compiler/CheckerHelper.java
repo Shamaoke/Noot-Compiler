@@ -1,5 +1,4 @@
 package noot.compiler;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -10,6 +9,7 @@ import noot.ast.Node.NodeType;
 public class CheckerHelper {
 
 	private int scopingLevel = 0;
+	private Stack<Integer> holdCloseScopeAtLevel = new Stack<Integer>(); // Needed for special scoping rules while and if statements
 
 	private HashMap<String,DeclarationNode> currentDeclarationsMap = new HashMap<String,DeclarationNode>();
 	private Stack<HashMap<String, DeclarationNode>> declarationsStack = new Stack<HashMap<String,DeclarationNode>>();
@@ -18,7 +18,8 @@ public class CheckerHelper {
 	 * Opens a new scope. 
 	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
 	 */
-	public void openScope()  {
+	public void openScope()
+	{
 		scopingLevel++;
 		declarationsStack.push(currentDeclarationsMap);
 		currentDeclarationsMap = new HashMap<String,DeclarationNode>(currentDeclarationsMap);
@@ -30,10 +31,37 @@ public class CheckerHelper {
 	 * @requires old.scopingLevel() > -1;
 	 * @ensures  this.scopingLevel() == old.scopingLevel()-1;
 	 */
-	public void closeScope() {
-		if(scopingLevel > -1) scopingLevel--;
-		currentDeclarationsMap = declarationsStack.pop();
+	public void tryToCloseScope()
+	{
+		if(holdCloseScopeAtLevel.size() == 0 || holdCloseScopeAtLevel.peek().intValue() != scopingLevel)
+		{
+			if(scopingLevel > -1) scopingLevel--;
+			currentDeclarationsMap = declarationsStack.pop();
+		}
 	}
+	
+	/** 
+	 * Opens a new scope. 
+	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
+	 */
+	public void holdUpcommingScope()
+	{
+		holdCloseScopeAtLevel.push(new Integer(scopingLevel + 1));
+	}
+	
+	/** 
+	 * Opens a new scope. 
+	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
+	 */
+	public void releaseAndCloseScope()
+	{
+		if(holdCloseScopeAtLevel.size() > 0 && holdCloseScopeAtLevel.peek().intValue() == scopingLevel)
+		{
+			holdCloseScopeAtLevel.pop();
+			this.tryToCloseScope();
+		}
+	}
+
 
 	/** Returns the current scope level. */
 	public int scopingLevel() {

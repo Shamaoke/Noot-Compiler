@@ -148,12 +148,43 @@ expression returns [Node node = null;] // All statements are expressions because
           
           node = te;
         }
-    |   ^(te=READ expression+) // Read statement
+    |   ^(te=READ
+            {
+              ArrayList<IdentifierNode> identifiers = new ArrayList<IdentifierNode>();
+            }
+          (id=IDENTIFIER
+            {
+              checkerHelper.linkToDeclaration( (IdentifierNode) id );
+              identifiers.add( (IdentifierNode) id );
+            }
+          )+) // Read statement
         {
+        
+          if(identifiers.size() == 1) // If only one argument is given let the read statement adopt its type
+            ((TypeAdoptedNode) te).setTypeDefiningChild(identifiers.get(0));
+          
           node = te;
         }
-    |   ^(te=PRINT expression+) // Print statement
+    |   ^(te=PRINT
+            {
+              ArrayList<Node> expressions = new ArrayList<Node>();
+            }
+          (en=expression
+            {
+              expressions.add(en);
+            }
+          )+) // Print statement
         {
+        
+          if(expressions.size() == 1) // If only one argument is given let the print statement adopt its type
+            ((TypeAdoptedNode) te).setTypeDefiningChild(expressions.get(0));
+            
+          for(Node argumentNode : expressions)
+          {
+            if(argumentNode.getNodeType() == Node.NodeType.VOID)
+              throw new CheckerException("Expression on line:" + argumentNode.getLine() + " is a void expression, this is not allowed as an argument of print.");
+          } 
+          
           node = te;
         }
     |   ^(te=LCURLY
@@ -181,25 +212,43 @@ expression returns [Node node = null;] // All statements are expressions because
               ((TypeAdoptedNode) te).setTypeDefiningChild(lastCommand);
             }
         
-            checkerHelper.closeScope();
+            checkerHelper.tryToCloseScope();
             node = te;
         } // Compound expression
-    |   ^(te=IF e1=expression e2=expression e3=expression?)
+    |   ^(te=IF
+            {
+              checkerHelper.holdUpcommingScope();
+            }
+          e1=expression e2=expression e3=expression?)
         {
-        
+          checkerHelper.releaseAndCloseScope();
+          
+          List<Node> condition = asList(e1);
+          checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+          
           if(e3 != null)
           {
-            List<Node> nodes = asList(e2,e3);
-            checkerHelper.checkExpressionsForEqualType(nodes,te);
+            try {
+              List<Node> nodes = asList(e2,e3);
+              checkerHelper.checkExpressionsForEqualType(nodes,te);
+            
+              // This so the if statement has the same type as both options
+              ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
+            } catch (CheckerException ce) {
+              // no defining type set, so remains void
+            }
           }
-          
-          // This so the chaining of IF rules will occure with the correct type checking
-          ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
           
           node = te;
         } // Conditional statement
-    |   ^(te=WHILE e1=expression e2=expression)
+    |   ^(te=WHILE
+            {
+              checkerHelper.holdUpcommingScope();
+            }
+          e1=expression e2=expression)
         {
+          checkerHelper.releaseAndCloseScope();
+          
           node = te;
         } // Loop statement
     ;
