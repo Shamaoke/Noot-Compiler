@@ -1,8 +1,8 @@
 /*
  * @author Thijs Scheepers <thijs@label305.com>
- * Copyright (c) 2013 Thijs Scheepers. All Right Reserved.
+ * Copyright (c) 2013 Thijs Scheepers.
  *
- * This source is subject to the BSD Licence.
+ * This source is subject to the BSD License.
  * Please see the LICENSE file for more information.
  * All other rights reserved.
  *

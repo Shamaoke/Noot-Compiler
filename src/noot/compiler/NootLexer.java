@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-05 15:03:13
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-05 15:37:26
 
   package noot.compiler;
   import noot.ast.*;
@@ -841,12 +841,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = IDENTIFIER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:5: ( LETTER ( LETTER | DIGIT )* )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:9: LETTER ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:5: ( LETTER ( LETTER | DIGIT )* )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:9: LETTER ( LETTER | DIGIT )*
 			{
 			mLETTER(); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:165:16: ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:16: ( LETTER | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -891,10 +891,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:5: ( ( DIGIT )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:5: ( ( DIGIT )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:9: ( DIGIT )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:169:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -943,8 +943,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = CHARACTER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:173:5: ( APOSTROPHE LETTER APOSTROPHE )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:173:8: APOSTROPHE LETTER APOSTROPHE
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:5: ( APOSTROPHE LETTER APOSTROPHE )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:8: APOSTROPHE LETTER APOSTROPHE
 			{
 			mAPOSTROPHE(); 
 
@@ -968,12 +968,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:5: ( '//' ( . )* '\\n' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:9: '//' ( . )* '\\n'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:5: ( '//' ( . )* '\\n' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:9: '//' ( . )* '\\n'
 			{
 			match("//"); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:14: ( . )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:14: ( . )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -987,7 +987,7 @@ public class NootLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:177:14: .
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:14: .
 					{
 					matchAny(); 
 					}
@@ -1016,10 +1016,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:182:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1067,7 +1067,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:186:17: ( ( '0' .. '9' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:201:17: ( ( '0' .. '9' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -1090,7 +1090,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:187:17: ( ( 'a' .. 'z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:202:17: ( ( 'a' .. 'z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1113,7 +1113,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:17: ( ( 'A' .. 'Z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:203:17: ( ( 'A' .. 'Z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -1136,7 +1136,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:189:17: ( LOWER | UPPER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:204:17: ( LOWER | UPPER )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
