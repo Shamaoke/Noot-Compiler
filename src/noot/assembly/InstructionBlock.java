@@ -22,8 +22,11 @@ public class InstructionBlock extends ArrayList<Instruction> {
 	
 	public void finalizeBlock()
 	{
-		if(this.labelIdentifier >= 0) this.get(0).label = this.referenceLabel();
-		if(this.jumpTo != null) this.add(new Instruction("JUMP", jumpTo.referenceLabel()));
+		if(this.size() > 0)
+		{
+			if(this.labelIdentifier >= 0) this.get(0).setLabel(this.referenceLabel());
+			if(this.jumpTo != null) this.add(new Instruction("JUMP", jumpTo.referenceLabel()));
+		}
 		finalized = true;
 		
 		for(Instruction instruction : this)
@@ -37,13 +40,13 @@ public class InstructionBlock extends ArrayList<Instruction> {
 	
 	public String referenceLabel()
 	{
-		return this.referenceLabel(false);
+		return "L" + Integer.toString(labelIdentifier);
 	}
 	
-	public String referenceLabel(boolean argument) // without argument = false
+	public String jumpLabel() // without argument = false
 	{
 
-		return InstructionBlock.label(this.labelIdentifier,argument);
+		return "L" + Integer.toString(labelIdentifier) + "[CB]";
 	}
 	
 	public static String label(int labelIdentifier, boolean argument)

@@ -2,12 +2,21 @@ package noot.assembly;
 
 public class Instruction {
 
-	public String instruction;
-	public String argument = null;
-	public int lengthSpecifier = -1;
-	public String label = null;
-	public String comment = null;
+	private String instruction;
+	private String argument = null;
+	private int lengthSpecifier = -1;
+	private String label = null;
+	private String comment = null;
 
+//	public Instruction(Instruction another)
+//	{
+//		this.instruction = another.instruction;
+//		this.argument = another.argument;
+//		this.lengthSpecifier = another.lengthSpecifier;
+//		this.label = another.label;
+//		this.comment = another.comment;
+//	}
+	
 	public Instruction(String aInstruction)
 	{
 		this.instruction = aInstruction;
@@ -83,5 +92,17 @@ public class Instruction {
 
 		return result + "\n";
 	}
+	
+	public String getLabel() {
+		return label;
+	}
 
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
 }

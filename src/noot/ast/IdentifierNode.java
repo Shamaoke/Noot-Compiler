@@ -24,7 +24,7 @@ public class IdentifierNode extends Node {
 
 	/** The declaration node. */
 	private DeclarationNode declarationNode;
-	
+
 	/**
 	 * Instantiates a new identifier node.
 	 */
@@ -57,6 +57,11 @@ public class IdentifierNode extends Node {
 	public void setDeclarationNode(DeclarationNode node)
 	{
 		this.declarationNode = node;
+	}
+	
+	public DeclarationNode getDeclarationNode()
+	{
+		return declarationNode;
 	}
 	
 	/* (non-Javadoc)

@@ -35,7 +35,7 @@ options {
 }
 
 @members {
-    public CheckerHelper checkerHelper = new CheckerHelper();
+    private CheckerHelper checkerHelper = new CheckerHelper();
 }
 
 program
@@ -43,17 +43,19 @@ program
     ;
     
 declaration returns [Node node = null;]
-    :   ^(d=(INT | BOOL | CHAR) IDENTIFIER declaration_extention?)
+    :   ^(d=(INT | BOOL | CHAR) id=IDENTIFIER declaration_extention?)
         {
             checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
             node = d;
         }
     ;
     
 declaration_extention
-    :   ^(d=COMMA IDENTIFIER declaration_extention?)
+    :   ^(d=COMMA id=IDENTIFIER declaration_extention?)
         {
             checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
         }
     ;
     

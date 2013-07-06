@@ -1,51 +1,32 @@
 noot
 
-int a, b, c, d,l;
+int a, b, c, d,l,k;
 char e;
-bool f,g,k;
+bool f,g;
 
 a := b := 4;
-c := b + 3 * 2;
-
-read(d);
-
-print(read(d),read(c),3 * print(4));
-
-if {
-		int z; read(z);
-		(z > a);
-	} then {
-		int i;
-		i := 4;
-		z := 5;
-		(z > i);
-	}
-else
-	false
-fi;
-
-e := 'e';
-
-a := a + (b := 1) + b;
+d := 5;
 
 f := a == 4 && b == 4 || d == 4;
+print('f',f); // 1
 
 g := {
 		int h,i;
-		read(h,i);
-		(h > i);
+		//read(h,i);
+		(read(h) > read(i));
 	}; // compound expression with type boolean
 
 k := if g == true then {
-		int i,j;
+		int j;
 		j := 5;
-		(j > i);
 	}
 else
-	false
+	4
 fi; // compound expression used with if statement
 
-while k == true do {
-	l := l + 1;
-	if l > 10 then { k := false; } fi;
-} od;
+print('g',g,'k',k);
+
+//while k == true do {
+//	l := l + 1;
+//	if l > 10 then { k := false; } fi;
+//} od;

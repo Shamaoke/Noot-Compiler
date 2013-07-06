@@ -17,28 +17,33 @@ package noot.compiler;
 
 import java.io.*;
 import java.util.*;
+import TAM.*;
 
 import noot.ast.NodeAdaptor;
 
 import org.antlr.runtime.*;
+import org.antlr.runtime.tree.BufferedTreeNodeStream;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
+import org.antlr.runtime.tree.TreeNodeStream;
 
 public class Compiler {
 
 	private static String inputFile;
+	private static String intermediateFile;
 	private static String outputFile;
 
 	public static void parseOptions(String[] args)
 	{
-		if (args.length != 2)
+		if (args.length != 3)
 		{
-			System.err.println("There should be two arguments, the first for the input file, the seccond for the output");
+			System.err.println("There should be three arguments, the first for the input file, the seccond for the intermediate output and the third the actual output");
 			System.exit(1);
 		}
 
 		inputFile = args[0];
-		outputFile = args[1];
+		intermediateFile = args[1];
+		outputFile = args[2];
 
 	}
 
@@ -46,8 +51,14 @@ public class Compiler {
 		parseOptions(args);
 
 		try {
+			
+			System.out.println("- Lexical analysis");
+			
 			InputStream in = inputFile == null ? System.in : new FileInputStream(inputFile);
 			NootLexer lexer = new NootLexer(new ANTLRInputStream(in));
+			
+			System.out.println("- Parsing");
+			
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			NootParser parser = new NootParser(tokens);
 			parser.setTreeAdaptor(new NodeAdaptor());
@@ -56,22 +67,47 @@ public class Compiler {
 			CommonTree tree = (CommonTree) result.getTree();
 			
 			// Printing the AST
-			System.out.println(tree.toStringTree());
+//			System.out.println(tree.toStringTree());
+			
+			System.out.println("- Contextual analysis");
 
-			CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
-			Checker checker = new Checker(nodes);
+			CommonTreeNodeStream checkerNodes = new CommonTreeNodeStream(tree);
+			Checker checker = new Checker(checkerNodes);
 			checker.program();
 			
-			System.out.println(tree.toStringTree());
+			System.out.println("- Intermediate code generation");
                         	
-			//            	TreeNodeStream nodes = new BufferedTreeNodeStream(tree);
-			//            	CalcGenerator generator = new CalcGenerator(nodes);
-			//            	File f = new File(outputFile);
-			//            	PrintStream out = new PrintStream(f);
-			//            	System.setOut(out);
-			//            	generator.program();
-			//            	out.close();
+			TreeNodeStream generatorNodes = new BufferedTreeNodeStream(tree);
+        	Generator generator = new Generator(generatorNodes);
+        	File f = new File(intermediateFile);
+        	PrintStream intermediateOut = new PrintStream(f);
+        	
+        	PrintStream standardOut = System.out;
+        	System.setOut(intermediateOut);
+        	generator.program();
+        	intermediateOut.close();
+        	System.setOut(standardOut);  
+        	
+        	System.out.println("- Assemble intermediate code");
+        	
+        	InputStream intermediateIn = new FileInputStream(intermediateFile);
+            OutputStream out = new FileOutputStream(outputFile);
 
+            Assembler.assemble(intermediateIn, out);
+            intermediateIn.close();
+            out.close();
+            
+            System.out.println("- Read Assembly");
+            
+            Interpreter.loadObjectProgram(outputFile);
+            
+            System.out.println("- Execution Test");
+            
+            Interpreter.interpretProgram();
+            
+            System.out.println("- Execution Results");
+            
+            Interpreter.showStatus();
 
 		} catch (RecognitionException e) {
 			System.err.print("ERROR: recognition exception thrown by compiler: ");

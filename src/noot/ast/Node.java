@@ -14,6 +14,8 @@
  */
 package noot.ast;
 
+import noot.compiler.Checker;
+
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTree;
 
@@ -71,6 +73,27 @@ public class Node extends CommonTree {
 	{
 		return NodeType.VOID;
 	}
+	
+	public boolean parrentNeedsResult()
+	{
+		
+		if(this.parent.getType() == Checker.NOOT)
+		{
+			return false;
+		}
+		
+		// This so nested compound expressions also work
+		if(this.parent.getType() == Checker.LCURLY && this.parent.getChild(this.parent.getChildCount() - 1) == this)
+		{
+			return ((Node) this.parent).parrentNeedsResult();
+		}
+		else if(this.parent.getType() == Checker.LCURLY)
+		{
+			return false;
+		}
+		
+		return true;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.antlr.runtime.tree.CommonTree#toString()
@@ -81,7 +104,7 @@ public class Node extends CommonTree {
 		
 		if(this.getNodeType() != NodeType.VOID)
 		{
-			s = s + "{" + this.getNodeType() + "}";
+			s = s + "[" + this.getNodeType() + "]";
 		}
 		
 		return s;
