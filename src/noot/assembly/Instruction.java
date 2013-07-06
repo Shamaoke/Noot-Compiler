@@ -7,15 +7,6 @@ public class Instruction {
 	private int lengthSpecifier = -1;
 	private String label = null;
 	private String comment = null;
-
-//	public Instruction(Instruction another)
-//	{
-//		this.instruction = another.instruction;
-//		this.argument = another.argument;
-//		this.lengthSpecifier = another.lengthSpecifier;
-//		this.label = another.label;
-//		this.comment = another.comment;
-//	}
 	
 	public Instruction(String aInstruction)
 	{
@@ -103,6 +94,10 @@ public class Instruction {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public void setArgument(String argument) {
+		this.argument = argument;
 	}
 	
 }

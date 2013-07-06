@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-06 14:55:08
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-06 15:40:00
 
     package noot.compiler;
     import noot.ast.*;
@@ -970,7 +970,8 @@ public class Generator extends TreeParser {
 					state._fsp--;
 
 
-					              program.pushInstruction(new Instruction("JUMPIF",InstructionBlock.label(program.getCurrentBlock().labelIdentifier + 1,true),0,"If"));
+					              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
+					              program.pushInstruction(jumpIfInstruction);
 					            
 					pushFollow(FOLLOW_expression_in_expression1064);
 					e2=expression();
@@ -978,10 +979,13 @@ public class Generator extends TreeParser {
 
 
 					                // Dit kan ingekort worden in het geval er geen else aanwezig is
-					                program.pushInstruction(new Instruction("JUMP",InstructionBlock.label(program.getCurrentBlock().labelIdentifier + 2,true),"Else"));
+					                Instruction jumpInstruction = new Instruction("JUMP","notset","Else (jump over else)");
+					                program.pushInstruction(jumpInstruction);
 					                program.pushBlock();
+					                
+					                jumpIfInstruction.setArgument(program.getCurrentBlock().jumpLabel());
 					            
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:250:13: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:254:13: (e3= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -989,7 +993,7 @@ public class Generator extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:250:13: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:254:13: e3= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression1092);
 							e3=expression();
@@ -1004,12 +1008,14 @@ public class Generator extends TreeParser {
 
 
 					          program.pushBlock();
+					          jumpInstruction.setArgument(program.getCurrentBlock().jumpLabel());
+					          
 					          node = te;
 					        
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:255:9: ^(te= WHILE expression expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:261:9: ^(te= WHILE expression expression )
 					{
 					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1118); 
 					 
@@ -1054,7 +1060,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:271:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:277:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1065,7 +1071,7 @@ public class Generator extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:272:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt10=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1100,7 +1106,7 @@ public class Generator extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:272:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:9: id= IDENTIFIER
 					{
 					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1203); 
 
@@ -1110,7 +1116,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:277:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:283:9: n= NUMBER
 					{
 					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1226); 
 
@@ -1120,7 +1126,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:282:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:288:9: b= TRUE
 					{
 					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1248); 
 
@@ -1130,7 +1136,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:287:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:293:9: b= FALSE
 					{
 					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1270); 
 
@@ -1140,7 +1146,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:292:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:298:9: c= CHARACTER
 					{
 					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1292); 
 

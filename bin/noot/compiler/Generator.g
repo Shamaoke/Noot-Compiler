@@ -239,17 +239,23 @@ expression returns [Node node = null;] // All statements are expressions because
         } // Compound expression
     |   ^(te=IF e1=expression
             {
-              program.pushInstruction(new Instruction("JUMPIF",InstructionBlock.label(program.getCurrentBlock().labelIdentifier + 1,true),0,"If"));
+              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
+              program.pushInstruction(jumpIfInstruction);
             }
           e2=expression
             {
                 // Dit kan ingekort worden in het geval er geen else aanwezig is
-                program.pushInstruction(new Instruction("JUMP",InstructionBlock.label(program.getCurrentBlock().labelIdentifier + 2,true),"Else"));
+                Instruction jumpInstruction = new Instruction("JUMP","notset","Else (jump over else)");
+                program.pushInstruction(jumpInstruction);
                 program.pushBlock();
+                
+                jumpIfInstruction.setArgument(program.getCurrentBlock().jumpLabel());
             }
           e3=expression?)
         {
           program.pushBlock();
+          jumpInstruction.setArgument(program.getCurrentBlock().jumpLabel());
+          
           node = te;
         } // Conditional statement
     |   ^(te=WHILE

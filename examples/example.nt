@@ -2,7 +2,7 @@ noot
 
 int a, b, c, d,l,k;
 char e;
-bool f,g;
+bool f,g,s;
 
 a := b := 4;
 d := 5;
@@ -12,13 +12,19 @@ print('f',f); // 1
 
 g := {
 		int h,i;
-		//read(h,i);
 		(read(h) > read(i));
 	}; // compound expression with type boolean
 
 k := if g == true then {
 		int j;
-		j := 5;
+		j := if true then
+				{
+					int i;
+					i := 5;
+				}
+				else
+					6
+				fi;
 	}
 else
 	4
@@ -26,7 +32,9 @@ fi; // compound expression used with if statement
 
 print('g',g,'k',k);
 
-//while k == true do {
+s := true;
+
+//while s == true do {
 //	l := l + 1;
-//	if l > 10 then { k := false; } fi;
+//	if l > 10 then { s := false; } fi;
 //} od;

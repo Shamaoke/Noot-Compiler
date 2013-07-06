@@ -9,6 +9,11 @@ import java.util.Date;
 
 public class Program extends ArrayList<InstructionBlock> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private InstructionBlock currentBlock = new InstructionBlock(0);;
 	private ArrayList<DeclarationNode> declarations = new ArrayList<DeclarationNode>();
 	private Instruction lastPushedInstruction;
@@ -45,7 +50,8 @@ public class Program extends ArrayList<InstructionBlock> {
 	
 	public void pushBlock()
 	{
-		this.add(this.currentBlock);
+		if(this.currentBlock.size() > 0)
+			this.add(this.currentBlock);
 	}
 
 	public void pushInstruction(Instruction instruction)
@@ -85,6 +91,12 @@ public class Program extends ArrayList<InstructionBlock> {
 		currentBlock.add(haltInstruction);
 
 		this.add(currentBlock);
+		
+		for(InstructionBlock block : this)
+		{
+			for(Instruction instruction : block)
+				System.out.print(instruction.toString());
+		}
 	}
 	
 	public InstructionBlock getCurrentBlock() {

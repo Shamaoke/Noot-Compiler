@@ -27,10 +27,8 @@ public class InstructionBlock extends ArrayList<Instruction> {
 			if(this.labelIdentifier >= 0) this.get(0).setLabel(this.referenceLabel());
 			if(this.jumpTo != null) this.add(new Instruction("JUMP", jumpTo.referenceLabel()));
 		}
-		finalized = true;
 		
-		for(Instruction instruction : this)
-			System.out.print(instruction.toString());
+		finalized = true;
 	}
 	
 	public boolean isFinalized()
