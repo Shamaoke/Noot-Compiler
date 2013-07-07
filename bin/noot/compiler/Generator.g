@@ -207,7 +207,7 @@ expression returns [Node node = null;] // All statements are expressions because
               if(temp != null)
               {
                 gh.currentBlock().push(new Instruction("LOAD",gh.addressOfMemoryLocation(temp),1,"Loading temp"));
-                gh.deallocHelperRegister(temp);
+                //gh.deallocHelperRegister(temp);
               }
             }
           )+) // Print statement
@@ -215,20 +215,11 @@ expression returns [Node node = null;] // All statements are expressions because
           
           node = te;
         }
-    |   ^(te=LCURLY
-            {
-              gh.openScope();
-            }
-          (dc=declaration | en=expression)+)
+    |   ^(te=LCURLY (dc=declaration | en=expression)+)
         {
-            gh.tryToCloseScope();
             node = te;
         } // Compound expression
-    |   ^(te=IF
-            {
-              gh.holdUpcommingScope();
-            }
-          e1=expression
+    |   ^(te=IF e1=expression
             {
               Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
               gh.currentBlock().push(jumpIfInstruction);
@@ -246,7 +237,6 @@ expression returns [Node node = null;] // All statements are expressions because
             }
           e3=expression?)
         {
-          gh.releaseAndCloseScope();
           
           gh.pushBlock(); // if block is empty it won't push
           jumpInstruction.setArgument(gh.currentBlock().jumpLabel());
@@ -257,8 +247,6 @@ expression returns [Node node = null;] // All statements are expressions because
           { 
             gh.pushBlock();
             String loopBackTo = gh.currentBlock().jumpLabel();
-            
-            gh.holdUpcommingScope();
           }
         expression
           {
@@ -267,8 +255,6 @@ expression returns [Node node = null;] // All statements are expressions because
           }
         expression)
         {
-          gh.releaseAndCloseScope();
-          
           gh.currentBlock().push(new Instruction("JUMP",loopBackTo,"Looping back"));
           
           gh.pushBlock();

@@ -12,16 +12,14 @@ import noot.assembly.MemoryLocation;
 import noot.ast.DeclarationNode;
 import noot.ast.IdentifierNode;
 
-public class GeneratorHelper extends ScopeHelper {
+public class GeneratorHelper {
 	
-	private Stack<ArrayList<MemoryLocation>> memoryScopingStack = new Stack<ArrayList<MemoryLocation>>();
+	private ArrayList<MemoryLocation> memoryLocations = new ArrayList<MemoryLocation>();
 	
 	private Stack<InstructionBlock> instructionBlockStack = new Stack<InstructionBlock>();
 	
 	public GeneratorHelper()
-	{
-		this.openScope();
-		
+	{	
 		instructionBlockStack.push(new InstructionBlock(0));
 	}
 
@@ -43,12 +41,19 @@ public class GeneratorHelper extends ScopeHelper {
         }
 	}
 	
-	public void finalizeAndPrintInstructions() throws NootException
+	public void finalizeAndPrintInstructions()
 	{
-		if(this.scopingLevel() != 1)
-			throw new GeneratorException("Finalizing program when not all scopes have been closed");
-			
-		this.closeScope();
+		
+		int pushCount = 0;
+		for(InstructionBlock ib : instructionBlockStack)
+		{
+			for(Instruction in : ib)
+			{
+				if(in.getInstruction().equals("PUSH")) pushCount ++;
+			}
+		}
+		
+		currentBlock().push(new Instruction("POP",Integer.toString(pushCount),0));
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		Date date = new Date();
@@ -76,22 +81,9 @@ public class GeneratorHelper extends ScopeHelper {
 			throw new NullPointerException("Declaration on line " + declaration.getLine() + " does not have an identifer.");
 		
 		MemoryLocation ml = new MemoryLocation(declaration);
-		memoryScopingStack.peek().add(ml);
+		memoryLocations.add(ml);
 		
 		currentBlock().push(new Instruction("PUSH","1","Declaring "+in.getNodeType()+" "+in.getText()));
-	}
-	
-	public void deallocHelperRegister(MemoryLocation ma) throws GeneratorException
-	{
-		if(memoryScopingStack.peek().contains(ma))
-		{
-			currentBlock().push(new Instruction("POP","1",0,"Popping helper register"));
-			memoryScopingStack.peek().remove(ma);
-		}
-		else
-		{
-			throw new GeneratorException("Dealloc failed, not allocated within this scope");
-		}
 	}
 	
 	public MemoryLocation allocHelperRegister()
@@ -99,7 +91,7 @@ public class GeneratorHelper extends ScopeHelper {
 		currentBlock().push(new Instruction("PUSH","1","Pushing for helper register "));
 		
 		MemoryLocation ml = new MemoryLocation();
-		memoryScopingStack.peek().add(ml);
+		memoryLocations.add(ml);
 		
 		return ml;
 	}
@@ -109,9 +101,7 @@ public class GeneratorHelper extends ScopeHelper {
 		String result = null;
 		int index = 0;
 		
-		for (ArrayList<MemoryLocation> memoryLocationsOfScope : memoryScopingStack)
-		{
-			for(MemoryLocation ml : memoryLocationsOfScope)
+			for(MemoryLocation ml : memoryLocations)
 			{
 				DeclarationNode dc = ml.getDeclaration();
 				
@@ -122,7 +112,6 @@ public class GeneratorHelper extends ScopeHelper {
 				
 				index++;
 			}
-		}
 		
 		if(result == null)
 			throw new GeneratorException("MemoryLocation is not allocated");
@@ -136,17 +125,14 @@ public class GeneratorHelper extends ScopeHelper {
 		String result = null;
 		int index = 0;
 		
-		for (ArrayList<MemoryLocation> memoryLocationsOfScope : memoryScopingStack)
+		for(MemoryLocation mlr : memoryLocations)
 		{
-			for(MemoryLocation mlr : memoryLocationsOfScope)
+			if(mlr == ml) 
 			{
-				if(mlr == ml) 
-				{
-					result = index + "[SB]";
-				}
-				
-				index++;
+				result = index + "[SB]";
 			}
+			
+			index++;
 		}
 		
 		if(result == null)
@@ -158,38 +144,5 @@ public class GeneratorHelper extends ScopeHelper {
 	public InstructionBlock currentBlock() {
 		return instructionBlockStack.peek();
 	}
-	
-	public void openScope()
-	{
-		super.openScope();
-		memoryScopingStack.push(new ArrayList<MemoryLocation>());
-	}
 
-	protected void closeScope() throws NootException
-	{
-		super.closeScope();
-		
-		for (MemoryLocation ml : memoryScopingStack.peek())
-		{
-			DeclarationNode dc = ml.getDeclaration();
-			
-			if(dc != null)
-			{
-				IdentifierNode in = dc.getIdentifierNode();
-				
-				if(in == null) // Used for easy debugging an invalid AST
-					throw new NullPointerException("Declaration on line " + dc.getLine() + " does not have an identifer.");
-				
-				currentBlock().push(new Instruction("POP","1",0,"Popping "+in.getNodeType()+" "+in.getText()));
-			}
-			else
-			{
-				
-				throw new GeneratorException("Helper register still allocated when closing scope, use deallocHelperRegister(MemoryLocation ml);");
-			}
-			
-		}
-		
-		memoryScopingStack.pop();
-	}
 }
