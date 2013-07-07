@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-06 15:40:00
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-07 13:22:21
 
     package noot.compiler;
     import noot.ast.*;
@@ -448,7 +448,7 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					 
-					          program.pushInstruction(new Instruction("CALL","add","Adition"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","add","Adition"));
 					          node = te;
 					        
 					}
@@ -484,17 +484,19 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          if(e2 != null)
-					            program.pushInstruction(new Instruction("CALL","sub","Subtracting"));
-					          else
-					            program.pushInstruction(new Instruction("CALL","neg","Integer negation"));
-					            
+					          if(!te.getIgnoreReturnValue())
+					          {
+					            if(e2 != null)
+					              program.pushInstruction(new Instruction("CALL","sub","Subtracting"));
+					            else
+					              program.pushInstruction(new Instruction("CALL","neg","Integer negation"));
+					          }  
 					          node = te;
 					        
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:87:9: ^(te= NEGATION expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:89:9: ^(te= NEGATION expression )
 					{
 					te=(Node)match(input,NEGATION,FOLLOW_NEGATION_in_expression351); 
 					match(input, Token.DOWN, null); 
@@ -505,13 +507,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","not","Boolean negation"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","not","Boolean negation"));
 					          node = te;
 					        
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:92:9: ^(te= MULTIPLY e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:94:9: ^(te= MULTIPLY e1= expression e2= expression )
 					{
 					te=(Node)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression377); 
 					match(input, Token.DOWN, null); 
@@ -526,13 +528,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","mult","Multiplication"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mult","Multiplication"));
 					          node = te;
 					        
 					}
 					break;
 				case 6 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:97:9: ^(te= DEVIDE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:99:9: ^(te= DEVIDE e1= expression e2= expression )
 					{
 					te=(Node)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression409); 
 					match(input, Token.DOWN, null); 
@@ -547,13 +549,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","div","Devide"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","div","Devide"));
 					          node = te;
 					        
 					}
 					break;
 				case 7 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:102:9: ^(te= MODULO e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:104:9: ^(te= MODULO e1= expression e2= expression )
 					{
 					te=(Node)match(input,MODULO,FOLLOW_MODULO_in_expression441); 
 					match(input, Token.DOWN, null); 
@@ -568,13 +570,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","mod","Modulo"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mod","Modulo"));
 					          node = te;
 					        
 					}
 					break;
 				case 8 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:107:9: ^(te= LESSEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:109:9: ^(te= LESSEQ e1= expression e2= expression )
 					{
 					te=(Node)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression473); 
 					match(input, Token.DOWN, null); 
@@ -589,13 +591,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","le","Less than or equal"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","le","Less than or equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 9 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:112:9: ^(te= MOREEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:114:9: ^(te= MOREEQ e1= expression e2= expression )
 					{
 					te=(Node)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression505); 
 					match(input, Token.DOWN, null); 
@@ -610,13 +612,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","ge","Greater than or equal"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ge","Greater than or equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 10 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:117:9: ^(te= NEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:119:9: ^(te= NEQ e1= expression e2= expression )
 					{
 					te=(Node)match(input,NEQ,FOLLOW_NEQ_in_expression537); 
 					match(input, Token.DOWN, null); 
@@ -631,14 +633,14 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("LOADL","1"));
-					          program.pushInstruction(new Instruction("CALL","ne","Not equal"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ne","Not equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 11 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:123:9: ^(te= EQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:125:9: ^(te= EQ e1= expression e2= expression )
 					{
 					te=(Node)match(input,EQ,FOLLOW_EQ_in_expression569); 
 					match(input, Token.DOWN, null); 
@@ -653,14 +655,14 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("LOADL","1" ));
-					          program.pushInstruction(new Instruction("CALL","eq"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1" ));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","eq"));
 					          node = te;
 					        
 					}
 					break;
 				case 12 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:129:9: ^(te= LESS e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:131:9: ^(te= LESS e1= expression e2= expression )
 					{
 					te=(Node)match(input,LESS,FOLLOW_LESS_in_expression601); 
 					match(input, Token.DOWN, null); 
@@ -675,13 +677,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","lt","Less than"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","lt","Less than"));
 					          node = te;
 					        
 					}
 					break;
 				case 13 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:134:9: ^(te= MORE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:136:9: ^(te= MORE e1= expression e2= expression )
 					{
 					te=(Node)match(input,MORE,FOLLOW_MORE_in_expression633); 
 					match(input, Token.DOWN, null); 
@@ -696,13 +698,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","gt","Greater than"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","gt","Greater than"));
 					          node = te;
 					        
 					}
 					break;
 				case 14 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:139:9: ^(te= AND e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:141:9: ^(te= AND e1= expression e2= expression )
 					{
 					te=(Node)match(input,AND,FOLLOW_AND_in_expression665); 
 					match(input, Token.DOWN, null); 
@@ -717,13 +719,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","and"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","and"));
 					          node = te;
 					        
 					}
 					break;
 				case 15 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:144:9: ^(te= OR e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:146:9: ^(te= OR e1= expression e2= expression )
 					{
 					te=(Node)match(input,OR,FOLLOW_OR_in_expression697); 
 					match(input, Token.DOWN, null); 
@@ -738,13 +740,13 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("CALL","or"));
+					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","or"));
 					          node = te;
 					        
 					}
 					break;
 				case 16 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:149:9: ^(te= BECOMES id= IDENTIFIER e1= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:151:9: ^(te= BECOMES id= IDENTIFIER e1= expression )
 					{
 					te=(Node)match(input,BECOMES,FOLLOW_BECOMES_in_expression729); 
 					match(input, Token.DOWN, null); 
@@ -758,7 +760,7 @@ public class Generator extends TreeParser {
 
 					          program.pushInstruction(new Instruction("STORE",program.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning "+id.getText()));
 					          
-					          if(te.parrentNeedsResult())
+					          if(!te.getIgnoreReturnValue())
 					          {
 					            program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
 					          }
@@ -768,7 +770,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 17 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:160:9: ^(te= READ (id= IDENTIFIER )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:162:9: ^(te= READ (id= IDENTIFIER )+ )
 					{
 					te=(Node)match(input,READ,FOLLOW_READ_in_expression762); 
 
@@ -776,7 +778,7 @@ public class Generator extends TreeParser {
 					            Instruction returnInstruction = null;
 					          
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:165:11: (id= IDENTIFIER )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:167:11: (id= IDENTIFIER )+
 					int cnt5=0;
 					loop5:
 					while (true) {
@@ -788,7 +790,7 @@ public class Generator extends TreeParser {
 
 						switch (alt5) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:165:12: id= IDENTIFIER
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:167:12: id= IDENTIFIER
 							{
 							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression789); 
 
@@ -826,7 +828,7 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					 
-					          if(readCount == 1 && te.parrentNeedsResult())
+					          if(readCount == 1 && !te.getIgnoreReturnValue())
 					          {
 					            program.pushInstruction(returnInstruction);
 					          }
@@ -836,7 +838,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 18 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:196:9: ^(te= PRINT (en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:198:9: ^(te= PRINT (en= expression )+ )
 					{
 					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression841); 
 
@@ -844,7 +846,7 @@ public class Generator extends TreeParser {
 					            Instruction returnInstruction = null;
 					          
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:201:11: (en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:203:11: (en= expression )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -856,7 +858,7 @@ public class Generator extends TreeParser {
 
 						switch (alt6) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:201:12: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:203:12: en= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression868);
 							en=expression();
@@ -891,7 +893,7 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          if(printCount == 1 && te.parrentNeedsResult())
+					          if(printCount == 1 && !te.getIgnoreReturnValue())
 					          {
 					            program.pushInstruction(returnInstruction);
 					          }
@@ -901,14 +903,14 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 19 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:226:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:228:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
 					{
 					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression920); 
 
 					                ArrayList<Node> commands = new ArrayList<Node>();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:230:11: (dc= declaration |en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:232:11: (dc= declaration |en= expression )+
 					int cnt7=0;
 					loop7:
 					while (true) {
@@ -923,7 +925,7 @@ public class Generator extends TreeParser {
 
 						switch (alt7) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:230:12: dc= declaration
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:232:12: dc= declaration
 							{
 							pushFollow(FOLLOW_declaration_in_expression949);
 							dc=declaration();
@@ -934,7 +936,7 @@ public class Generator extends TreeParser {
 							}
 							break;
 						case 2 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:233:14: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:235:14: en= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression980);
 							en=expression();
@@ -961,7 +963,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 20 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:240:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:242:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
 					{
 					te=(Node)match(input,IF,FOLLOW_IF_in_expression1032); 
 					match(input, Token.DOWN, null); 
@@ -985,7 +987,7 @@ public class Generator extends TreeParser {
 					                
 					                jumpIfInstruction.setArgument(program.getCurrentBlock().jumpLabel());
 					            
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:254:13: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:256:13: (e3= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -993,7 +995,7 @@ public class Generator extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:254:13: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:256:13: e3= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression1092);
 							e3=expression();
@@ -1015,7 +1017,7 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:261:9: ^(te= WHILE expression expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:263:9: ^(te= WHILE expression expression )
 					{
 					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1118); 
 					 
@@ -1060,7 +1062,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:277:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:279:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1071,7 +1073,7 @@ public class Generator extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:280:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt10=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1106,52 +1108,55 @@ public class Generator extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:280:9: id= IDENTIFIER
 					{
 					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1203); 
 
-					          program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
+					          if(!id.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
 					          node = id;
 					        
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:283:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:285:9: n= NUMBER
 					{
 					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1226); 
 
-					          program.pushInstruction(new Instruction("LOADL",n.getText()));
+					          if(!n.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL",n.getText()));
 					          node = n;
 					        
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:288:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:290:9: b= TRUE
 					{
 					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1248); 
 
-					          program.pushInstruction(new Instruction("LOADL","1","True Boolean"));
+					          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1","True Boolean"));
 					          node = b;
 					        
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:293:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:295:9: b= FALSE
 					{
 					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1270); 
 
-					          program.pushInstruction(new Instruction("LOADL","0","False Boolean"));
+					          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","0","False Boolean"));
 					          node = b;
 					        
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:298:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:300:9: c= CHARACTER
 					{
 					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1292); 
 
-					          int ascii = (int)c.getText().charAt(1);
-					          program.pushInstruction(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
+					          if(!c.getIgnoreReturnValue())
+					          {
+					            int ascii = (int)c.getText().charAt(1);
+					            program.pushInstruction(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
+					          }
 					          node = c;
 					        
 					}

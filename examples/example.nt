@@ -1,21 +1,14 @@
 noot
 
-int a, b, c, d,l,k;
-char e;
-bool f,g,s;
+bool g;
 
-a := b := 4;
-d := 5;
+{
+	int h,i;
+	i := 5;
+	(read(h) > i);
+}; // compound expression with type boolean
 
-f := a == 4 && b == 4 || d == 4;
-print('f',f); // 1
-
-g := {
-		int h,i;
-		(read(h) > read(i));
-	}; // compound expression with type boolean
-
-k := if g == true then {
+if g == true then {
 		int j;
 		j := if true then
 				{
@@ -29,12 +22,3 @@ k := if g == true then {
 else
 	4
 fi; // compound expression used with if statement
-
-print('g',g,'k',k);
-
-s := true;
-
-//while s == true do {
-//	l := l + 1;
-//	if l > 10 then { s := false; } fi;
-//} od;

@@ -19,31 +19,43 @@ import java.io.*;
 import java.util.*;
 import TAM.*;
 
+import noot.ast.DOTNodeAdaptor;
 import noot.ast.NodeAdaptor;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.BufferedTreeNodeStream;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
+import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.runtime.tree.TreeNodeStream;
+import org.antlr.stringtemplate.StringTemplate;
 
 public class Compiler {
 
 	private static String inputFile;
 	private static String intermediateFile;
+	private static String DOTFile;
 	private static String outputFile;
 
 	public static void parseOptions(String[] args)
 	{
-		if (args.length != 3)
+		if (args.length != 1)
 		{
-			System.err.println("There should be three arguments, the first for the input file, the seccond for the intermediate output and the third the actual output");
+			System.err.println("There should an argument for the Noot file to compile");
 			System.exit(1);
 		}
-
+		
 		inputFile = args[0];
-		intermediateFile = args[1];
-		outputFile = args[2];
+		
+		if(!inputFile.endsWith(".nt"))
+		{
+			System.err.println("The input file should have the .nt extention");
+			System.exit(1);
+		}
+		
+		intermediateFile = inputFile.substring(0, inputFile.length()-3) + ".as";
+		DOTFile = inputFile.substring(0, inputFile.length()-3) + ".dot";
+		outputFile = inputFile.substring(0, inputFile.length()-3) + ".tam";
 
 	}
 
@@ -67,13 +79,25 @@ public class Compiler {
 			CommonTree tree = (CommonTree) result.getTree();
 			
 			// Printing the AST
-//			System.out.println(tree.toStringTree());
+			System.out.println(tree.toStringTree());
 			
 			System.out.println("- Contextual analysis");
 
 			CommonTreeNodeStream checkerNodes = new CommonTreeNodeStream(tree);
 			Checker checker = new Checker(checkerNodes);
 			checker.program();
+			
+			// Printing the AST
+			System.out.println(tree.toStringTree());
+			
+			DOTTreeGenerator gen = new DOTTreeGenerator();
+			
+            StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
+            
+            File DOTf = new File(DOTFile);
+        	PrintStream DOTOut = new PrintStream(DOTf);
+        	DOTOut.println(st);
+        	DOTOut.close();
 			
 			System.out.println("- Intermediate code generation");
                         	

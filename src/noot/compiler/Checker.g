@@ -39,23 +39,40 @@ options {
 }
 
 program
-    :   ^(NOOT (declaration | expression)+)
+    :   ^(NOOT (dec=declaration
+          {
+            dec.setIgnoreReturnValue(true);
+          }
+          | ex=expression
+          {
+            ex.setIgnoreReturnValue(true);
+          }
+          )+)
     ;
     
 declaration returns [Node node = null;]
-    :   ^(d=(INT | BOOL | CHAR) id=IDENTIFIER declaration_extention?)
+    :   ^(d=(INT | BOOL | CHAR) id=IDENTIFIER dex=declaration_extention?)
         {
             checkerHelper.declare( (DeclarationNode) d );
             checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            d.addValueReturningChild(id);
+            if(dex != null) d.addValueReturningChild(dex);
+            
             node = d;
         }
     ;
     
-declaration_extention
-    :   ^(d=COMMA id=IDENTIFIER declaration_extention?)
+declaration_extention returns [Node node = null;]
+    :   ^(d=COMMA id=IDENTIFIER dex=declaration_extention?)
         {
             checkerHelper.declare( (DeclarationNode) d );
             checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            d.addValueReturningChild(id);
+            if(dex != null) d.addValueReturningChild(dex);
+            
+            node = d;
         }
     ;
     
@@ -68,6 +85,7 @@ expression returns [Node node = null;] // All statements are expressions because
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=MINUS e1=expression e2=expression?)
@@ -79,78 +97,91 @@ expression returns [Node node = null;] // All statements are expressions because
             expressions = asList(e1);
             
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=NEGATION e1=expression)
         {
           List<Node> expressions = asList(e1);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=MULTIPLY e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=DEVIDE e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=MODULO e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=LESSEQ e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=MOREEQ e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=NEQ e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForEqualType(expressions,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=EQ e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForEqualType(expressions,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=LESS e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=MORE e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=AND e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=OR e1=expression e2=expression)
         {
           List<Node> expressions = asList(e1,e2);
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
+          te.addValueReturningChildren(expressions);
           node = te;
         }
     |   ^(te=BECOMES id=IDENTIFIER e1=expression) // Assign statement
@@ -178,7 +209,10 @@ expression returns [Node node = null;] // All statements are expressions because
         {
         
           if(identifiers.size() == 1) // If only one argument is given let the read statement adopt its type
+          {
             ((TypeAdoptedNode) te).setTypeDefiningChild(identifiers.get(0));
+            ((TypeAdoptedNode) te).addValueReturningChild(identifiers.get(0));
+          }
           
           node = te;
         }
@@ -194,7 +228,10 @@ expression returns [Node node = null;] // All statements are expressions because
         {
         
           if(expressions.size() == 1) // If only one argument is given let the print statement adopt its type
+          {
             ((TypeAdoptedNode) te).setTypeDefiningChild(expressions.get(0));
+            ((TypeAdoptedNode) te).addValueReturningChild(expressions.get(0));
+          }
             
           for(Node argumentNode : expressions)
           {
@@ -227,6 +264,13 @@ expression returns [Node node = null;] // All statements are expressions because
                 throw new CheckerException("Command on line:" + lastCommand.getLine() + " is a declaration, this is not allowed, the last command in a compound expression needs to be a statement.");
               
               ((TypeAdoptedNode) te).setTypeDefiningChild(lastCommand);
+              ((TypeAdoptedNode) te).addValueReturningChild(lastCommand);
+            }
+            
+            // Only not for the last command
+            for(int index = 0; index < commands.size() - 1; index++)
+            {
+              commands.get(index).setIgnoreReturnValue(true);
             }
         
             checkerHelper.tryToCloseScope();
@@ -251,11 +295,18 @@ expression returns [Node node = null;] // All statements are expressions because
             
               // This so the if statement has the same type as both options
               ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
+              ((TypeAdoptedNode) te).addValueReturningChild(e2);
+              ((TypeAdoptedNode) te).addValueReturningChild(e3);
             } catch (CheckerException ce) {
               // no defining type set, so remains void
+              e2.setIgnoreReturnValue(true);
+              e3.setIgnoreReturnValue(true);
             }
           }
-          
+          else
+          {
+            e2.setIgnoreReturnValue(true);
+          }
           node = te;
         } // Conditional statement
     |   ^(te=WHILE
@@ -264,7 +315,13 @@ expression returns [Node node = null;] // All statements are expressions because
             }
           e1=expression e2=expression)
         {
+        
+          List<Node> condition = asList(e1);
+          checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+        
           checkerHelper.releaseAndCloseScope();
+          
+          e2.setIgnoreReturnValue(true);
           
           node = te;
         } // Loop statement

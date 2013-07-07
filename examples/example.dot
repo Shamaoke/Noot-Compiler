@@ -1,0 +1,95 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="lightgrey"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="blue"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label="noot"];
+  n1 [label="bool[ ir ]"];
+  n1 [label="bool[ ir ]"];
+  n2 [label="g[BOOL ir]"];
+  n3 [label="{[BOOL ir]"];
+  n3 [label="{[BOOL ir]"];
+  n4 [label="int[ ir ]"];
+  n4 [label="int[ ir ]"];
+  n5 [label="h[INT ir]"];
+  n6 [label=",[ ir ]"];
+  n6 [label=",[ ir ]"];
+  n7 [label="i[INT ir]"];
+  n8 [label=":=[INT ir]"];
+  n8 [label=":=[INT ir]"];
+  n9 [label="i[INT]"];
+  n10 [label="5[INT]"];
+  n11 [label=">[BOOL ir]"];
+  n11 [label=">[BOOL ir]"];
+  n12 [label="read[INT ir]"];
+  n12 [label="read[INT ir]"];
+  n13 [label="h[INT ir]"];
+  n14 [label="i[INT ir]"];
+  n15 [label="if[INT ir]"];
+  n15 [label="if[INT ir]"];
+  n16 [label="==[BOOL]"];
+  n16 [label="==[BOOL]"];
+  n17 [label="g[BOOL]"];
+  n18 [label="true[BOOL]"];
+  n19 [label="{[INT ir]"];
+  n19 [label="{[INT ir]"];
+  n20 [label="int[ ir ]"];
+  n20 [label="int[ ir ]"];
+  n21 [label="j[INT ir]"];
+  n22 [label=":=[INT ir]"];
+  n22 [label=":=[INT ir]"];
+  n23 [label="j[INT]"];
+  n24 [label="if[INT]"];
+  n24 [label="if[INT]"];
+  n25 [label="true[BOOL]"];
+  n26 [label="{[INT]"];
+  n26 [label="{[INT]"];
+  n27 [label="int[ ir ]"];
+  n27 [label="int[ ir ]"];
+  n28 [label="i[INT ir]"];
+  n29 [label=":=[INT]"];
+  n29 [label=":=[INT]"];
+  n30 [label="i[INT]"];
+  n31 [label="5[INT]"];
+  n32 [label="6[INT]"];
+  n33 [label="4[INT ir]"];
+
+  n0 -> n1 // "noot" -> "bool[ ir ]"
+  n1 -> n2 // "bool[ ir ]" -> "g[BOOL ir]"
+  n0 -> n3 // "noot" -> "{[BOOL ir]"
+  n3 -> n4 // "{[BOOL ir]" -> "int[ ir ]"
+  n4 -> n5 // "int[ ir ]" -> "h[INT ir]"
+  n4 -> n6 // "int[ ir ]" -> ",[ ir ]"
+  n6 -> n7 // ",[ ir ]" -> "i[INT ir]"
+  n3 -> n8 // "{[BOOL ir]" -> ":=[INT ir]"
+  n8 -> n9 // ":=[INT ir]" -> "i[INT]"
+  n8 -> n10 // ":=[INT ir]" -> "5[INT]"
+  n3 -> n11 // "{[BOOL ir]" -> ">[BOOL ir]"
+  n11 -> n12 // ">[BOOL ir]" -> "read[INT ir]"
+  n12 -> n13 // "read[INT ir]" -> "h[INT ir]"
+  n11 -> n14 // ">[BOOL ir]" -> "i[INT ir]"
+  n0 -> n15 // "noot" -> "if[INT ir]"
+  n15 -> n16 // "if[INT ir]" -> "==[BOOL]"
+  n16 -> n17 // "==[BOOL]" -> "g[BOOL]"
+  n16 -> n18 // "==[BOOL]" -> "true[BOOL]"
+  n15 -> n19 // "if[INT ir]" -> "{[INT ir]"
+  n19 -> n20 // "{[INT ir]" -> "int[ ir ]"
+  n20 -> n21 // "int[ ir ]" -> "j[INT ir]"
+  n19 -> n22 // "{[INT ir]" -> ":=[INT ir]"
+  n22 -> n23 // ":=[INT ir]" -> "j[INT]"
+  n22 -> n24 // ":=[INT ir]" -> "if[INT]"
+  n24 -> n25 // "if[INT]" -> "true[BOOL]"
+  n24 -> n26 // "if[INT]" -> "{[INT]"
+  n26 -> n27 // "{[INT]" -> "int[ ir ]"
+  n27 -> n28 // "int[ ir ]" -> "i[INT ir]"
+  n26 -> n29 // "{[INT]" -> ":=[INT]"
+  n29 -> n30 // ":=[INT]" -> "i[INT]"
+  n29 -> n31 // ":=[INT]" -> "5[INT]"
+  n24 -> n32 // "if[INT]" -> "6[INT]"
+  n15 -> n33 // "if[INT ir]" -> "4[INT ir]"
+
+}
+

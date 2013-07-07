@@ -72,85 +72,87 @@ expression returns [Node node = null;] // All statements are expressions because
         }
     |   ^(te=PLUS expression expression)
         { 
-          program.pushInstruction(new Instruction("CALL","add","Adition"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","add","Adition"));
           node = te;
         }
     |   ^(te=MINUS e1=expression e2=expression?)
         {
-          if(e2 != null)
-            program.pushInstruction(new Instruction("CALL","sub","Subtracting"));
-          else
-            program.pushInstruction(new Instruction("CALL","neg","Integer negation"));
-            
+          if(!te.getIgnoreReturnValue())
+          {
+            if(e2 != null)
+              program.pushInstruction(new Instruction("CALL","sub","Subtracting"));
+            else
+              program.pushInstruction(new Instruction("CALL","neg","Integer negation"));
+          }  
           node = te;
         }
     |   ^(te=NEGATION expression)
         {
-          program.pushInstruction(new Instruction("CALL","not","Boolean negation"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","not","Boolean negation"));
           node = te;
         }
     |   ^(te=MULTIPLY e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","mult","Multiplication"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mult","Multiplication"));
           node = te;
         }
     |   ^(te=DEVIDE e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","div","Devide"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","div","Devide"));
           node = te;
         }
     |   ^(te=MODULO e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","mod","Modulo"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mod","Modulo"));
           node = te;
         }
     |   ^(te=LESSEQ e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","le","Less than or equal"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","le","Less than or equal"));
           node = te;
         }
     |   ^(te=MOREEQ e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","ge","Greater than or equal"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ge","Greater than or equal"));
           node = te;
         }
     |   ^(te=NEQ e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("LOADL","1"));
-          program.pushInstruction(new Instruction("CALL","ne","Not equal"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ne","Not equal"));
           node = te;
         }
     |   ^(te=EQ e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("LOADL","1" ));
-          program.pushInstruction(new Instruction("CALL","eq"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1" ));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","eq"));
           node = te;
         }
     |   ^(te=LESS e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","lt","Less than"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","lt","Less than"));
           node = te;
         }
     |   ^(te=MORE e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","gt","Greater than"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","gt","Greater than"));
           node = te;
         }
     |   ^(te=AND e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","and"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","and"));
           node = te;
         }
     |   ^(te=OR e1=expression e2=expression)
         {
-          program.pushInstruction(new Instruction("CALL","or"));
+          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","or"));
           node = te;
         }
     |   ^(te=BECOMES id=IDENTIFIER e1=expression) // Assign statement
         {
           program.pushInstruction(new Instruction("STORE",program.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning "+id.getText()));
           
-          if(te.parrentNeedsResult())
+          if(!te.getIgnoreReturnValue())
           {
             program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
           }
@@ -186,7 +188,7 @@ expression returns [Node node = null;] // All statements are expressions because
             }
           )+) // Read statement
         { 
-          if(readCount == 1 && te.parrentNeedsResult())
+          if(readCount == 1 && !te.getIgnoreReturnValue())
           {
             program.pushInstruction(returnInstruction);
           }
@@ -216,7 +218,7 @@ expression returns [Node node = null;] // All statements are expressions because
             }
           )+) // Print statement
         {
-          if(printCount == 1 && te.parrentNeedsResult())
+          if(printCount == 1 && !te.getIgnoreReturnValue())
           {
             program.pushInstruction(returnInstruction);
           }
@@ -277,28 +279,31 @@ expression returns [Node node = null;] // All statements are expressions because
 operand returns [Node node = null;]
     :   id=IDENTIFIER 
         {
-          program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
+          if(!id.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
           node = id;
         }
     |   n=NUMBER
         {
-          program.pushInstruction(new Instruction("LOADL",n.getText()));
+          if(!n.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL",n.getText()));
           node = n;
         }
     |   b=TRUE
         {
-          program.pushInstruction(new Instruction("LOADL","1","True Boolean"));
+          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1","True Boolean"));
           node = b;
         }
     |   b=FALSE
         {
-          program.pushInstruction(new Instruction("LOADL","0","False Boolean"));
+          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","0","False Boolean"));
           node = b;
         }
     |   c=CHARACTER
         {
-          int ascii = (int)c.getText().charAt(1);
-          program.pushInstruction(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
+          if(!c.getIgnoreReturnValue())
+          {
+            int ascii = (int)c.getText().charAt(1);
+            program.pushInstruction(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
+          }
           node = c;
         }
     ;

@@ -82,7 +82,9 @@ public class TypeAdoptedNode extends Node {
 		public void setTypeDefiningChild(Node typeDefiningChild)
 		{
 			if(this.children.contains(typeDefiningChild))
+			{
 				this.typeDefiningChild = typeDefiningChild;
+			}
 		}
 		
 		

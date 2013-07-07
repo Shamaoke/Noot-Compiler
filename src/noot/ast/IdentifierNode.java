@@ -15,6 +15,7 @@
 package noot.ast;
 
 import org.antlr.runtime.Token;
+import org.antlr.runtime.tree.Tree;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -74,6 +75,6 @@ public class IdentifierNode extends Node {
 			return this.declarationNode.getDeclaredType();
 		}
 		return NodeType.VOID;
-	}
+	}	
 	
 }

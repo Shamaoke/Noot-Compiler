@@ -14,7 +14,8 @@
  */
 package noot.ast;
 
-import noot.compiler.Checker;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTree;
@@ -40,6 +41,12 @@ public class Node extends CommonTree {
  CHAR 
 	}
 	
+	private boolean ignoreReturnValue = false;
+	
+	private ArrayList<Node> valueReturningChildren = new ArrayList<Node>();
+	
+	
+
 	/**
 	 * Instantiates a new node.
 	 */
@@ -73,27 +80,6 @@ public class Node extends CommonTree {
 	{
 		return NodeType.VOID;
 	}
-	
-	public boolean parrentNeedsResult()
-	{
-		
-		if(this.parent.getType() == Checker.NOOT)
-		{
-			return false;
-		}
-		
-		// This so nested compound expressions also work
-		if(this.parent.getType() == Checker.LCURLY && this.parent.getChild(this.parent.getChildCount() - 1) == this)
-		{
-			return ((Node) this.parent).parrentNeedsResult();
-		}
-		else if(this.parent.getType() == Checker.LCURLY)
-		{
-			return false;
-		}
-		
-		return true;
-	}
 
 	/* (non-Javadoc)
 	 * @see org.antlr.runtime.tree.CommonTree#toString()
@@ -102,11 +88,43 @@ public class Node extends CommonTree {
 	{	
 		String s = super.toString();
 		
+		String ignoreResultString = this.ignoreReturnValue ? " ir" : "";
+
 		if(this.getNodeType() != NodeType.VOID)
 		{
-			s = s + "[" + this.getNodeType() + "]";
+			s = s + "[" + this.getNodeType() + ignoreResultString + "]";
+		}
+		else if (!ignoreResultString.equals(""))
+		{
+			s = s + "[" + ignoreResultString + " ]";
 		}
 		
 		return s;
 	}
+
+	public boolean getIgnoreReturnValue() {
+		return ignoreReturnValue;
+	}
+
+	public void setIgnoreReturnValue(boolean ignoreReturnValue) {
+		this.ignoreReturnValue = ignoreReturnValue;
+		
+		for(Node child : valueReturningChildren)
+			child.setIgnoreReturnValue(this.getIgnoreReturnValue());
+	}
+	
+	public void addValueReturningChild(Node valueReturningChild)
+	{
+		if(this.children.contains(valueReturningChild))
+		{
+			valueReturningChildren.add(valueReturningChild);
+		}
+	}
+	
+	public void addValueReturningChildren(List<Node> list)
+	{
+		for(Node child : list)
+			this.addValueReturningChild(child);
+	}
+	
 }
