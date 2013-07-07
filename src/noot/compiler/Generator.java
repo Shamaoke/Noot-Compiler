@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-07 13:22:21
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-07 18:52:42
 
     package noot.compiler;
     import noot.ast.*;
@@ -90,7 +90,7 @@ public class Generator extends TreeParser {
 
 
 
-	    private Program program = new Program();
+	    private GeneratorHelper gh = new GeneratorHelper();
 	    
 
 
@@ -148,7 +148,7 @@ public class Generator extends TreeParser {
 			match(input, Token.UP, null); 
 
 
-			           program.finalize();
+			           gh.finalizeAndPrintInstructions();
 			        
 			}
 
@@ -167,11 +167,8 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "declaration"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:50:1: declaration returns [Node node = null;] : ^(de= ( INT | BOOL | CHAR ) id= IDENTIFIER ( declaration_extention )? ) ;
-	public final Node declaration() throws RecognitionException {
-		Node node =  null;;
-
-
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:50:1: declaration : ^(de= ( INT | BOOL | CHAR ) id= IDENTIFIER ( declaration_extention )? ) ;
+	public final void declaration() throws RecognitionException {
 		Node de=null;
 		Node id=null;
 
@@ -189,12 +186,11 @@ public class Generator extends TreeParser {
 				throw mse;
 			}
 			match(input, Token.DOWN, null); 
-			id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_declaration155); 
+			id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_declaration151); 
 
-			              program.pushInstruction(new Instruction("PUSH","1","Declaring "+((IdentifierNode)id).getNodeType()+" "+id.getText()));
-			              program.getDeclarations().add( (DeclarationNode)de );
+			              gh.declare( (DeclarationNode)de );
 			            
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:56:11: ( declaration_extention )?
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:55:11: ( declaration_extention )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==COMMA) ) {
@@ -202,9 +198,9 @@ public class Generator extends TreeParser {
 			}
 			switch (alt2) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:56:11: declaration_extention
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:55:11: declaration_extention
 					{
-					pushFollow(FOLLOW_declaration_extention_in_declaration181);
+					pushFollow(FOLLOW_declaration_extention_in_declaration177);
 					declaration_extention();
 					state._fsp--;
 
@@ -226,30 +222,28 @@ public class Generator extends TreeParser {
 		finally {
 			// do for sure before leaving
 		}
-		return node;
 	}
 	// $ANTLR end "declaration"
 
 
 
 	// $ANTLR start "declaration_extention"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:59:1: declaration_extention : ^(de= COMMA id= IDENTIFIER ( declaration_extention )? ) ;
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:58:1: declaration_extention : ^(de= COMMA id= IDENTIFIER ( declaration_extention )? ) ;
 	public final void declaration_extention() throws RecognitionException {
 		Node de=null;
 		Node id=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:60:5: ( ^(de= COMMA id= IDENTIFIER ( declaration_extention )? ) )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:60:9: ^(de= COMMA id= IDENTIFIER ( declaration_extention )? )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:59:5: ( ^(de= COMMA id= IDENTIFIER ( declaration_extention )? ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:59:9: ^(de= COMMA id= IDENTIFIER ( declaration_extention )? )
 			{
-			de=(Node)match(input,COMMA,FOLLOW_COMMA_in_declaration_extention209); 
+			de=(Node)match(input,COMMA,FOLLOW_COMMA_in_declaration_extention205); 
 			match(input, Token.DOWN, null); 
-			id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_declaration_extention213); 
+			id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_declaration_extention209); 
 
-			            program.pushInstruction(new Instruction("PUSH","1","Declaring "+((IdentifierNode)id).getNodeType()+" "+id.getText()));
-			            program.getDeclarations().add( (DeclarationNode)de );
+			            gh.declare( (DeclarationNode)de );
 			        
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:65:11: ( declaration_extention )?
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:63:11: ( declaration_extention )?
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==COMMA) ) {
@@ -257,9 +251,9 @@ public class Generator extends TreeParser {
 			}
 			switch (alt3) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:65:11: declaration_extention
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:63:11: declaration_extention
 					{
-					pushFollow(FOLLOW_declaration_extention_in_declaration_extention235);
+					pushFollow(FOLLOW_declaration_extention_in_declaration_extention231);
 					declaration_extention();
 					state._fsp--;
 
@@ -287,7 +281,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:68:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS expression expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:66:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS expression expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) );
 	public final Node expression() throws RecognitionException {
 		Node node =  null;;
 
@@ -298,11 +292,10 @@ public class Generator extends TreeParser {
 		Node e1 =null;
 		Node e2 =null;
 		Node en =null;
-		Node dc =null;
 		Node e3 =null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:69:5: (op= operand | ^(te= PLUS expression expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:67:5: (op= operand | ^(te= PLUS expression expression ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) )
 			int alt9=21;
 			switch ( input.LA(1) ) {
 			case CHARACTER:
@@ -421,9 +414,9 @@ public class Generator extends TreeParser {
 			}
 			switch (alt9) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:69:9: op= operand
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:67:9: op= operand
 					{
-					pushFollow(FOLLOW_operand_in_expression267);
+					pushFollow(FOLLOW_operand_in_expression263);
 					op=operand();
 					state._fsp--;
 
@@ -433,36 +426,36 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:73:9: ^(te= PLUS expression expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:71:9: ^(te= PLUS expression expression )
 					{
-					te=(Node)match(input,PLUS,FOLLOW_PLUS_in_expression290); 
+					te=(Node)match(input,PLUS,FOLLOW_PLUS_in_expression286); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression292);
+					pushFollow(FOLLOW_expression_in_expression288);
 					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression294);
+					pushFollow(FOLLOW_expression_in_expression290);
 					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 					 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","add","Adition"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","add","Adition"));
 					          node = te;
 					        
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:78:9: ^(te= MINUS e1= expression (e2= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:76:9: ^(te= MINUS e1= expression (e2= expression )? )
 					{
-					te=(Node)match(input,MINUS,FOLLOW_MINUS_in_expression318); 
+					te=(Node)match(input,MINUS,FOLLOW_MINUS_in_expression314); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression322);
+					pushFollow(FOLLOW_expression_in_expression318);
 					e1=expression();
 					state._fsp--;
 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:78:36: (e2= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:76:36: (e2= expression )?
 					int alt4=2;
 					int LA4_0 = input.LA(1);
 					if ( (LA4_0==AND||LA4_0==BECOMES||LA4_0==CHARACTER||LA4_0==DEVIDE||(LA4_0 >= EQ && LA4_0 <= FALSE)||(LA4_0 >= IDENTIFIER && LA4_0 <= IF)||(LA4_0 >= LCURLY && LA4_0 <= LESSEQ)||(LA4_0 >= MINUS && LA4_0 <= NEQ)||LA4_0==NUMBER||(LA4_0 >= OR && LA4_0 <= PRINT)||LA4_0==READ||LA4_0==TRUE||LA4_0==WHILE) ) {
@@ -470,9 +463,9 @@ public class Generator extends TreeParser {
 					}
 					switch (alt4) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:78:36: e2= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:76:36: e2= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression326);
+							pushFollow(FOLLOW_expression_in_expression322);
 							e2=expression();
 							state._fsp--;
 
@@ -484,301 +477,292 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue())
+					          if(!te.shouldIgnoreReturnValue())
 					          {
 					            if(e2 != null)
-					              program.pushInstruction(new Instruction("CALL","sub","Subtracting"));
+					              gh.currentBlock().push(new Instruction("CALL","sub","Subtracting"));
 					            else
-					              program.pushInstruction(new Instruction("CALL","neg","Integer negation"));
+					              gh.currentBlock().push(new Instruction("CALL","neg","Integer negation"));
 					          }  
 					          node = te;
 					        
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:89:9: ^(te= NEGATION expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:87:9: ^(te= NEGATION expression )
 					{
-					te=(Node)match(input,NEGATION,FOLLOW_NEGATION_in_expression351); 
+					te=(Node)match(input,NEGATION,FOLLOW_NEGATION_in_expression347); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression353);
+					pushFollow(FOLLOW_expression_in_expression349);
 					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","not","Boolean negation"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","not","Boolean negation"));
 					          node = te;
 					        
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:94:9: ^(te= MULTIPLY e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:92:9: ^(te= MULTIPLY e1= expression e2= expression )
 					{
-					te=(Node)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression377); 
+					te=(Node)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression373); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression381);
+					pushFollow(FOLLOW_expression_in_expression377);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression385);
+					pushFollow(FOLLOW_expression_in_expression381);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mult","Multiplication"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","mult","Multiplication"));
 					          node = te;
 					        
 					}
 					break;
 				case 6 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:99:9: ^(te= DEVIDE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:97:9: ^(te= DEVIDE e1= expression e2= expression )
 					{
-					te=(Node)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression409); 
+					te=(Node)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression405); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression413);
+					pushFollow(FOLLOW_expression_in_expression409);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression417);
+					pushFollow(FOLLOW_expression_in_expression413);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","div","Devide"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","div","Devide"));
 					          node = te;
 					        
 					}
 					break;
 				case 7 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:104:9: ^(te= MODULO e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:102:9: ^(te= MODULO e1= expression e2= expression )
 					{
-					te=(Node)match(input,MODULO,FOLLOW_MODULO_in_expression441); 
+					te=(Node)match(input,MODULO,FOLLOW_MODULO_in_expression437); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression445);
+					pushFollow(FOLLOW_expression_in_expression441);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression449);
+					pushFollow(FOLLOW_expression_in_expression445);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","mod","Modulo"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","mod","Modulo"));
 					          node = te;
 					        
 					}
 					break;
 				case 8 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:109:9: ^(te= LESSEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:107:9: ^(te= LESSEQ e1= expression e2= expression )
 					{
-					te=(Node)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression473); 
+					te=(Node)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression469); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression477);
+					pushFollow(FOLLOW_expression_in_expression473);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression481);
+					pushFollow(FOLLOW_expression_in_expression477);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","le","Less than or equal"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","le","Less than or equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 9 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:114:9: ^(te= MOREEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:112:9: ^(te= MOREEQ e1= expression e2= expression )
 					{
-					te=(Node)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression505); 
+					te=(Node)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression501); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression509);
+					pushFollow(FOLLOW_expression_in_expression505);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression513);
+					pushFollow(FOLLOW_expression_in_expression509);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ge","Greater than or equal"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","ge","Greater than or equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 10 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:119:9: ^(te= NEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:117:9: ^(te= NEQ e1= expression e2= expression )
 					{
-					te=(Node)match(input,NEQ,FOLLOW_NEQ_in_expression537); 
+					te=(Node)match(input,NEQ,FOLLOW_NEQ_in_expression533); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression541);
+					pushFollow(FOLLOW_expression_in_expression537);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression545);
+					pushFollow(FOLLOW_expression_in_expression541);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1"));
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","ne","Not equal"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","ne","Not equal"));
 					          node = te;
 					        
 					}
 					break;
 				case 11 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:125:9: ^(te= EQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:123:9: ^(te= EQ e1= expression e2= expression )
 					{
-					te=(Node)match(input,EQ,FOLLOW_EQ_in_expression569); 
+					te=(Node)match(input,EQ,FOLLOW_EQ_in_expression565); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression573);
+					pushFollow(FOLLOW_expression_in_expression569);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression577);
+					pushFollow(FOLLOW_expression_in_expression573);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1" ));
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","eq"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1" ));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","eq"));
 					          node = te;
 					        
 					}
 					break;
 				case 12 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:131:9: ^(te= LESS e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:129:9: ^(te= LESS e1= expression e2= expression )
 					{
-					te=(Node)match(input,LESS,FOLLOW_LESS_in_expression601); 
+					te=(Node)match(input,LESS,FOLLOW_LESS_in_expression597); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression605);
+					pushFollow(FOLLOW_expression_in_expression601);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression609);
+					pushFollow(FOLLOW_expression_in_expression605);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","lt","Less than"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","lt","Less than"));
 					          node = te;
 					        
 					}
 					break;
 				case 13 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:136:9: ^(te= MORE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:134:9: ^(te= MORE e1= expression e2= expression )
 					{
-					te=(Node)match(input,MORE,FOLLOW_MORE_in_expression633); 
+					te=(Node)match(input,MORE,FOLLOW_MORE_in_expression629); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression637);
+					pushFollow(FOLLOW_expression_in_expression633);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression641);
+					pushFollow(FOLLOW_expression_in_expression637);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","gt","Greater than"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","gt","Greater than"));
 					          node = te;
 					        
 					}
 					break;
 				case 14 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:141:9: ^(te= AND e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:139:9: ^(te= AND e1= expression e2= expression )
 					{
-					te=(Node)match(input,AND,FOLLOW_AND_in_expression665); 
+					te=(Node)match(input,AND,FOLLOW_AND_in_expression661); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression669);
+					pushFollow(FOLLOW_expression_in_expression665);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression673);
+					pushFollow(FOLLOW_expression_in_expression669);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","and"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","and"));
 					          node = te;
 					        
 					}
 					break;
 				case 15 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:146:9: ^(te= OR e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:144:9: ^(te= OR e1= expression e2= expression )
 					{
-					te=(Node)match(input,OR,FOLLOW_OR_in_expression697); 
+					te=(Node)match(input,OR,FOLLOW_OR_in_expression693); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression701);
+					pushFollow(FOLLOW_expression_in_expression697);
 					e1=expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression705);
+					pushFollow(FOLLOW_expression_in_expression701);
 					e2=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          if(!te.getIgnoreReturnValue()) program.pushInstruction(new Instruction("CALL","or"));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","or"));
 					          node = te;
 					        
 					}
 					break;
 				case 16 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:151:9: ^(te= BECOMES id= IDENTIFIER e1= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:149:9: ^(te= BECOMES id= IDENTIFIER e1= expression )
 					{
-					te=(Node)match(input,BECOMES,FOLLOW_BECOMES_in_expression729); 
+					te=(Node)match(input,BECOMES,FOLLOW_BECOMES_in_expression725); 
 					match(input, Token.DOWN, null); 
-					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression733); 
-					pushFollow(FOLLOW_expression_in_expression737);
+					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression729); 
+					pushFollow(FOLLOW_expression_in_expression733);
 					e1=expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("STORE",program.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning "+id.getText()));
-					          
-					          if(!te.getIgnoreReturnValue())
-					          {
-					            program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
-					          }
-					          
+					          gh.currentBlock().push(new Instruction("STORE",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning "+id.getText()));
+					          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
 					          node = te;
 					        
 					}
 					break;
 				case 17 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:162:9: ^(te= READ (id= IDENTIFIER )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:155:9: ^(te= READ (id= IDENTIFIER )+ )
 					{
-					te=(Node)match(input,READ,FOLLOW_READ_in_expression762); 
-
-					            int readCount = 0;
-					            Instruction returnInstruction = null;
-					          
+					te=(Node)match(input,READ,FOLLOW_READ_in_expression758); 
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:167:11: (id= IDENTIFIER )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:155:19: (id= IDENTIFIER )+
 					int cnt5=0;
 					loop5:
 					while (true) {
@@ -790,29 +774,33 @@ public class Generator extends TreeParser {
 
 						switch (alt5) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:167:12: id= IDENTIFIER
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:155:20: id= IDENTIFIER
 							{
-							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression789); 
+							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression763); 
 
-							              if(readCount == 0)
-							                returnInstruction = new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression");
 							                
-							              program.pushInstruction(new Instruction("LOADA",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading address of "+id.getText()));
+							              gh.currentBlock().push(new Instruction("LOADA",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading address of "+id.getText()));
 							              
 							              if(id.getNodeType() == Node.NodeType.CHAR)
 							              {
-							                program.pushInstruction(new Instruction("CALL","get","Reading character "+id.getText()));
+							                gh.pushInstructionsForPrintingString("Enter character: ");
+							                gh.currentBlock().push(new Instruction("CALL","get","Reading character "+id.getText()));
 							              }
 							              else if(id.getNodeType() == Node.NodeType.INT)
 							              {
-							                program.pushInstruction(new Instruction("CALL","getint","Reading int "+id.getText()));
+							                gh.pushInstructionsForPrintingString("Enter integer: ");
+							                gh.currentBlock().push(new Instruction("CALL","getint","Reading int "+id.getText()));
 							              }
 							              else if(id.getNodeType() == Node.NodeType.BOOL)
 							              {
-							                program.pushInstruction(new Instruction("CALL","getint","Reading boolean "+id.getText()));
+							                gh.pushInstructionsForPrintingString("Enter boolean: ");
+							                gh.currentBlock().push(new Instruction("CALL","getint","Reading boolean "+id.getText()));
 							              }
 							              
-							              readCount++;
+							              if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue())
+							              {
+							                gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
+							              }
 							            
 							}
 							break;
@@ -828,25 +816,20 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 					 
-					          if(readCount == 1 && !te.getIgnoreReturnValue())
-					          {
-					            program.pushInstruction(returnInstruction);
-					          }
-					          
 					          node = te;
 					        
 					}
 					break;
 				case 18 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:198:9: ^(te= PRINT (en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:185:9: ^(te= PRINT (en= expression )+ )
 					{
-					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression841); 
+					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression815); 
 
-					            int printCount = 0;
-					            Instruction returnInstruction = null;
-					          
+					              MemoryLocation temp = null;
+					              if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue()) temp = gh.allocHelperRegister();
+					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:203:11: (en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:190:11: (en= expression )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -858,26 +841,33 @@ public class Generator extends TreeParser {
 
 						switch (alt6) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:203:12: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:190:12: en= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression868);
+							pushFollow(FOLLOW_expression_in_expression845);
 							en=expression();
 							state._fsp--;
 
 
-							              if(printCount == 0)
-							                returnInstruction = program.getLastPushedInstruction();
-							            
-							              if(en.getNodeType() == Node.NodeType.CHAR)
-							                program.pushInstruction(new Instruction("CALL","put","Print character"));
-							              else if(en.getNodeType() == Node.NodeType.INT)
-							                program.pushInstruction(new Instruction("CALL","putint","Print int"));
-							              else if(en.getNodeType() == Node.NodeType.BOOL)
-							                program.pushInstruction(new Instruction("CALL","putint","Print boolean"));
-							                
-							              program.pushInstruction(new Instruction("CALL","puteol"));
+							              if(temp != null)
+							              {
+							                gh.currentBlock().push(new Instruction("STORE",gh.addressOfMemoryLocation(temp),1,"Assigning temp"));
+							                gh.currentBlock().push(new Instruction("LOAD",gh.addressOfMemoryLocation(temp),1,"Loading temp"));
+							              }
 							              
-							              printCount++;
+							              if(en.getNodeType() == Node.NodeType.CHAR)
+							                gh.currentBlock().push(new Instruction("CALL","put","Print character"));
+							              else if(en.getNodeType() == Node.NodeType.INT)
+							                gh.currentBlock().push(new Instruction("CALL","putint","Print int"));
+							              else if(en.getNodeType() == Node.NodeType.BOOL)
+							                gh.currentBlock().push(new Instruction("CALL","putint","Print boolean"));
+							                
+							              gh.currentBlock().push(new Instruction("CALL","puteol"));
+							              
+							              if(temp != null)
+							              {
+							                gh.currentBlock().push(new Instruction("LOAD",gh.addressOfMemoryLocation(temp),1,"Loading temp"));
+							                gh.deallocHelperRegister(temp);
+							              }
 							            
 							}
 							break;
@@ -893,24 +883,20 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          if(printCount == 1 && !te.getIgnoreReturnValue())
-					          {
-					            program.pushInstruction(returnInstruction);
-					          }
 					          
 					          node = te;
 					        
 					}
 					break;
 				case 19 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:228:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:218:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
 					{
-					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression920); 
+					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression897); 
 
-					                ArrayList<Node> commands = new ArrayList<Node>();
+					              gh.openScope();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:232:11: (dc= declaration |en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:222:11: (dc= declaration |en= expression )+
 					int cnt7=0;
 					loop7:
 					while (true) {
@@ -925,25 +911,21 @@ public class Generator extends TreeParser {
 
 						switch (alt7) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:232:12: dc= declaration
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:222:12: dc= declaration
 							{
-							pushFollow(FOLLOW_declaration_in_expression949);
-							dc=declaration();
+							pushFollow(FOLLOW_declaration_in_expression926);
+							declaration();
 							state._fsp--;
 
-
-							            
 							}
 							break;
 						case 2 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:235:14: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:222:29: en= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression980);
+							pushFollow(FOLLOW_expression_in_expression932);
 							en=expression();
 							state._fsp--;
 
-
-							            
 							}
 							break;
 
@@ -958,36 +940,42 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
+					            gh.tryToCloseScope();
 					            node = te;
 					        
 					}
 					break;
 				case 20 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:242:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:227:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
 					{
-					te=(Node)match(input,IF,FOLLOW_IF_in_expression1032); 
+					te=(Node)match(input,IF,FOLLOW_IF_in_expression959); 
+
+					              gh.holdUpcommingScope();
+					            
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1036);
+					pushFollow(FOLLOW_expression_in_expression987);
 					e1=expression();
 					state._fsp--;
 
 
 					              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
-					              program.pushInstruction(jumpIfInstruction);
+					              gh.currentBlock().push(jumpIfInstruction);
 					            
-					pushFollow(FOLLOW_expression_in_expression1064);
+					pushFollow(FOLLOW_expression_in_expression1015);
 					e2=expression();
 					state._fsp--;
 
 
-					                // Dit kan ingekort worden in het geval er geen else aanwezig is
 					                Instruction jumpInstruction = new Instruction("JUMP","notset","Else (jump over else)");
-					                program.pushInstruction(jumpInstruction);
-					                program.pushBlock();
 					                
-					                jumpIfInstruction.setArgument(program.getCurrentBlock().jumpLabel());
+					                if(te.getChildren().size() == 3)
+					                  gh.currentBlock().push(jumpInstruction);
+					   
+					                gh.pushBlock();
+					                
+					                jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
 					            
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:256:13: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:247:13: (e3= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -995,9 +983,9 @@ public class Generator extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:256:13: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:247:13: e3= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression1092);
+							pushFollow(FOLLOW_expression_in_expression1043);
 							e3=expression();
 							state._fsp--;
 
@@ -1009,37 +997,48 @@ public class Generator extends TreeParser {
 					match(input, Token.UP, null); 
 
 
-					          program.pushBlock();
-					          jumpInstruction.setArgument(program.getCurrentBlock().jumpLabel());
+					          gh.releaseAndCloseScope();
+					          
+					          gh.pushBlock(); // if block is empty it won't push
+					          jumpInstruction.setArgument(gh.currentBlock().jumpLabel());
 					          
 					          node = te;
 					        
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:263:9: ^(te= WHILE expression expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:256:9: ^(te= WHILE expression expression )
 					{
-					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1118); 
+					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1069); 
 					 
-					            program.pushBlock();
-					            String loopBackTo = program.getCurrentBlock().jumpLabel();
+					            gh.pushBlock();
+					            String loopBackTo = gh.currentBlock().jumpLabel();
+					            
+					            gh.holdUpcommingScope();
 					          
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1140);
+					pushFollow(FOLLOW_expression_in_expression1091);
 					expression();
 					state._fsp--;
 
 
-					            program.pushInstruction(new Instruction("JUMPIF",InstructionBlock.label(program.getCurrentBlock().labelIdentifier + 1,true),0,"Looping"));
+					            Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"While (jump out)");
+					            gh.currentBlock().push(jumpIfInstruction);
 					          
-					pushFollow(FOLLOW_expression_in_expression1162);
+					pushFollow(FOLLOW_expression_in_expression1113);
 					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
 
 
-					          program.pushInstruction(new Instruction("JUMP",loopBackTo,"Looping"));
+					          gh.releaseAndCloseScope();
+					          
+					          gh.currentBlock().push(new Instruction("JUMP",loopBackTo,"Looping back"));
+					          
+					          gh.pushBlock();
+					          jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
+					          
 					          node = te;
 					        
 					}
@@ -1062,7 +1061,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:279:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:281:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1073,7 +1072,7 @@ public class Generator extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:280:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:282:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt10=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1108,54 +1107,54 @@ public class Generator extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:280:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:282:9: id= IDENTIFIER
 					{
-					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1203); 
+					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1154); 
 
-					          if(!id.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOAD",program.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
+					          if(!id.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
 					          node = id;
 					        
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:285:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:287:9: n= NUMBER
 					{
-					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1226); 
+					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1177); 
 
-					          if(!n.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL",n.getText()));
+					          if(!n.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL",n.getText()));
 					          node = n;
 					        
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:290:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:292:9: b= TRUE
 					{
-					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1248); 
+					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1199); 
 
-					          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","1","True Boolean"));
+					          if(!b.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1","True Boolean"));
 					          node = b;
 					        
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:295:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:297:9: b= FALSE
 					{
-					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1270); 
+					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1221); 
 
-					          if(!b.getIgnoreReturnValue()) program.pushInstruction(new Instruction("LOADL","0","False Boolean"));
+					          if(!b.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","0","False Boolean"));
 					          node = b;
 					        
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:300:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:302:9: c= CHARACTER
 					{
-					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1292); 
+					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1243); 
 
-					          if(!c.getIgnoreReturnValue())
+					          if(!c.shouldIgnoreReturnValue())
 					          {
 					            int ascii = (int)c.getText().charAt(1);
-					            program.pushInstruction(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
+					            gh.currentBlock().push(new Instruction("LOADL",Integer.toString(ascii),"Loading character "+c.getText()));
 					          }
 					          node = c;
 					        
@@ -1183,74 +1182,74 @@ public class Generator extends TreeParser {
 	public static final BitSet FOLLOW_NOOT_in_program91 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_declaration_in_program94 = new BitSet(new long[]{0x000145D7F1FB13D8L});
 	public static final BitSet FOLLOW_expression_in_program98 = new BitSet(new long[]{0x000145D7F1FB13D8L});
-	public static final BitSet FOLLOW_set_in_declaration141 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_declaration155 = new BitSet(new long[]{0x0000000000000408L});
-	public static final BitSet FOLLOW_declaration_extention_in_declaration181 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_COMMA_in_declaration_extention209 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_declaration_extention213 = new BitSet(new long[]{0x0000000000000408L});
-	public static final BitSet FOLLOW_declaration_extention_in_declaration_extention235 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_operand_in_expression267 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_expression290 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression292 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression294 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expression318 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression322 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_expression_in_expression326 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEGATION_in_expression351 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression353 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MULTIPLY_in_expression377 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression381 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression385 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DEVIDE_in_expression409 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression413 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression417 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expression441 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression445 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression449 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LESSEQ_in_expression473 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression477 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression481 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MOREEQ_in_expression505 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression509 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression513 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expression537 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression541 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression545 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expression569 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression573 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression577 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LESS_in_expression601 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression605 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression609 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MORE_in_expression633 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression637 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression641 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_AND_in_expression665 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression669 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression673 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expression697 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression701 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression705 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_BECOMES_in_expression729 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression733 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression737 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_READ_in_expression762 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression789 = new BitSet(new long[]{0x0000000000080008L});
-	public static final BitSet FOLLOW_PRINT_in_expression841 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression868 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_LCURLY_in_expression920 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_declaration_in_expression949 = new BitSet(new long[]{0x000145D7F1FB13D8L});
-	public static final BitSet FOLLOW_expression_in_expression980 = new BitSet(new long[]{0x000145D7F1FB13D8L});
-	public static final BitSet FOLLOW_IF_in_expression1032 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1036 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression1064 = new BitSet(new long[]{0x000145D7F1DB1258L});
-	public static final BitSet FOLLOW_expression_in_expression1092 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WHILE_in_expression1118 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1140 = new BitSet(new long[]{0x000145D7F1DB1250L});
-	public static final BitSet FOLLOW_expression_in_expression1162 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand1203 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_operand1226 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1248 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1270 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHARACTER_in_operand1292 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_declaration137 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_declaration151 = new BitSet(new long[]{0x0000000000000408L});
+	public static final BitSet FOLLOW_declaration_extention_in_declaration177 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_COMMA_in_declaration_extention205 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_declaration_extention209 = new BitSet(new long[]{0x0000000000000408L});
+	public static final BitSet FOLLOW_declaration_extention_in_declaration_extention231 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_operand_in_expression263 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_expression286 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression288 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression290 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expression314 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression318 = new BitSet(new long[]{0x000145D7F1DB1258L});
+	public static final BitSet FOLLOW_expression_in_expression322 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEGATION_in_expression347 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression349 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression373 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression377 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression381 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DEVIDE_in_expression405 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression409 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression413 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expression437 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression441 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression445 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LESSEQ_in_expression469 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression473 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression477 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MOREEQ_in_expression501 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression505 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression509 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEQ_in_expression533 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression537 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression541 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expression565 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression569 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression573 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LESS_in_expression597 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression601 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression605 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MORE_in_expression629 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression633 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression637 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_AND_in_expression661 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression665 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression669 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expression693 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression697 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression701 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_BECOMES_in_expression725 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression729 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression733 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_READ_in_expression758 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression763 = new BitSet(new long[]{0x0000000000080008L});
+	public static final BitSet FOLLOW_PRINT_in_expression815 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression845 = new BitSet(new long[]{0x000145D7F1DB1258L});
+	public static final BitSet FOLLOW_LCURLY_in_expression897 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_declaration_in_expression926 = new BitSet(new long[]{0x000145D7F1FB13D8L});
+	public static final BitSet FOLLOW_expression_in_expression932 = new BitSet(new long[]{0x000145D7F1FB13D8L});
+	public static final BitSet FOLLOW_IF_in_expression959 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression987 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression1015 = new BitSet(new long[]{0x000145D7F1DB1258L});
+	public static final BitSet FOLLOW_expression_in_expression1043 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WHILE_in_expression1069 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1091 = new BitSet(new long[]{0x000145D7F1DB1250L});
+	public static final BitSet FOLLOW_expression_in_expression1113 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1154 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_operand1177 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1199 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1221 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHARACTER_in_operand1243 = new BitSet(new long[]{0x0000000000000002L});
 }

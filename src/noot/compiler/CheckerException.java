@@ -14,32 +14,19 @@
  */
 package noot.compiler;
 
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
 
-public class CheckerException extends RecognitionException {
+public class CheckerException extends NootException {
+
+	private static final long serialVersionUID = 6841118816451063086L;
 	
-    private String msg;
-    public static final long serialVersionUID = 24162462L; // for Serializable
-
-    // Ctor which only requires the error message to be printed.
-    public CheckerException(String msg) {
-        super();
-        this.msg = msg;
-    }
-
-    // Ctor that takes a node of the AST tree (i.e. IDENTIFIER) and
-    // the error message to build a more informative error message.
-    public CheckerException(Tree tree, String msg) {
-        super();
-        this.msg = tree.getText() +
-                " (" + tree.getLine() +
-                ":" + tree.getCharPositionInLine() +
-                ") " + msg;
-    }
-
-    @Override
-    public String getMessage() {
-        return this.msg;
-    }
+	public CheckerException(String msg)
+	{
+		super(msg);
+	}
+	
+	public CheckerException(Tree tree, String msg)
+	{
+		super(tree,msg);
+	}
 }

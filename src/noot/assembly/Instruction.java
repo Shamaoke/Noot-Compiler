@@ -3,6 +3,7 @@ package noot.assembly;
 public class Instruction {
 
 	private String instruction;
+
 	private String argument = null;
 	private int lengthSpecifier = -1;
 	private String label = null;
@@ -100,4 +101,11 @@ public class Instruction {
 		this.argument = argument;
 	}
 	
+	public String getInstruction() {
+		return instruction;
+	}
+
+	public String getArgument() {
+		return argument;
+	}
 }

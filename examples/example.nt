@@ -1,24 +1,21 @@
 noot
 
-bool g;
+int a, b, c, d,l;
+char e;
+bool f,g,k;
 
-{
-	int h,i;
-	i := 5;
-	(read(h) > i);
-}; // compound expression with type boolean
-
-if g == true then {
-		int j;
-		j := if true then
-				{
-					int i;
-					i := 5;
-				}
-				else
-					6
-				fi;
+k := if g == true then {
+		int i,j;
+		j := 5;
+		(j > i);
 	}
 else
-	4
+	false
 fi; // compound expression used with if statement
+
+k := true;
+
+while k == true do {
+	l := print(l + 1);
+	if l > 10 then { k := false; } fi;
+} od;

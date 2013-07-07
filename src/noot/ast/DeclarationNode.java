@@ -17,7 +17,6 @@ package noot.ast;
 import noot.compiler.NootParser;
 
 import org.antlr.runtime.Token;
-import org.antlr.runtime.tree.Tree;
 
 // TODO: Auto-generated Javadoc
 /**

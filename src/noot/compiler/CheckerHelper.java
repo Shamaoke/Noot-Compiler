@@ -21,66 +21,22 @@ import java.util.Stack;
 import noot.ast.*;
 import noot.ast.Node.NodeType;
 
-public class CheckerHelper {
-
-	private int scopingLevel = 0;
-	private Stack<Integer> holdCloseScopeAtLevel = new Stack<Integer>(); // Needed for special scoping rules while and if statements
+public class CheckerHelper extends ScopeHelper {
 
 	private HashMap<String,DeclarationNode> currentDeclarationsMap = new HashMap<String,DeclarationNode>();
 	private Stack<HashMap<String, DeclarationNode>> declarationsStack = new Stack<HashMap<String,DeclarationNode>>();
 
-	/** 
-	 * Opens a new scope. 
-	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
-	 */
 	public void openScope()
 	{
-		scopingLevel++;
+		super.openScope();
 		declarationsStack.push(currentDeclarationsMap);
 		currentDeclarationsMap = new HashMap<String,DeclarationNode>(currentDeclarationsMap);
 	}
 
-	/** 
-	 * Closes the current scope. All identifiers in 
-	 * the current scope will be removed from the SymbolTable.
-	 * @requires old.scopingLevel() > -1;
-	 * @ensures  this.scopingLevel() == old.scopingLevel()-1;
-	 */
-	public void tryToCloseScope()
+	protected void closeScope() throws NootException
 	{
-		if(holdCloseScopeAtLevel.size() == 0 || holdCloseScopeAtLevel.peek().intValue() != scopingLevel)
-		{
-			if(scopingLevel > -1) scopingLevel--;
-			currentDeclarationsMap = declarationsStack.pop();
-		}
-	}
-	
-	/** 
-	 * Opens a new scope. 
-	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
-	 */
-	public void holdUpcommingScope()
-	{
-		holdCloseScopeAtLevel.push(new Integer(scopingLevel + 1));
-	}
-	
-	/** 
-	 * Opens a new scope. 
-	 * @ensures this.scopingLevel() == old.scopingLevel()+1;
-	 */
-	public void releaseAndCloseScope()
-	{
-		if(holdCloseScopeAtLevel.size() > 0 && holdCloseScopeAtLevel.peek().intValue() == scopingLevel)
-		{
-			holdCloseScopeAtLevel.pop();
-			this.tryToCloseScope();
-		}
-	}
-
-
-	/** Returns the current scope level. */
-	public int scopingLevel() {
-		return scopingLevel;
+		super.closeScope();
+		currentDeclarationsMap = declarationsStack.pop();
 	}
 
 	/** 
@@ -95,7 +51,7 @@ public class CheckerHelper {
 	 */
 	public void declare(DeclarationNode node)
 			throws CheckerException { 
-		node.setDeclarationLevel(scopingLevel);
+		node.setDeclarationLevel(this.scopingLevel());
 
 		IdentifierNode identifierNode = node.getIdentifierNode();
 
@@ -103,7 +59,7 @@ public class CheckerHelper {
 			throw new NullPointerException("Declaration does not have an identifier");
 
 		if(currentDeclarationsMap.get(identifierNode.getText()) != null &&
-				currentDeclarationsMap.get(identifierNode.getText()).getDeclarationLevel() == scopingLevel)
+				currentDeclarationsMap.get(identifierNode.getText()).getDeclarationLevel() == this.scopingLevel())
 			throw new CheckerException(identifierNode.getText()+" on line: " + identifierNode.getLine() + " has already been declared on current level");
 
 		currentDeclarationsMap.put(identifierNode.getText(),node);

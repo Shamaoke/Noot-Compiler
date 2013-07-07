@@ -16,7 +16,6 @@
 package noot.compiler;
 
 import java.io.*;
-import java.util.*;
 import TAM.*;
 
 import noot.ast.DOTNodeAdaptor;
@@ -89,6 +88,8 @@ public class Compiler {
 			
 			// Printing the AST
 			System.out.println(tree.toStringTree());
+			
+			System.out.println("- Generating AST visualization");
 			
 			DOTTreeGenerator gen = new DOTTreeGenerator();
 			

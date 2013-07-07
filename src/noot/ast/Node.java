@@ -43,7 +43,7 @@ public class Node extends CommonTree {
 	
 	private boolean ignoreReturnValue = false;
 	
-	private ArrayList<Node> valueReturningChildren = new ArrayList<Node>();
+	private ArrayList<Node> ValuePropagatingChildren = new ArrayList<Node>();
 	
 	
 
@@ -102,29 +102,29 @@ public class Node extends CommonTree {
 		return s;
 	}
 
-	public boolean getIgnoreReturnValue() {
+	public boolean shouldIgnoreReturnValue() {
 		return ignoreReturnValue;
 	}
 
 	public void setIgnoreReturnValue(boolean ignoreReturnValue) {
 		this.ignoreReturnValue = ignoreReturnValue;
 		
-		for(Node child : valueReturningChildren)
-			child.setIgnoreReturnValue(this.getIgnoreReturnValue());
+		for(Node child : ValuePropagatingChildren)
+			child.setIgnoreReturnValue(this.shouldIgnoreReturnValue());
 	}
 	
-	public void addValueReturningChild(Node valueReturningChild)
+	public void addValuePropagatingChild(Node ValuePropagatingChild)
 	{
-		if(this.children.contains(valueReturningChild))
+		if(this.children.contains(ValuePropagatingChild))
 		{
-			valueReturningChildren.add(valueReturningChild);
+			ValuePropagatingChildren.add(ValuePropagatingChild);
 		}
 	}
 	
-	public void addValueReturningChildren(List<Node> list)
+	public void addValuePropagatingChildren(List<Node> list)
 	{
 		for(Node child : list)
-			this.addValueReturningChild(child);
+			this.addValuePropagatingChild(child);
 	}
 	
 }

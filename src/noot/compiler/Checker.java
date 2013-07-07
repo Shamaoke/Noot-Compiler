@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-07 13:16:45
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-07 14:38:40
 
     package noot.compiler;
     import noot.ast.*;
@@ -220,8 +220,8 @@ public class Checker extends TreeParser {
 			            checkerHelper.declare( (DeclarationNode) d );
 			            checkerHelper.linkToDeclaration( (IdentifierNode) id );
 			            
-			            d.addValueReturningChild(id);
-			            if(dex != null) d.addValueReturningChild(dex);
+			            d.addValuePropagatingChild(id);
+			            if(dex != null) d.addValuePropagatingChild(dex);
 			            
 			            node = d;
 			        
@@ -284,8 +284,8 @@ public class Checker extends TreeParser {
 			            checkerHelper.declare( (DeclarationNode) d );
 			            checkerHelper.linkToDeclaration( (IdentifierNode) id );
 			            
-			            d.addValueReturningChild(id);
-			            if(dex != null) d.addValueReturningChild(dex);
+			            d.addValuePropagatingChild(id);
+			            if(dex != null) d.addValuePropagatingChild(dex);
 			            
 			            node = d;
 			        
@@ -470,7 +470,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -513,7 +513,7 @@ public class Checker extends TreeParser {
 					            expressions = asList(e1);
 					            
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -532,7 +532,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -555,7 +555,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -578,7 +578,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -601,7 +601,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -624,7 +624,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -647,7 +647,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -670,7 +670,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForEqualType(expressions,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -693,7 +693,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForEqualType(expressions,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -716,7 +716,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -739,7 +739,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -762,7 +762,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -785,7 +785,7 @@ public class Checker extends TreeParser {
 
 					          List<Node> expressions = asList(e1,e2);
 					          checkerHelper.checkExpressionsForType(expressions,Node.NodeType.BOOL,te);
-					          te.addValueReturningChildren(expressions);
+					          te.addValuePropagatingChildren(expressions);
 					          node = te;
 					        
 					}
@@ -860,7 +860,6 @@ public class Checker extends TreeParser {
 					          if(identifiers.size() == 1) // If only one argument is given let the read statement adopt its type
 					          {
 					            ((TypeAdoptedNode) te).setTypeDefiningChild(identifiers.get(0));
-					            ((TypeAdoptedNode) te).addValueReturningChild(identifiers.get(0));
 					          }
 					          
 					          node = te;
@@ -868,14 +867,14 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 18 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:219:9: ^(te= PRINT (en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:218:9: ^(te= PRINT (en= expression )+ )
 					{
 					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression872); 
 
 					              ArrayList<Node> expressions = new ArrayList<Node>();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:223:11: (en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:222:11: (en= expression )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -887,7 +886,7 @@ public class Checker extends TreeParser {
 
 						switch (alt6) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:223:12: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:222:12: en= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression901);
 							en=expression();
@@ -914,7 +913,6 @@ public class Checker extends TreeParser {
 					          if(expressions.size() == 1) // If only one argument is given let the print statement adopt its type
 					          {
 					            ((TypeAdoptedNode) te).setTypeDefiningChild(expressions.get(0));
-					            ((TypeAdoptedNode) te).addValueReturningChild(expressions.get(0));
 					          }
 					            
 					          for(Node argumentNode : expressions)
@@ -928,7 +926,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 19 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:244:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:242:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
 					{
 					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression953); 
 
@@ -936,7 +934,7 @@ public class Checker extends TreeParser {
 					                ArrayList<Node> commands = new ArrayList<Node>();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:249:11: (dc= declaration |en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:247:11: (dc= declaration |en= expression )+
 					int cnt7=0;
 					loop7:
 					while (true) {
@@ -951,7 +949,7 @@ public class Checker extends TreeParser {
 
 						switch (alt7) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:249:12: dc= declaration
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:247:12: dc= declaration
 							{
 							pushFollow(FOLLOW_declaration_in_expression982);
 							dc=declaration();
@@ -963,7 +961,7 @@ public class Checker extends TreeParser {
 							}
 							break;
 						case 2 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:253:14: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:251:14: en= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression1013);
 							en=expression();
@@ -994,7 +992,7 @@ public class Checker extends TreeParser {
 					                throw new CheckerException("Command on line:" + lastCommand.getLine() + " is a declaration, this is not allowed, the last command in a compound expression needs to be a statement.");
 					              
 					              ((TypeAdoptedNode) te).setTypeDefiningChild(lastCommand);
-					              ((TypeAdoptedNode) te).addValueReturningChild(lastCommand);
+					              ((TypeAdoptedNode) te).addValuePropagatingChild(lastCommand);
 					            }
 					            
 					            // Only not for the last command
@@ -1009,7 +1007,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 20 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:279:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:277:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
 					{
 					te=(Node)match(input,IF,FOLLOW_IF_in_expression1065); 
 
@@ -1024,7 +1022,7 @@ public class Checker extends TreeParser {
 					e2=expression();
 					state._fsp--;
 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:283:41: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:281:41: (e3= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -1032,7 +1030,7 @@ public class Checker extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:283:41: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:281:41: e3= expression
 							{
 							pushFollow(FOLLOW_expression_in_expression1101);
 							e3=expression();
@@ -1059,8 +1057,10 @@ public class Checker extends TreeParser {
 					            
 					              // This so the if statement has the same type as both options
 					              ((TypeAdoptedNode) te).setTypeDefiningChild(e2);
-					              ((TypeAdoptedNode) te).addValueReturningChild(e2);
-					              ((TypeAdoptedNode) te).addValueReturningChild(e3);
+					              
+					              ((TypeAdoptedNode) te).addValuePropagatingChild(e2);
+					              ((TypeAdoptedNode) te).addValuePropagatingChild(e3);
+					              
 					            } catch (CheckerException ce) {
 					              // no defining type set, so remains void
 					              e2.setIgnoreReturnValue(true);
@@ -1071,12 +1071,13 @@ public class Checker extends TreeParser {
 					          {
 					            e2.setIgnoreReturnValue(true);
 					          }
+					          
 					          node = te;
 					        
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:312:9: ^(te= WHILE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:313:9: ^(te= WHILE e1= expression e2= expression )
 					{
 					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1127); 
 
@@ -1124,7 +1125,7 @@ public class Checker extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:330:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:331:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1135,7 +1136,7 @@ public class Checker extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:331:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:332:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt10=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1170,7 +1171,7 @@ public class Checker extends TreeParser {
 			}
 			switch (alt10) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:331:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:332:9: id= IDENTIFIER
 					{
 					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1200); 
 
@@ -1180,7 +1181,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:336:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:337:9: n= NUMBER
 					{
 					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1223); 
 
@@ -1189,7 +1190,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:340:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:341:9: b= TRUE
 					{
 					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1245); 
 
@@ -1198,7 +1199,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:344:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:345:9: b= FALSE
 					{
 					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1267); 
 
@@ -1207,7 +1208,7 @@ public class Checker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:348:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Checker.g:349:9: c= CHARACTER
 					{
 					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1289); 
 
