@@ -59,6 +59,11 @@ public class IdentifierNode extends Node {
 		this.declarationNode = node;
 	}
 	
+	/**
+	 * Gets the declaration node.
+	 *
+	 * @return the declaration node
+	 */
 	public DeclarationNode getDeclarationNode()
 	{
 		return declarationNode;

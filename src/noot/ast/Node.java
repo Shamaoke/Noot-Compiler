@@ -41,8 +41,10 @@ public class Node extends CommonTree {
  CHAR 
 	}
 	
+	/** The ignore return value. */
 	private boolean ignoreReturnValue = false;
 	
+	/** The Value propagating children. */
 	private ArrayList<Node> ValuePropagatingChildren = new ArrayList<Node>();
 	
 	
@@ -102,10 +104,20 @@ public class Node extends CommonTree {
 		return s;
 	}
 
+	/**
+	 * Should ignore return value.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean shouldIgnoreReturnValue() {
 		return ignoreReturnValue;
 	}
 
+	/**
+	 * Sets the ignore return value.
+	 *
+	 * @param ignoreReturnValue the new ignore return value
+	 */
 	public void setIgnoreReturnValue(boolean ignoreReturnValue) {
 		this.ignoreReturnValue = ignoreReturnValue;
 		
@@ -113,6 +125,11 @@ public class Node extends CommonTree {
 			child.setIgnoreReturnValue(this.shouldIgnoreReturnValue());
 	}
 	
+	/**
+	 * Adds the value propagating child.
+	 *
+	 * @param ValuePropagatingChild the value propagating child
+	 */
 	public void addValuePropagatingChild(Node ValuePropagatingChild)
 	{
 		if(this.children.contains(ValuePropagatingChild))
@@ -121,6 +138,11 @@ public class Node extends CommonTree {
 		}
 	}
 	
+	/**
+	 * Adds the value propagating children.
+	 *
+	 * @param list the list
+	 */
 	public void addValuePropagatingChildren(List<Node> list)
 	{
 		for(Node child : list)
