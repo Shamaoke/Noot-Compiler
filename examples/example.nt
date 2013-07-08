@@ -1,12 +1,10 @@
 noot
 
 int a, b, c, d,l;
-const int y = 1;
+const int y := 1, x := 5;
 //const int z = true;
 char e;
 bool f,g,k;
-
-y := 3;
 
 k := if true then {
 		int i,j;

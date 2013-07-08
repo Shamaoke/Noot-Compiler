@@ -102,9 +102,9 @@ public class Assembler {
         while ( (line = buf.readLine()) != null) {
             lines.add(line);
         }
-        final int totalLineCount = lines.size();
+        //final int totalLineCount = lines.size();
 
-        int labelLineCount = 0;
+        //int labelLineCount = 0;
         //first pass, extract labels
         int codeLineNumber = 0;
         Iterator<String> iter = lines.iterator();
@@ -115,7 +115,7 @@ public class Assembler {
 
             if (labelMatcher.matches()) {
                 labelMap.put(labelMatcher.group(1), new Integer(codeLineNumber));
-                labelLineCount++;
+                //labelLineCount++;
                 iter.remove();	//remove labels after adding them to the label map
             }
             else if (commandMatcher.matches()) {
@@ -130,7 +130,7 @@ public class Assembler {
             }
         }
         //only _real_ code lines should be left in lines now
-        final int codeLineCount = lines.size();
+        //final int codeLineCount = lines.size();
 
         //second pass, emit code
         iter = lines.iterator();
@@ -141,12 +141,12 @@ public class Assembler {
                 instruction.write(dataOut);
             }
         }
-        System.err.println("Assembly results:\n" +
-                "lines in file: " + totalLineCount + "\n" +
-                "lines of code: " + codeLineCount + "\n" +
-                "label lines  : " + labelLineCount + "\n" +
-                "lines ignored: " + (totalLineCount - codeLineCount - labelLineCount) + "\n"
-        );
+        //System.err.println("Assembly results:\n" +
+        //        "lines in file: " + totalLineCount + "\n" +
+        //        "lines of code: " + codeLineCount + "\n" +
+        //        "label lines  : " + labelLineCount + "\n" +
+        //        "lines ignored: " + (totalLineCount - codeLineCount - labelLineCount) + "\n"
+        //);
     }
 
     public static Instruction instructionFromString(String str) {

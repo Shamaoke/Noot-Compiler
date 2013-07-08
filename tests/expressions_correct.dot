@@ -1,0 +1,263 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="lightgrey"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="blue"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label="noot"];
+  n1 [label="int[ ir ]"];
+  n1 [label="int[ ir ]"];
+  n2 [label="i1[INT ir]"];
+  n3 [label=",[ ir ]"];
+  n3 [label=",[ ir ]"];
+  n4 [label="i2[INT ir]"];
+  n5 [label="bool[ ir ]"];
+  n5 [label="bool[ ir ]"];
+  n6 [label="b1[BOOL ir]"];
+  n7 [label="char[ ir ]"];
+  n7 [label="char[ ir ]"];
+  n8 [label="c1[CHAR ir]"];
+  n9 [label=",[ ir ]"];
+  n9 [label=",[ ir ]"];
+  n10 [label="c2[CHAR ir]"];
+  n11 [label="int[ ir ]"];
+  n11 [label="int[ ir ]"];
+  n12 [label="ic1[INT ir]"];
+  n13 [label="1[INT]"];
+  n14 [label=",[ ir ]"];
+  n14 [label=",[ ir ]"];
+  n15 [label="ic2[INT ir]"];
+  n16 [label="2[INT]"];
+  n17 [label="bool[ ir ]"];
+  n17 [label="bool[ ir ]"];
+  n18 [label="bc1[BOOL ir]"];
+  n19 [label="true[BOOL]"];
+  n20 [label="char[ ir ]"];
+  n20 [label="char[ ir ]"];
+  n21 [label="cc1[CHAR ir]"];
+  n22 [label="'c'[CHAR]"];
+  n23 [label="print[BOOL ir]"];
+  n23 [label="print[BOOL ir]"];
+  n24 [label="==[BOOL]"];
+  n24 [label="==[BOOL]"];
+  n25 [label="+[INT]"];
+  n25 [label="+[INT]"];
+  n26 [label="+[INT]"];
+  n26 [label="+[INT]"];
+  n27 [label="16[INT]"];
+  n28 [label="*[INT]"];
+  n28 [label="*[INT]"];
+  n29 [label="2[INT]"];
+  n30 [label="-[INT]"];
+  n30 [label="-[INT]"];
+  n31 [label="8[INT]"];
+  n32 [label="0[INT]"];
+  n33 [label=":=[INT ir]"];
+  n33 [label=":=[INT ir]"];
+  n34 [label="i1[INT]"];
+  n35 [label="1[INT]"];
+  n36 [label=":=[INT ir]"];
+  n36 [label=":=[INT ir]"];
+  n37 [label="i2[INT]"];
+  n38 [label="2[INT]"];
+  n39 [label="print[BOOL ir]"];
+  n39 [label="print[BOOL ir]"];
+  n40 [label="&&[BOOL]"];
+  n40 [label="&&[BOOL]"];
+  n41 [label="==[BOOL]"];
+  n41 [label="==[BOOL]"];
+  n42 [label="+[INT]"];
+  n42 [label="+[INT]"];
+  n43 [label="*[INT]"];
+  n43 [label="*[INT]"];
+  n44 [label="/[INT]"];
+  n44 [label="/[INT]"];
+  n45 [label="12[INT]"];
+  n46 [label="5[INT]"];
+  n47 [label="5[INT]"];
+  n48 [label="%[INT]"];
+  n48 [label="%[INT]"];
+  n49 [label="12[INT]"];
+  n50 [label="5[INT]"];
+  n51 [label="12[INT]"];
+  n52 [label=">=[BOOL]"];
+  n52 [label=">=[BOOL]"];
+  n53 [label="6[INT]"];
+  n54 [label="6[INT]"];
+  n55 [label="print[BOOL ir]"];
+  n55 [label="print[BOOL ir]"];
+  n56 [label="&&[BOOL]"];
+  n56 [label="&&[BOOL]"];
+  n57 [label="<[BOOL]"];
+  n57 [label="<[BOOL]"];
+  n58 [label="i1[INT]"];
+  n59 [label="i2[INT]"];
+  n60 [label="<=[BOOL]"];
+  n60 [label="<=[BOOL]"];
+  n61 [label="ic1[INT]"];
+  n62 [label="ic2[INT]"];
+  n63 [label="print[BOOL ir]"];
+  n63 [label="print[BOOL ir]"];
+  n64 [label=">[BOOL]"];
+  n64 [label=">[BOOL]"];
+  n65 [label="*[INT]"];
+  n65 [label="*[INT]"];
+  n66 [label="ic1[INT]"];
+  n67 [label="ic2[INT]"];
+  n68 [label="-[INT]"];
+  n68 [label="-[INT]"];
+  n69 [label="i2[INT]"];
+  n70 [label="ic1[INT]"];
+  n71 [label=":=[CHAR ir]"];
+  n71 [label=":=[CHAR ir]"];
+  n72 [label="c1[CHAR]"];
+  n73 [label="'a'[CHAR]"];
+  n74 [label=":=[CHAR ir]"];
+  n74 [label=":=[CHAR ir]"];
+  n75 [label="c2[CHAR]"];
+  n76 [label="'a'[CHAR]"];
+  n77 [label="print[BOOL ir]"];
+  n77 [label="print[BOOL ir]"];
+  n78 [label="&&[BOOL]"];
+  n78 [label="&&[BOOL]"];
+  n79 [label="==[BOOL]"];
+  n79 [label="==[BOOL]"];
+  n80 [label="c1[CHAR]"];
+  n81 [label="c2[CHAR]"];
+  n82 [label="||[BOOL]"];
+  n82 [label="||[BOOL]"];
+  n83 [label="!=[BOOL]"];
+  n83 [label="!=[BOOL]"];
+  n84 [label="cc1[CHAR]"];
+  n85 [label="'b'[CHAR]"];
+  n86 [label="![BOOL]"];
+  n86 [label="![BOOL]"];
+  n87 [label="false[BOOL]"];
+  n88 [label=":=[BOOL ir]"];
+  n88 [label=":=[BOOL ir]"];
+  n89 [label="b1[BOOL]"];
+  n90 [label="true[BOOL]"];
+  n91 [label="print[BOOL ir]"];
+  n91 [label="print[BOOL ir]"];
+  n92 [label="||[BOOL]"];
+  n92 [label="||[BOOL]"];
+  n93 [label="&&[BOOL]"];
+  n93 [label="&&[BOOL]"];
+  n94 [label="![BOOL]"];
+  n94 [label="![BOOL]"];
+  n95 [label="false[BOOL]"];
+  n96 [label="==[BOOL]"];
+  n96 [label="==[BOOL]"];
+  n97 [label="b1[BOOL]"];
+  n98 [label="bc1[BOOL]"];
+  n99 [label="!=[BOOL]"];
+  n99 [label="!=[BOOL]"];
+  n100 [label="true[BOOL]"];
+  n101 [label="false[BOOL]"];
+
+  n0 -> n1 // "noot" -> "int[ ir ]"
+  n1 -> n2 // "int[ ir ]" -> "i1[INT ir]"
+  n1 -> n3 // "int[ ir ]" -> ",[ ir ]"
+  n3 -> n4 // ",[ ir ]" -> "i2[INT ir]"
+  n0 -> n5 // "noot" -> "bool[ ir ]"
+  n5 -> n6 // "bool[ ir ]" -> "b1[BOOL ir]"
+  n0 -> n7 // "noot" -> "char[ ir ]"
+  n7 -> n8 // "char[ ir ]" -> "c1[CHAR ir]"
+  n7 -> n9 // "char[ ir ]" -> ",[ ir ]"
+  n9 -> n10 // ",[ ir ]" -> "c2[CHAR ir]"
+  n0 -> n11 // "noot" -> "int[ ir ]"
+  n11 -> n12 // "int[ ir ]" -> "ic1[INT ir]"
+  n11 -> n13 // "int[ ir ]" -> "1[INT]"
+  n11 -> n14 // "int[ ir ]" -> ",[ ir ]"
+  n14 -> n15 // ",[ ir ]" -> "ic2[INT ir]"
+  n14 -> n16 // ",[ ir ]" -> "2[INT]"
+  n0 -> n17 // "noot" -> "bool[ ir ]"
+  n17 -> n18 // "bool[ ir ]" -> "bc1[BOOL ir]"
+  n17 -> n19 // "bool[ ir ]" -> "true[BOOL]"
+  n0 -> n20 // "noot" -> "char[ ir ]"
+  n20 -> n21 // "char[ ir ]" -> "cc1[CHAR ir]"
+  n20 -> n22 // "char[ ir ]" -> "'c'[CHAR]"
+  n0 -> n23 // "noot" -> "print[BOOL ir]"
+  n23 -> n24 // "print[BOOL ir]" -> "==[BOOL]"
+  n24 -> n25 // "==[BOOL]" -> "+[INT]"
+  n25 -> n26 // "+[INT]" -> "+[INT]"
+  n26 -> n27 // "+[INT]" -> "16[INT]"
+  n25 -> n28 // "+[INT]" -> "*[INT]"
+  n28 -> n29 // "*[INT]" -> "2[INT]"
+  n28 -> n30 // "*[INT]" -> "-[INT]"
+  n30 -> n31 // "-[INT]" -> "8[INT]"
+  n24 -> n32 // "==[BOOL]" -> "0[INT]"
+  n0 -> n33 // "noot" -> ":=[INT ir]"
+  n33 -> n34 // ":=[INT ir]" -> "i1[INT]"
+  n33 -> n35 // ":=[INT ir]" -> "1[INT]"
+  n0 -> n36 // "noot" -> ":=[INT ir]"
+  n36 -> n37 // ":=[INT ir]" -> "i2[INT]"
+  n36 -> n38 // ":=[INT ir]" -> "2[INT]"
+  n0 -> n39 // "noot" -> "print[BOOL ir]"
+  n39 -> n40 // "print[BOOL ir]" -> "&&[BOOL]"
+  n40 -> n41 // "&&[BOOL]" -> "==[BOOL]"
+  n41 -> n42 // "==[BOOL]" -> "+[INT]"
+  n42 -> n43 // "+[INT]" -> "*[INT]"
+  n43 -> n44 // "*[INT]" -> "/[INT]"
+  n44 -> n45 // "/[INT]" -> "12[INT]"
+  n44 -> n46 // "/[INT]" -> "5[INT]"
+  n43 -> n47 // "*[INT]" -> "5[INT]"
+  n42 -> n48 // "+[INT]" -> "%[INT]"
+  n48 -> n49 // "%[INT]" -> "12[INT]"
+  n48 -> n50 // "%[INT]" -> "5[INT]"
+  n41 -> n51 // "==[BOOL]" -> "12[INT]"
+  n40 -> n52 // "&&[BOOL]" -> ">=[BOOL]"
+  n52 -> n53 // ">=[BOOL]" -> "6[INT]"
+  n52 -> n54 // ">=[BOOL]" -> "6[INT]"
+  n0 -> n55 // "noot" -> "print[BOOL ir]"
+  n55 -> n56 // "print[BOOL ir]" -> "&&[BOOL]"
+  n56 -> n57 // "&&[BOOL]" -> "<[BOOL]"
+  n57 -> n58 // "<[BOOL]" -> "i1[INT]"
+  n57 -> n59 // "<[BOOL]" -> "i2[INT]"
+  n56 -> n60 // "&&[BOOL]" -> "<=[BOOL]"
+  n60 -> n61 // "<=[BOOL]" -> "ic1[INT]"
+  n60 -> n62 // "<=[BOOL]" -> "ic2[INT]"
+  n0 -> n63 // "noot" -> "print[BOOL ir]"
+  n63 -> n64 // "print[BOOL ir]" -> ">[BOOL]"
+  n64 -> n65 // ">[BOOL]" -> "*[INT]"
+  n65 -> n66 // "*[INT]" -> "ic1[INT]"
+  n65 -> n67 // "*[INT]" -> "ic2[INT]"
+  n64 -> n68 // ">[BOOL]" -> "-[INT]"
+  n68 -> n69 // "-[INT]" -> "i2[INT]"
+  n68 -> n70 // "-[INT]" -> "ic1[INT]"
+  n0 -> n71 // "noot" -> ":=[CHAR ir]"
+  n71 -> n72 // ":=[CHAR ir]" -> "c1[CHAR]"
+  n71 -> n73 // ":=[CHAR ir]" -> "'a'[CHAR]"
+  n0 -> n74 // "noot" -> ":=[CHAR ir]"
+  n74 -> n75 // ":=[CHAR ir]" -> "c2[CHAR]"
+  n74 -> n76 // ":=[CHAR ir]" -> "'a'[CHAR]"
+  n0 -> n77 // "noot" -> "print[BOOL ir]"
+  n77 -> n78 // "print[BOOL ir]" -> "&&[BOOL]"
+  n78 -> n79 // "&&[BOOL]" -> "==[BOOL]"
+  n79 -> n80 // "==[BOOL]" -> "c1[CHAR]"
+  n79 -> n81 // "==[BOOL]" -> "c2[CHAR]"
+  n78 -> n82 // "&&[BOOL]" -> "||[BOOL]"
+  n82 -> n83 // "||[BOOL]" -> "!=[BOOL]"
+  n83 -> n84 // "!=[BOOL]" -> "cc1[CHAR]"
+  n83 -> n85 // "!=[BOOL]" -> "'b'[CHAR]"
+  n82 -> n86 // "||[BOOL]" -> "![BOOL]"
+  n86 -> n87 // "![BOOL]" -> "false[BOOL]"
+  n0 -> n88 // "noot" -> ":=[BOOL ir]"
+  n88 -> n89 // ":=[BOOL ir]" -> "b1[BOOL]"
+  n88 -> n90 // ":=[BOOL ir]" -> "true[BOOL]"
+  n0 -> n91 // "noot" -> "print[BOOL ir]"
+  n91 -> n92 // "print[BOOL ir]" -> "||[BOOL]"
+  n92 -> n93 // "||[BOOL]" -> "&&[BOOL]"
+  n93 -> n94 // "&&[BOOL]" -> "![BOOL]"
+  n94 -> n95 // "![BOOL]" -> "false[BOOL]"
+  n93 -> n96 // "&&[BOOL]" -> "==[BOOL]"
+  n96 -> n97 // "==[BOOL]" -> "b1[BOOL]"
+  n96 -> n98 // "==[BOOL]" -> "bc1[BOOL]"
+  n92 -> n99 // "||[BOOL]" -> "!=[BOOL]"
+  n99 -> n100 // "!=[BOOL]" -> "true[BOOL]"
+  n99 -> n101 // "!=[BOOL]" -> "false[BOOL]"
+
+}
+

@@ -86,9 +86,13 @@ expression returns [Node node = null;] // All statements are expressions because
         {
           node = op;
         }
-    |   ^(te=PLUS expression expression)
+    |   ^(te=PLUS e1=expression e2=expression?)
         { 
-          if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","add","Adition"));
+          if(!te.shouldIgnoreReturnValue())
+          {
+            if(e2 != null)
+              gh.currentBlock().push(new Instruction("CALL","add","Adition"));
+          }  
           node = te;
         }
     |   ^(te=MINUS e1=expression e2=expression?)
@@ -218,7 +222,27 @@ expression returns [Node node = null;] // All statements are expressions because
               else if(en.getNodeType() == Node.NodeType.INT)
                 gh.currentBlock().push(new Instruction("CALL","putint","Print int"));
               else if(en.getNodeType() == Node.NodeType.BOOL)
-                gh.currentBlock().push(new Instruction("CALL","putint","Print boolean"));
+              {
+                gh.currentBlock().push(new Instruction("LOADL","1" ));
+                gh.currentBlock().push(new Instruction("LOADL","1" ));
+                gh.currentBlock().push(new Instruction("CALL","eq"));
+                Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"Printing True or jump");
+                gh.currentBlock().push(jumpIfInstruction);
+                
+                gh.pushInstructionsForPrintingString("true");
+                
+                Instruction jumpInstruction = new Instruction("JUMP","notset","Printing False");
+                gh.currentBlock().push(jumpInstruction);
+                
+                gh.pushBlock();
+                jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
+                
+                gh.pushInstructionsForPrintingString("false");
+                
+                gh.pushBlock();
+                jumpInstruction.setArgument(gh.currentBlock().jumpLabel());
+                
+              }
                 
               gh.currentBlock().push(new Instruction("CALL","puteol"));
               

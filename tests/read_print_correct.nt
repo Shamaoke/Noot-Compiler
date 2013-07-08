@@ -1,0 +1,23 @@
+noot
+
+// This test should not yield any errors
+// The output should be 11 lines where the last four are true, 0, true, true
+
+int i1, i2, i3;
+bool b1,b2;
+char c1;
+
+// Testing read and print assignments
+
+read(i1,i2);
+print(i1,i2);
+i3 := read(i1);
+print(i3,i1);
+
+read(b1,c1);
+b2 := print(b1);
+print(b2,c1);
+
+print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6, +16 + 2 * -8); // true, 0
+b1 := print(+16 + 2 * -8 == 0); // true
+print(b1); // true

@@ -72,3 +72,8 @@ while a == true do {
 	if b > 10 then { a = false; } fi;
 } od;
 ```
+
+Dot files
+-------------
+
+The generated dot files can be opened with [Graphviz](http://www.graphviz.org/).

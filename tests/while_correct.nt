@@ -1,0 +1,17 @@
+noot
+
+// This test should not yield any errors
+// The output should be 3 lines containing 2,3,4
+
+int i1, i2;
+bool b1;
+
+// Testing while statements
+
+b1 := true;
+
+while b1 == true do {
+	i1 := i1 + 1;
+	if i1 >= 4 then { b1 := false; } fi;
+	print(i1);
+} od; // 2,3,4

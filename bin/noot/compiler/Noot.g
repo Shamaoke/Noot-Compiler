@@ -93,7 +93,7 @@ program
     
 command
     :  declaration SEMICOLON!
-    |  expression SEMICOLON!
+    |  expression SEMICOLON! // All statements are expressions, so we don't have a seperate statement grammar rule
     ;
     
 declaration
@@ -116,7 +116,13 @@ variable_declaration
 variable_declaration_extention
     :  (COMMA<DeclarationNode>^ IDENTIFIER<IdentifierNode> variable_declaration_extention)?
     ;
-
+    
+expression // All statements are expressions, so we don't have a seperate statement grammar rule
+    :   (IDENTIFIER BECOMES) => assignment
+    |   while_statement
+    |   expression_level6
+    ;
+    
 assignment
     :  IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
     ;
@@ -124,12 +130,6 @@ assignment
 assignment_extention
     :  (IDENTIFIER BECOMES) => IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
     |  expression
-    ;
-    
-expression
-    :   (IDENTIFIER BECOMES) => assignment
-    |   while_statement
-    |   expression_level6
     ;
     
 while_statement
@@ -157,7 +157,7 @@ expression_level2
     ;
     
 expression_level1 // unary operators
-    :   (MINUS<NumericalExpressionNode>^ | NEGATION<BinaryExpressionNode>^)? operand
+    :   (MINUS<NumericalExpressionNode>^ | NEGATION<BinaryExpressionNode>^ | PLUS<NumericalExpressionNode>^)? operand
     ; 
 
 operand

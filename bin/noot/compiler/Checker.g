@@ -138,9 +138,14 @@ expression returns [Node node = null;] // All statements are expressions because
         {
           node = op;
         }
-    |   ^(te=PLUS e1=expression e2=expression)
+    |   ^(te=PLUS e1=expression e2=expression?)
         {
-          List<Node> expressions = asList(e1,e2);
+          List<Node> expressions;
+          if(e2 != null)
+            expressions = asList(e1,e2);
+          else
+            expressions = asList(e1);
+            
           checkerHelper.checkExpressionsForType(expressions,Node.NodeType.INT,te);
           te.addValuePropagatingChildren(expressions);
           node = te;
@@ -264,6 +269,9 @@ expression returns [Node node = null;] // All statements are expressions because
             {
               checkerHelper.linkToDeclaration( (IdentifierNode) id );
               identifiers.add( (IdentifierNode) id );
+              
+              if(((IdentifierNode) id).getDeclarationNode().isConstant())
+                throw new CheckerException("Reading a constant on line: " + te.getLine() + " this is not allowed.");
             }
           )+) // Read statement
         {
