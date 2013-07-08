@@ -13,8 +13,8 @@ noot
 
 int a, b, c, d;
 
-a = b = 4;
-c = b + 3 * 2;
+a := b := 4;
+c := b + 3 * 2;
 
 read(d);
 print(d + c);
@@ -27,7 +27,7 @@ noot
 
 bool a;
 
-a = {
+a := {
 		int h,i;
 		read(h,i);
 		(h > i);
@@ -39,20 +39,19 @@ Using a coumpound expression in an if statement.
 ```
 noot
 
-bool a,b;
+bool a;
+const bool b := true;
 
-b = true;
-
-a = if a == true then {
+a := if b == true then {
 		int i,j;
-		j = 5;
+		j := 5;
 		(j > i);
 	}
 else
 	false
 fi;
 
-print(a);
+print(a); // comment, this will print true
 ```
 
 Using a while loop.
@@ -69,7 +68,7 @@ b := 0;
 while a == true do {
 	b := b + 1;
 	print(b);
-	if b > 10 then { a = false; } fi;
+	if b > 10 then { a := false; } fi;
 } od;
 ```
 

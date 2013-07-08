@@ -34,8 +34,18 @@ import org.antlr.stringtemplate.StringTemplate;
  */
 public class Compiler {
 	
+	/** The verbose logging. */
 	private boolean verboseLogging = false;
 	
+	/**
+	 * Compile.
+	 *
+	 * @param inputFile the input file
+	 * @param runAfterwards the run afterwards
+	 * @param verboseLogging the verbose logging
+	 * @param generateASTVisualization the generate ast visualization
+	 * @return true, if successful
+	 */
 	public boolean compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization)
 	{
 		this.verboseLogging = verboseLogging;
@@ -141,6 +151,11 @@ public class Compiler {
 		}
 	}
 	
+	/**
+	 * Prints the for verbose loging.
+	 *
+	 * @param out the out
+	 */
 	public void printForVerboseLoging(String out)
 	{
 		if(verboseLogging) System.out.println(out);
