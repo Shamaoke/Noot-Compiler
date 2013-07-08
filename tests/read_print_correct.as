@@ -141,6 +141,18 @@ L0:     PUSH         1         ; Declaring INT i1
         CALL         put       ; Print character
         LOADL        110       ; Loading character
         CALL         put       ; Print character
+        LOADL        32        ; Loading character
+        CALL         put       ; Print character
+        LOADL        40        ; Loading character
+        CALL         put       ; Print character
+        LOADL        48        ; Loading character
+        CALL         put       ; Print character
+        LOADL        47        ; Loading character
+        CALL         put       ; Print character
+        LOADL        49        ; Loading character
+        CALL         put       ; Print character
+        LOADL        41        ; Loading character
+        CALL         put       ; Print character
         LOADL        58        ; Loading character
         CALL         put       ; Print character
         LOADL        32        ; Loading character
@@ -186,13 +198,57 @@ L0:     PUSH         1         ; Declaring INT i1
         LOAD(1)      3[SB]     ; Loading b1
         STORE(1)     6[SB]     ; Assigning temp
         LOAD(1)      6[SB]     ; Loading temp
-        CALL         putint    ; Print boolean
-        CALL         puteol
+        LOADL        1
+        LOADL        1
+        CALL         eq
+        JUMPIF(0)    L1[CB]    ; Printing True or jump
+        LOADL        116       ; Loading character
+        CALL         put       ; Print character
+        LOADL        114       ; Loading character
+        CALL         put       ; Print character
+        LOADL        117       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+        JUMP         L2[CB]    ; Printing False
+L1:     LOADL        102       ; Loading character
+        CALL         put       ; Print character
+        LOADL        97        ; Loading character
+        CALL         put       ; Print character
+        LOADL        108       ; Loading character
+        CALL         put       ; Print character
+        LOADL        115       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+L2:     CALL         puteol
         LOAD(1)      6[SB]     ; Loading temp
         STORE(1)     4[SB]     ; Assigning b2
         LOAD(1)      4[SB]     ; Loading b2
-        CALL         putint    ; Print boolean
-        CALL         puteol
+        LOADL        1
+        LOADL        1
+        CALL         eq
+        JUMPIF(0)    L3[CB]    ; Printing True or jump
+        LOADL        116       ; Loading character
+        CALL         put       ; Print character
+        LOADL        114       ; Loading character
+        CALL         put       ; Print character
+        LOADL        117       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+        JUMP         L4[CB]    ; Printing False
+L3:     LOADL        102       ; Loading character
+        CALL         put       ; Print character
+        LOADL        97        ; Loading character
+        CALL         put       ; Print character
+        LOADL        108       ; Loading character
+        CALL         put       ; Print character
+        LOADL        115       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+L4:     CALL         puteol
         LOAD(1)      5[SB]     ; Loading c1
         CALL         put       ; Print character
         CALL         puteol
@@ -212,8 +268,30 @@ L0:     PUSH         1         ; Declaring INT i1
         LOADL        6
         CALL         ge        ; Greater than or equal
         CALL         and
-        CALL         putint    ; Print boolean
-        CALL         puteol
+        LOADL        1
+        LOADL        1
+        CALL         eq
+        JUMPIF(0)    L5[CB]    ; Printing True or jump
+        LOADL        116       ; Loading character
+        CALL         put       ; Print character
+        LOADL        114       ; Loading character
+        CALL         put       ; Print character
+        LOADL        117       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+        JUMP         L6[CB]    ; Printing False
+L5:     LOADL        102       ; Loading character
+        CALL         put       ; Print character
+        LOADL        97        ; Loading character
+        CALL         put       ; Print character
+        LOADL        108       ; Loading character
+        CALL         put       ; Print character
+        LOADL        115       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+L6:     CALL         puteol
         LOADL        16
         LOADL        2
         LOADL        8
@@ -234,12 +312,56 @@ L0:     PUSH         1         ; Declaring INT i1
         CALL         eq
         STORE(1)     7[SB]     ; Assigning temp
         LOAD(1)      7[SB]     ; Loading temp
-        CALL         putint    ; Print boolean
-        CALL         puteol
+        LOADL        1
+        LOADL        1
+        CALL         eq
+        JUMPIF(0)    L7[CB]    ; Printing True or jump
+        LOADL        116       ; Loading character
+        CALL         put       ; Print character
+        LOADL        114       ; Loading character
+        CALL         put       ; Print character
+        LOADL        117       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+        JUMP         L8[CB]    ; Printing False
+L7:     LOADL        102       ; Loading character
+        CALL         put       ; Print character
+        LOADL        97        ; Loading character
+        CALL         put       ; Print character
+        LOADL        108       ; Loading character
+        CALL         put       ; Print character
+        LOADL        115       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+L8:     CALL         puteol
         LOAD(1)      7[SB]     ; Loading temp
         STORE(1)     3[SB]     ; Assigning b1
         LOAD(1)      3[SB]     ; Loading b1
-        CALL         putint    ; Print boolean
-        CALL         puteol
+        LOADL        1
+        LOADL        1
+        CALL         eq
+        JUMPIF(0)    L9[CB]    ; Printing True or jump
+        LOADL        116       ; Loading character
+        CALL         put       ; Print character
+        LOADL        114       ; Loading character
+        CALL         put       ; Print character
+        LOADL        117       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+        JUMP         L10[CB]   ; Printing False
+L9:     LOADL        102       ; Loading character
+        CALL         put       ; Print character
+        LOADL        97        ; Loading character
+        CALL         put       ; Print character
+        LOADL        108       ; Loading character
+        CALL         put       ; Print character
+        LOADL        115       ; Loading character
+        CALL         put       ; Print character
+        LOADL        101       ; Loading character
+        CALL         put       ; Print character
+L10:    CALL         puteol
         POP(0)       8
-        HALT                   ; Generated by the Noot Compiler (2013/07/08 17:23)
+        HALT                   ; Generated by the Noot Compiler (2013/07/08 23:01)

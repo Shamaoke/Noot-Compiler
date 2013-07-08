@@ -191,7 +191,7 @@ expression returns [Node node = null;] // All statements are expressions because
               }
               else if(id.getNodeType() == Node.NodeType.BOOL)
               {
-                gh.pushInstructionsForPrintingString("Enter boolean: ");
+                gh.pushInstructionsForPrintingString("Enter boolean (0/1): ");
                 gh.currentBlock().push(new Instruction("CALL","getint","Reading boolean "+id.getText()));
               }
               

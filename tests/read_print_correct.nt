@@ -9,14 +9,14 @@ char c1;
 
 // Testing read and print assignments
 
-read(i1,i2);
-print(i1,i2);
-i3 := read(i1);
-print(i3,i1);
+read(i1,i2); // input 1, 2
+print(i1,i2); // 1, 2
+i3 := read(i1); // input 3
+print(i3,i1); // 3, 3
 
-read(b1,c1);
-b2 := print(b1);
-print(b2,c1);
+read(b1,c1); // input 1, c
+b2 := print(b1); // true
+print(b2,c1); // true c
 
 print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6, +16 + 2 * -8); // true, 0
 b1 := print(+16 + 2 * -8 == 0); // true

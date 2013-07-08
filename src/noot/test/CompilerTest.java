@@ -16,8 +16,10 @@ package noot.test;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
 
@@ -46,6 +48,14 @@ public class CompilerTest {
 	@Test
 	public void testCompoundExpressions() {
 		assertTrue(testFile("tests/compound_expressions_correct.nt","true\n2\ntrue\ntrue\nfalse\nb\na\n",null));
+	}
+	
+	/**
+	 * Test the read and print statements.
+	 */
+	@Test
+	public void testReadPrint() {
+		assertTrue(testFile("tests/read_print_correct.nt","Enter integer: Enter integer: 1\n2\nEnter integer: 3\n3\nEnter boolean (0/1): Enter character: true\ntrue\nc\ntrue\n0\ntrue\ntrue\n","1\n2\n3\n1\nc\n"));
 	}
 
 	/**
@@ -90,14 +100,24 @@ public class CompilerTest {
 		{
 			System.out.println("** Testing " + inputFile + " **");
 			
+			
 			PrintStream standardOut = System.out;
+			InputStream standardIn = System.in;
+			
 			ByteArrayOutputStream resultOut = new ByteArrayOutputStream();
 			PrintStream resultPrintOut = new PrintStream(resultOut);
 			System.setOut(resultPrintOut);
+			
+			if(input != null)
+			{
+				InputStream inputStream = new ByteArrayInputStream( input.getBytes(Charset.defaultCharset()) );
+				System.setIn( inputStream );
+			}
 
 			Compiler c = new Compiler();
 			boolean compileResult = c.compile(inputFile, true, false, true);
-
+			
+			if(input != null) System.setIn( standardIn );
 			System.setOut(standardOut);
 			resultPrintOut.close();
 			resultOut.close();

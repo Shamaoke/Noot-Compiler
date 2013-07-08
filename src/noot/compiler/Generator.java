@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-08 20:49:33
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-08 23:00:45
 
     package noot.compiler;
     import noot.ast.*;
@@ -1043,7 +1043,7 @@ public class Generator extends TreeParser {
 							              }
 							              else if(id.getNodeType() == Node.NodeType.BOOL)
 							              {
-							                gh.pushInstructionsForPrintingString("Enter boolean: ");
+							                gh.pushInstructionsForPrintingString("Enter boolean (0/1): ");
 							                gh.currentBlock().push(new Instruction("CALL","getint","Reading boolean "+id.getText()));
 							              }
 							              
