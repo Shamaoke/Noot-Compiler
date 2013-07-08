@@ -16,6 +16,7 @@ package noot.compiler;
 
 import java.util.Stack;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ScopeHelper.
  * 
@@ -55,9 +56,9 @@ public class ScopeHelper {
 	 * Try to close the current scope.
 	 * 
 	 * Scope will be closed when it is not held.
-	 * 
-	 * @require scopingLevel() <= 0
+	 *
 	 * @throws NootException exception will be thrown when requirements are ignored
+	 * @require scopingLevel() <= 0
 	 */
 	public void tryToCloseScope() throws NootException
 	{
@@ -72,10 +73,10 @@ public class ScopeHelper {
 	 * 
 	 * This method is not supposed to be called directly, use tryToCloseScope() or releaseAndCloseScope().
 	 * It is here so it can be subclassed. Always call super.closeScope() in the subclassed method.
-	 * 
+	 *
+	 * @throws NootException exception will be thrown when requirements are ignored
 	 * @require scopingLevel() <= 0
 	 * @ensure new.scopingLevel() == old.scopingLevel() - 1
-	 * @throws NootException exception will be thrown when requirements are ignored
 	 */
 	protected void closeScope() throws NootException
 	{
@@ -105,6 +106,8 @@ public class ScopeHelper {
 	 * 
 	 * The method will return true when holdUpcommingScope() has been called and an
 	 * openScope() method has not been called since. Than the upcoming scope will be released.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean releaseUpcomingScope()
 	{
@@ -120,9 +123,9 @@ public class ScopeHelper {
 	 * Release and close scope.
 	 * 
 	 * When the current scope is being held this method will close it anyway.
-	 * 
-	 * @require holdUpcommingScope() has been called and scoping level is the same as when this call occurred.
+	 *
 	 * @throws NootException the noot exception
+	 * @require holdUpcommingScope() has been called and scoping level is the same as when this call occurred.
 	 */
 	public void releaseAndCloseScope() throws NootException
 	{

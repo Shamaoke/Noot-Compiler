@@ -29,13 +29,29 @@ import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.runtime.tree.TreeNodeStream;
 import org.antlr.stringtemplate.StringTemplate;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Compiler.
+ */
 public class Compiler {
 
+	/** The input file. */
 	private static String inputFile;
+	
+	/** The intermediate file. */
 	private static String intermediateFile;
+	
+	/** The DOT file. */
 	private static String DOTFile;
+	
+	/** The output file. */
 	private static String outputFile;
 
+	/**
+	 * Parses the options.
+	 *
+	 * @param args the args
+	 */
 	public static void parseOptions(String[] args)
 	{
 		if (args.length != 1)
@@ -58,6 +74,11 @@ public class Compiler {
 
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		parseOptions(args);
 

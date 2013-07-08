@@ -1,3 +1,17 @@
+/*
+ * @author Thijs Scheepers <thijs@label305.com>
+ * Copyright (c) 2013 Thijs Scheepers.
+ *
+ * This source is subject to the BSD License.
+ * Please see the LICENSE file for more information.
+ * All other rights reserved.
+ *
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ */
 package noot.compiler;
 
 import java.text.DateFormat;
@@ -12,17 +26,29 @@ import noot.assembly.MemoryLocation;
 import noot.ast.DeclarationNode;
 import noot.ast.IdentifierNode;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GeneratorHelper.
+ */
 public class GeneratorHelper {
 	
+	/** The memory locations. */
 	private ArrayList<MemoryLocation> memoryLocations = new ArrayList<MemoryLocation>();
 	
+	/** The instruction block stack. */
 	private Stack<InstructionBlock> instructionBlockStack = new Stack<InstructionBlock>();
 	
+	/**
+	 * Instantiates a new generator helper.
+	 */
 	public GeneratorHelper()
 	{	
 		instructionBlockStack.push(new InstructionBlock(0));
 	}
 
+	/**
+	 * Push block.
+	 */
 	public void pushBlock()
 	{
 		if(this.instructionBlockStack.peek().size() > 0)
@@ -31,6 +57,11 @@ public class GeneratorHelper {
 		}
 	}
 	
+	/**
+	 * Push instructions for printing string.
+	 *
+	 * @param s the s
+	 */
 	public void pushInstructionsForPrintingString(String s)
 	{
 		for (int i = 0; i < s.length(); i++)
@@ -41,6 +72,9 @@ public class GeneratorHelper {
         }
 	}
 	
+	/**
+	 * Finalize and print instructions.
+	 */
 	public void finalizeAndPrintInstructions()
 	{
 		
@@ -73,6 +107,11 @@ public class GeneratorHelper {
 		}
 	}
 	
+	/**
+	 * Declare.
+	 *
+	 * @param declaration the declaration
+	 */
 	public void declare(DeclarationNode declaration)
 	{
 		IdentifierNode in = declaration.getIdentifierNode();
@@ -86,6 +125,11 @@ public class GeneratorHelper {
 		currentBlock().push(new Instruction("PUSH","1","Declaring "+in.getNodeType()+" "+in.getText()));
 	}
 	
+	/**
+	 * Alloc helper register.
+	 *
+	 * @return the memory location
+	 */
 	public MemoryLocation allocHelperRegister()
 	{
 		currentBlock().push(new Instruction("PUSH","1","Pushing for helper register "));
@@ -96,6 +140,13 @@ public class GeneratorHelper {
 		return ml;
 	}
 	
+	/**
+	 * Address of identifier.
+	 *
+	 * @param node the node
+	 * @return the string
+	 * @throws GeneratorException the generator exception
+	 */
 	public String addressOfIdentifier(IdentifierNode node) throws GeneratorException
 	{
 		String result = null;
@@ -120,6 +171,13 @@ public class GeneratorHelper {
 
 	}
 	
+	/**
+	 * Address of memory location.
+	 *
+	 * @param ml the ml
+	 * @return the string
+	 * @throws GeneratorException the generator exception
+	 */
 	public String addressOfMemoryLocation(MemoryLocation ml) throws GeneratorException
 	{
 		String result = null;
@@ -141,6 +199,11 @@ public class GeneratorHelper {
 		return result;
 	}
 	
+	/**
+	 * Current block.
+	 *
+	 * @return the instruction block
+	 */
 	public InstructionBlock currentBlock() {
 		return instructionBlockStack.peek();
 	}

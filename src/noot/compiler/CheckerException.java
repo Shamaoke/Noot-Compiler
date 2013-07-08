@@ -16,15 +16,31 @@ package noot.compiler;
 
 import org.antlr.runtime.tree.Tree;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CheckerException.
+ */
 public class CheckerException extends NootException {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6841118816451063086L;
 	
+	/**
+	 * Instantiates a new checker exception.
+	 *
+	 * @param msg the msg
+	 */
 	public CheckerException(String msg)
 	{
 		super(msg);
 	}
 	
+	/**
+	 * Instantiates a new checker exception.
+	 *
+	 * @param tree the tree
+	 * @param msg the msg
+	 */
 	public CheckerException(Tree tree, String msg)
 	{
 		super(tree,msg);

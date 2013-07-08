@@ -21,11 +21,21 @@ import java.util.Stack;
 import noot.ast.*;
 import noot.ast.Node.NodeType;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CheckerHelper.
+ */
 public class CheckerHelper extends ScopeHelper {
 
+	/** The current declarations map. */
 	private HashMap<String,DeclarationNode> currentDeclarationsMap = new HashMap<String,DeclarationNode>();
+	
+	/** The declarations stack. */
 	private Stack<HashMap<String, DeclarationNode>> declarationsStack = new Stack<HashMap<String,DeclarationNode>>();
 
+	/* (non-Javadoc)
+	 * @see noot.compiler.ScopeHelper#openScope()
+	 */
 	public void openScope()
 	{
 		super.openScope();
@@ -33,21 +43,20 @@ public class CheckerHelper extends ScopeHelper {
 		currentDeclarationsMap = new HashMap<String,DeclarationNode>(currentDeclarationsMap);
 	}
 
+	/* (non-Javadoc)
+	 * @see noot.compiler.ScopeHelper#closeScope()
+	 */
 	protected void closeScope() throws NootException
 	{
 		super.closeScope();
 		currentDeclarationsMap = declarationsStack.pop();
 	}
 
-	/** 
-	 * Enters an id together with an entry into this SymbolTable 
-	 * using the current scope level. The entry's level is set to 
-	 * currentLevel().
-	 * @requires id != null && id.length() > 0 && entry != null;
-	 * @ensures  this.retrieve(id).getLevel() == currentLevel();
-	 * @throws SymbolTableException when there is no valid 
-	 *    current scope level, or when the id is already declared 
-	 *    on the current level. 
+	/**
+	 * Declare.
+	 *
+	 * @param node the node
+	 * @throws CheckerException the checker exception
 	 */
 	public void declare(DeclarationNode node)
 			throws CheckerException { 
@@ -65,11 +74,11 @@ public class CheckerHelper extends ScopeHelper {
 		currentDeclarationsMap.put(identifierNode.getText(),node);
 	}
 
-	/** 
-	 * Get the Entry corresponding with id whose level is
-	 * the highest; in other words, that is defined last.
-	 * @return  Entry of this id on the highest level
-	 *          null if this SymbolTable does not contain id 
+	/**
+	 * Link to declaration.
+	 *
+	 * @param node the node
+	 * @throws CheckerException the checker exception
 	 */
 	public void linkToDeclaration(IdentifierNode node) 
 			throws CheckerException {
@@ -86,6 +95,14 @@ public class CheckerHelper extends ScopeHelper {
 		}
 	}
 
+	/**
+	 * Check expressions for type.
+	 *
+	 * @param expressions the expressions
+	 * @param type the type
+	 * @param operator the operator
+	 * @throws CheckerException the checker exception
+	 */
 	public void checkExpressionsForType(List<Node> expressions, NodeType type, Node operator) throws CheckerException
 	{	
 		for (int i = 0; i < expressions.size(); i++)
@@ -100,6 +117,13 @@ public class CheckerHelper extends ScopeHelper {
 		}
 	}
 	
+	/**
+	 * Check expressions for equal type.
+	 *
+	 * @param expressions the expressions
+	 * @param operator the operator
+	 * @throws CheckerException the checker exception
+	 */
 	public void checkExpressionsForEqualType(List<Node> expressions, Node operator) throws CheckerException
 	{	
 		NodeType type = null;
