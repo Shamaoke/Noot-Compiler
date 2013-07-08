@@ -26,7 +26,6 @@ import org.antlr.runtime.tree.BufferedTreeNodeStream;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.DOTTreeGenerator;
-import org.antlr.runtime.tree.TreeNodeStream;
 import org.antlr.stringtemplate.StringTemplate;
 
 // TODO: Auto-generated Javadoc
@@ -34,44 +33,117 @@ import org.antlr.stringtemplate.StringTemplate;
  * The Class Compiler.
  */
 public class Compiler {
-
-	/** The input file. */
-	private static String inputFile;
 	
-	/** The intermediate file. */
-	private static String intermediateFile;
+	private boolean verboseLogging = false;
 	
-	/** The DOT file. */
-	private static String DOTFile;
-	
-	/** The output file. */
-	private static String outputFile;
-
-	/**
-	 * Parses the options.
-	 *
-	 * @param args the args
-	 */
-	public static void parseOptions(String[] args)
+	public boolean compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization)
 	{
-		if (args.length != 1)
-		{
-			System.err.println("There should an argument for the Noot file to compile");
-			System.exit(1);
-		}
-		
-		inputFile = args[0];
+		this.verboseLogging = verboseLogging;
 		
 		if(!inputFile.endsWith(".nt"))
 		{
 			System.err.println("The input file should have the .nt extention");
-			System.exit(1);
+			return false;
 		}
 		
-		intermediateFile = inputFile.substring(0, inputFile.length()-3) + ".as";
-		DOTFile = inputFile.substring(0, inputFile.length()-3) + ".dot";
-		outputFile = inputFile.substring(0, inputFile.length()-3) + ".tam";
+		String intermediateFile = inputFile.substring(0, inputFile.length()-3) + ".as";
+		String DOTFile = inputFile.substring(0, inputFile.length()-3) + ".dot";
+		String TAMFile = inputFile.substring(0, inputFile.length()-3) + ".tam";
+		
+		try {
+			
+			PrintStream standardPrintStream = System.out;
+			
+			printForVerboseLoging("- Lexical analysis");
+			
+			FileInputStream fileInputStream = new FileInputStream(inputFile);
+			NootLexer lexer = new NootLexer(new ANTLRInputStream(fileInputStream));
+			
+			printForVerboseLoging("- Parsing");
+			
+			NootParser parser = new NootParser(new CommonTokenStream(lexer));
+			parser.setTreeAdaptor(new NodeAdaptor());
+			CommonTree tree = (CommonTree) parser.program().getTree();
+			
+			printForVerboseLoging("- Contextual analysis");
+			Checker checker = new Checker(new CommonTreeNodeStream(tree));
+			checker.program();
+			
+			if(generateASTVisualization)
+			{
+				printForVerboseLoging("- Generating AST visualization (" + DOTFile + ")");
+			
+				DOTTreeGenerator gen = new DOTTreeGenerator();
+				StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
+            
+				PrintStream DOTOut = new PrintStream(new File(DOTFile));
+				DOTOut.println(st);
+        		DOTOut.close();
+			}
+			
+        	printForVerboseLoging("- Intermediate code generation (" + intermediateFile + ")");
+                   
+        	Generator generator = new Generator(new BufferedTreeNodeStream(tree));
+        	PrintStream writeIntermediateFile = new PrintStream(new File(intermediateFile));
+        	
+        	System.setOut(writeIntermediateFile);
+        	generator.program();
+        	System.setOut(standardPrintStream); 
+        	writeIntermediateFile.close();
+        	
+        	printForVerboseLoging("- Assemble to TAM (" + TAMFile + ")");
+        	
+        	InputStream readIntermediateFile = new FileInputStream(intermediateFile);
+            OutputStream writeTAMFile = new FileOutputStream(TAMFile);
 
+            Assembler.assemble(readIntermediateFile, writeTAMFile);
+            readIntermediateFile.close();
+            writeTAMFile.close();
+            
+            if(runAfterwards)
+            {
+	            printForVerboseLoging("- Reading TAM");
+	            
+	            Interpreter.loadObjectProgram(TAMFile);
+	            
+	            printForVerboseLoging("- Execution Test");
+	            
+	            Interpreter.interpretProgram();
+	            
+	            if(verboseLogging)
+	            {
+            		printForVerboseLoging("- Execution Results");
+            		Interpreter.showStatus();
+            	}
+            }
+            
+            return true;
+
+		} 
+		catch (RecognitionException e)
+		{
+			System.err.println("** COMPILE ERROR **");
+			System.err.println(e.getMessage());
+			System.err.println("Please resolve the issue and recompile.");
+			
+			if(verboseLogging) e.printStackTrace();
+			
+			return false;
+		}
+		catch (Exception e)
+		{
+			System.err.print("** UNEXPECTED ERROR **");
+			System.err.println(e.getMessage());
+			
+			if(verboseLogging) e.printStackTrace();
+			
+			return false;
+		}
+	}
+	
+	public void printForVerboseLoging(String out)
+	{
+		if(verboseLogging) System.out.println(out);
 	}
 
 	/**
@@ -79,90 +151,17 @@ public class Compiler {
 	 *
 	 * @param args the arguments
 	 */
-	public static void main(String[] args) {
-		parseOptions(args);
-
-		try {
-			
-			System.out.println("- Lexical analysis");
-			
-			InputStream in = inputFile == null ? System.in : new FileInputStream(inputFile);
-			NootLexer lexer = new NootLexer(new ANTLRInputStream(in));
-			
-			System.out.println("- Parsing");
-			
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			NootParser parser = new NootParser(tokens);
-			parser.setTreeAdaptor(new NodeAdaptor());
-
-			NootParser.program_return result = parser.program();
-			CommonTree tree = (CommonTree) result.getTree();
-			
-			// Printing the AST
-			System.out.println(tree.toStringTree());
-			
-			System.out.println("- Contextual analysis");
-
-			CommonTreeNodeStream checkerNodes = new CommonTreeNodeStream(tree);
-			Checker checker = new Checker(checkerNodes);
-			checker.program();
-			
-			// Printing the AST
-			System.out.println(tree.toStringTree());
-			
-			System.out.println("- Generating AST visualization");
-			
-			DOTTreeGenerator gen = new DOTTreeGenerator();
-			
-            StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
-            
-            File DOTf = new File(DOTFile);
-        	PrintStream DOTOut = new PrintStream(DOTf);
-        	DOTOut.println(st);
-        	DOTOut.close();
-			
-			System.out.println("- Intermediate code generation");
-                        	
-			TreeNodeStream generatorNodes = new BufferedTreeNodeStream(tree);
-        	Generator generator = new Generator(generatorNodes);
-        	File f = new File(intermediateFile);
-        	PrintStream intermediateOut = new PrintStream(f);
-        	
-        	PrintStream standardOut = System.out;
-        	System.setOut(intermediateOut);
-        	generator.program();
-        	intermediateOut.close();
-        	System.setOut(standardOut);  
-        	
-        	System.out.println("- Assemble intermediate code");
-        	
-        	InputStream intermediateIn = new FileInputStream(intermediateFile);
-            OutputStream out = new FileOutputStream(outputFile);
-
-            Assembler.assemble(intermediateIn, out);
-            intermediateIn.close();
-            out.close();
-            
-            System.out.println("- Read Assembly");
-            
-            Interpreter.loadObjectProgram(outputFile);
-            
-            System.out.println("- Execution Test");
-            
-            Interpreter.interpretProgram();
-            
-            System.out.println("- Execution Results");
-            
-            Interpreter.showStatus();
-
-		} catch (RecognitionException e) {
-			System.err.print("ERROR: recognition exception thrown by compiler: ");
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.err.print("ERROR: uncaught exception thrown by compiler: ");
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+	public static void main(String[] args)
+	{
+		Compiler c = new Compiler();
+		
+		if (args.length == 1)
+		{
+			c.compile(args[0], true, true, true);
+		}
+		else
+		{
+			System.err.println("Please enter a .nt file to compile.");
 		}
 	}
 
