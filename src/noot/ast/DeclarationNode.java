@@ -27,6 +27,8 @@ public class DeclarationNode extends Node {
 	/** The declaration level. */
 	private int declarationLevel = 0;
 	
+	private boolean constant = false;
+	
 	/**
 	 * Instantiates a new declaration node.
 	 */
@@ -108,6 +110,14 @@ public class DeclarationNode extends Node {
 		}
 			
 		return NodeType.VOID;
+	}
+
+	public boolean isConstant() {
+		return constant;
+	}
+
+	public void setConstant(boolean constant) {
+		this.constant = constant;
 	}
 	
 }

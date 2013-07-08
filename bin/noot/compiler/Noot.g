@@ -73,6 +73,7 @@ tokens {
     NOOT        =   'noot';
     TRUE        =   'true';
     FALSE       =   'false';
+    CONST       =   'const';
     
 }
 
@@ -96,15 +97,28 @@ command
     ;
     
 declaration
-    :   (INT<DeclarationNode>^ | CHAR<DeclarationNode>^ | BOOL<DeclarationNode>^) IDENTIFIER<IdentifierNode> declaration_extention
+    :  CONST! constant_declaration // Constant declaration
+    |  variable_declaration // Variable declaration
+    ;
+
+constant_declaration
+    :  (INT<DeclarationNode>^ | CHAR<DeclarationNode>^ | BOOL<DeclarationNode>^) IDENTIFIER<IdentifierNode> BECOMES! primary_operand constant_declaration_extention
     ;
     
-declaration_extention
-    :   (COMMA<DeclarationNode>^ IDENTIFIER<IdentifierNode> declaration_extention)?
+constant_declaration_extention
+    :  (COMMA<DeclarationNode>^ IDENTIFIER<IdentifierNode> BECOMES! primary_operand constant_declaration_extention)?
+    ;
+    
+variable_declaration
+    :  (INT<DeclarationNode>^ | CHAR<DeclarationNode>^ | BOOL<DeclarationNode>^) IDENTIFIER<IdentifierNode> variable_declaration_extention
+    ;
+    
+variable_declaration_extention
+    :  (COMMA<DeclarationNode>^ IDENTIFIER<IdentifierNode> variable_declaration_extention)?
     ;
 
 assignment
-    :   IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
+    :  IDENTIFIER<IdentifierNode> BECOMES<TypeAdoptedNode>^ assignment_extention
     ;
     
 assignment_extention
@@ -147,15 +161,20 @@ expression_level1 // unary operators
     ; 
 
 operand
-    :   (TRUE<BinaryExpressionNode> | FALSE<BinaryExpressionNode>)
-    |   IDENTIFIER<IdentifierNode>
-    |   NUMBER<NumericalExpressionNode>
-    |   CHARACTER<CharacterNode>
+    :   primary_operand
     |   LPAREN! expression RPAREN!
     |   print_statement
     |   read_statement
     |   compound_expression
     |   if_statement
+    ;
+    
+primary_operand
+    :   TRUE<BinaryExpressionNode>
+    |   FALSE<BinaryExpressionNode>
+    |   IDENTIFIER<IdentifierNode>
+    |   NUMBER<NumericalExpressionNode>
+    |   CHARACTER<CharacterExpressionNode>
     ;
     
 print_statement

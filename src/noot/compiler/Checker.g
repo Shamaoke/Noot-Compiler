@@ -49,9 +49,52 @@ program
           }
           )+)
     ;
-    
+
 declaration returns [Node node = null;]
-    :   ^(d=(INT | BOOL | CHAR) id=IDENTIFIER dex=declaration_extention?)
+  :     ^(d=(INT | BOOL | CHAR) id=IDENTIFIER op=operand dex=declaration_extention?) // constant
+        {
+            ((DeclarationNode) d).setConstant(true);
+        
+            checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            List<Node> nodes = asList(id,op);
+            checkerHelper.checkExpressionsForEqualType(nodes,d);
+            
+            d.addValuePropagatingChild(id);
+            if(dex != null) d.addValuePropagatingChild(dex);
+            
+            node = d;
+        }
+  |     ^(d=(INT | BOOL | CHAR) id=IDENTIFIER dex=declaration_extention?) // variable
+        {
+            checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            d.addValuePropagatingChild(id);
+            if(dex != null) d.addValuePropagatingChild(dex);
+            
+            node = d;
+        }
+  ;
+    
+declaration_extention returns [Node node = null;]
+    :   ^(d=COMMA id=IDENTIFIER op=operand dex=declaration_extention?) // constant
+        {
+            ((DeclarationNode) d).setConstant(true);
+            
+            checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            List<Node> nodes = asList(id,op);
+            checkerHelper.checkExpressionsForEqualType(nodes,d);
+            
+            d.addValuePropagatingChild(id);
+            if(dex != null) d.addValuePropagatingChild(dex);
+            
+            node = d;
+        }
+    |   ^(d=COMMA id=IDENTIFIER dex=declaration_extention?) // variable
         {
             checkerHelper.declare( (DeclarationNode) d );
             checkerHelper.linkToDeclaration( (IdentifierNode) id );
@@ -63,8 +106,22 @@ declaration returns [Node node = null;]
         }
     ;
     
-declaration_extention returns [Node node = null;]
-    :   ^(d=COMMA id=IDENTIFIER dex=declaration_extention?)
+    
+variable_declaration returns [Node node = null;]
+    :   ^(d=(INT | BOOL | CHAR) id=IDENTIFIER dex=variable_declaration_extention?)
+        {
+            checkerHelper.declare( (DeclarationNode) d );
+            checkerHelper.linkToDeclaration( (IdentifierNode) id );
+            
+            d.addValuePropagatingChild(id);
+            if(dex != null) d.addValuePropagatingChild(dex);
+            
+            node = d;
+        }
+    ;
+    
+variable_declaration_extention returns [Node node = null;]
+    :   ^(d=COMMA id=IDENTIFIER dex=variable_declaration_extention?)
         {
             checkerHelper.declare( (DeclarationNode) d );
             checkerHelper.linkToDeclaration( (IdentifierNode) id );
@@ -188,6 +245,9 @@ expression returns [Node node = null;] // All statements are expressions because
         {
           checkerHelper.linkToDeclaration( (IdentifierNode) id );
           
+          if(((IdentifierNode) id).getDeclarationNode().isConstant())
+              throw new CheckerException("Reassigning a constant on line: " + te.getLine() + " this is not allowed.");
+          
           List<Node> nodes = asList(id,e1);
           checkerHelper.checkExpressionsForEqualType(nodes,te);
           
@@ -234,7 +294,7 @@ expression returns [Node node = null;] // All statements are expressions because
           for(Node argumentNode : expressions)
           {
             if(argumentNode.getNodeType() == Node.NodeType.VOID)
-              throw new CheckerException("Expression on line:" + argumentNode.getLine() + " is a void expression, this is not allowed as an argument of print.");
+              throw new CheckerException("Expression on line: " + argumentNode.getLine() + " is a void expression, this is not allowed as an argument of print.");
           } 
           
           node = te;

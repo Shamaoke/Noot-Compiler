@@ -20,31 +20,31 @@ import org.antlr.runtime.Token;
 /**
  * The Class CharacterNode.
  */
-public class CharacterNode extends Node {
+public class CharacterExpressionNode extends Node {
 
 	/**
 	 * Instantiates a new character node.
 	 */
-	public CharacterNode() { super(); }
+	public CharacterExpressionNode() { super(); }
 	
 	/**
 	 * Instantiates a new character node.
 	 *
 	 * @param t the t
 	 */
-	public CharacterNode(Token t) { super(t); }
+	public CharacterExpressionNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new character node.
 	 *
 	 * @param n the n
 	 */
-	public CharacterNode(CharacterNode n) { super(n); }
+	public CharacterExpressionNode(CharacterExpressionNode n) { super(n); }
 	
 	/* (non-Javadoc)
 	 * @see noot.ast.Node#dupNode()
 	 */
-	public CharacterNode dupNode() { return new CharacterNode(this); } 
+	public CharacterExpressionNode dupNode() { return new CharacterExpressionNode(this); } 
 	
 	/* (non-Javadoc)
 	 * @see noot.ast.Node#getNodeType()

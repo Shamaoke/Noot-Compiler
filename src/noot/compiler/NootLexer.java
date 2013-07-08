@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-08 11:06:18
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-08 14:23:35
 
   package noot.compiler;
   import noot.ast.*;
@@ -20,44 +20,45 @@ public class NootLexer extends Lexer {
 	public static final int CHARACTER=9;
 	public static final int COMMA=10;
 	public static final int COMMENT=11;
-	public static final int DEVIDE=12;
-	public static final int DIGIT=13;
-	public static final int DO=14;
-	public static final int ELSE=15;
-	public static final int EQ=16;
-	public static final int FALSE=17;
-	public static final int FI=18;
-	public static final int IDENTIFIER=19;
-	public static final int IF=20;
-	public static final int INT=21;
-	public static final int LCURLY=22;
-	public static final int LESS=23;
-	public static final int LESSEQ=24;
-	public static final int LETTER=25;
-	public static final int LOWER=26;
-	public static final int LPAREN=27;
-	public static final int MINUS=28;
-	public static final int MODULO=29;
-	public static final int MORE=30;
-	public static final int MOREEQ=31;
-	public static final int MULTIPLY=32;
-	public static final int NEGATION=33;
-	public static final int NEQ=34;
-	public static final int NOOT=35;
-	public static final int NUMBER=36;
-	public static final int OD=37;
-	public static final int OR=38;
-	public static final int PLUS=39;
-	public static final int PRINT=40;
-	public static final int RCURLY=41;
-	public static final int READ=42;
-	public static final int RPAREN=43;
-	public static final int SEMICOLON=44;
-	public static final int THEN=45;
-	public static final int TRUE=46;
-	public static final int UPPER=47;
-	public static final int WHILE=48;
-	public static final int WS=49;
+	public static final int CONST=12;
+	public static final int DEVIDE=13;
+	public static final int DIGIT=14;
+	public static final int DO=15;
+	public static final int ELSE=16;
+	public static final int EQ=17;
+	public static final int FALSE=18;
+	public static final int FI=19;
+	public static final int IDENTIFIER=20;
+	public static final int IF=21;
+	public static final int INT=22;
+	public static final int LCURLY=23;
+	public static final int LESS=24;
+	public static final int LESSEQ=25;
+	public static final int LETTER=26;
+	public static final int LOWER=27;
+	public static final int LPAREN=28;
+	public static final int MINUS=29;
+	public static final int MODULO=30;
+	public static final int MORE=31;
+	public static final int MOREEQ=32;
+	public static final int MULTIPLY=33;
+	public static final int NEGATION=34;
+	public static final int NEQ=35;
+	public static final int NOOT=36;
+	public static final int NUMBER=37;
+	public static final int OD=38;
+	public static final int OR=39;
+	public static final int PLUS=40;
+	public static final int PRINT=41;
+	public static final int RCURLY=42;
+	public static final int READ=43;
+	public static final int RPAREN=44;
+	public static final int SEMICOLON=45;
+	public static final int THEN=46;
+	public static final int TRUE=47;
+	public static final int UPPER=48;
+	public static final int WHILE=49;
+	public static final int WS=50;
 
 	// delegates
 	// delegators
@@ -198,13 +199,34 @@ public class NootLexer extends Lexer {
 	}
 	// $ANTLR end "COMMA"
 
+	// $ANTLR start "CONST"
+	public final void mCONST() throws RecognitionException {
+		try {
+			int _type = CONST;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:7: ( 'const' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:9: 'const'
+			{
+			match("const"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "CONST"
+
 	// $ANTLR start "DEVIDE"
 	public final void mDEVIDE() throws RecognitionException {
 		try {
 			int _type = DEVIDE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:8: ( '/' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:18:10: '/'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:8: ( '/' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:10: '/'
 			{
 			match('/'); 
 			}
@@ -223,8 +245,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = DO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:4: ( 'do' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:19:6: 'do'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:4: ( 'do' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:6: 'do'
 			{
 			match("do"); 
 
@@ -244,8 +266,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = ELSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:6: ( 'else' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:20:8: 'else'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:6: ( 'else' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:8: 'else'
 			{
 			match("else"); 
 
@@ -265,8 +287,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:4: ( '==' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:21:6: '=='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:4: ( '==' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:6: '=='
 			{
 			match("=="); 
 
@@ -286,8 +308,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:7: ( 'false' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:22:9: 'false'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:7: ( 'false' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:9: 'false'
 			{
 			match("false"); 
 
@@ -307,8 +329,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = FI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:4: ( 'fi' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:23:6: 'fi'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:4: ( 'fi' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:6: 'fi'
 			{
 			match("fi"); 
 
@@ -328,8 +350,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = IF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:4: ( 'if' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:24:6: 'if'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:4: ( 'if' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:6: 'if'
 			{
 			match("if"); 
 
@@ -349,8 +371,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:5: ( 'int' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:25:7: 'int'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:5: ( 'int' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:7: 'int'
 			{
 			match("int"); 
 
@@ -370,8 +392,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:8: ( '{' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:26:10: '{'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:8: ( '{' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:10: '{'
 			{
 			match('{'); 
 			}
@@ -390,8 +412,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LESS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:6: ( '<' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:27:8: '<'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:6: ( '<' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:8: '<'
 			{
 			match('<'); 
 			}
@@ -410,8 +432,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LESSEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:8: ( '<=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:28:10: '<='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:8: ( '<=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:10: '<='
 			{
 			match("<="); 
 
@@ -431,8 +453,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:8: ( '(' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:29:10: '('
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:8: ( '(' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:10: '('
 			{
 			match('('); 
 			}
@@ -451,8 +473,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:7: ( '-' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:30:9: '-'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:7: ( '-' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:9: '-'
 			{
 			match('-'); 
 			}
@@ -471,8 +493,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MODULO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:8: ( '%' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:31:10: '%'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:8: ( '%' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:10: '%'
 			{
 			match('%'); 
 			}
@@ -491,8 +513,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MORE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:6: ( '>' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:32:8: '>'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:6: ( '>' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:8: '>'
 			{
 			match('>'); 
 			}
@@ -511,8 +533,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MOREEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:8: ( '>=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:33:10: '>='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:8: ( '>=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:10: '>='
 			{
 			match(">="); 
 
@@ -532,8 +554,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = MULTIPLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:10: ( '*' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:34:12: '*'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:10: ( '*' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:12: '*'
 			{
 			match('*'); 
 			}
@@ -552,8 +574,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NEGATION;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:10: ( '!' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:35:12: '!'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:10: ( '!' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:12: '!'
 			{
 			match('!'); 
 			}
@@ -572,8 +594,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:5: ( '!=' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:36:7: '!='
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:5: ( '!=' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:7: '!='
 			{
 			match("!="); 
 
@@ -593,8 +615,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NOOT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:6: ( 'noot' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:37:8: 'noot'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:6: ( 'noot' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:8: 'noot'
 			{
 			match("noot"); 
 
@@ -614,8 +636,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = OD;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:4: ( 'od' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:38:6: 'od'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:4: ( 'od' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:6: 'od'
 			{
 			match("od"); 
 
@@ -635,8 +657,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:4: ( '||' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:39:6: '||'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:4: ( '||' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:6: '||'
 			{
 			match("||"); 
 
@@ -656,8 +678,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:6: ( '+' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:40:8: '+'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:6: ( '+' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:8: '+'
 			{
 			match('+'); 
 			}
@@ -676,8 +698,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:7: ( 'print' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:41:9: 'print'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:7: ( 'print' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:9: 'print'
 			{
 			match("print"); 
 
@@ -697,8 +719,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = RCURLY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:8: ( '}' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:42:10: '}'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:8: ( '}' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:10: '}'
 			{
 			match('}'); 
 			}
@@ -717,8 +739,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = READ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:6: ( 'read' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:43:8: 'read'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:6: ( 'read' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:8: 'read'
 			{
 			match("read"); 
 
@@ -738,8 +760,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:8: ( ')' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:44:10: ')'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:8: ( ')' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:10: ')'
 			{
 			match(')'); 
 			}
@@ -758,8 +780,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = SEMICOLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:11: ( ';' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:45:13: ';'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:11: ( ';' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:13: ';'
 			{
 			match(';'); 
 			}
@@ -778,8 +800,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = THEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:6: ( 'then' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:46:8: 'then'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:6: ( 'then' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:8: 'then'
 			{
 			match("then"); 
 
@@ -799,8 +821,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:6: ( 'true' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:47:8: 'true'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:6: ( 'true' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:8: 'true'
 			{
 			match("true"); 
 
@@ -820,8 +842,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = WHILE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:7: ( 'while' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:48:9: 'while'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:49:7: ( 'while' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:49:9: 'while'
 			{
 			match("while"); 
 
@@ -841,12 +863,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = IDENTIFIER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:5: ( LETTER ( LETTER | DIGIT )* )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:9: LETTER ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:199:5: ( LETTER ( LETTER | DIGIT )* )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:199:9: LETTER ( LETTER | DIGIT )*
 			{
 			mLETTER(); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:180:16: ( LETTER | DIGIT )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:199:16: ( LETTER | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -891,10 +913,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:5: ( ( DIGIT )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:203:5: ( ( DIGIT )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:203:9: ( DIGIT )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:184:9: ( DIGIT )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:203:9: ( DIGIT )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -943,8 +965,8 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = CHARACTER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:5: ( APOSTROPHE LETTER APOSTROPHE )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:188:8: APOSTROPHE LETTER APOSTROPHE
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:207:5: ( APOSTROPHE LETTER APOSTROPHE )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:207:8: APOSTROPHE LETTER APOSTROPHE
 			{
 			mAPOSTROPHE(); 
 
@@ -968,12 +990,12 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:5: ( '//' ( . )* '\\n' )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:9: '//' ( . )* '\\n'
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:211:5: ( '//' ( . )* '\\n' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:211:9: '//' ( . )* '\\n'
 			{
 			match("//"); 
 
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:14: ( . )*
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:211:14: ( . )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -987,7 +1009,7 @@ public class NootLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:192:14: .
+					// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:211:14: .
 					{
 					matchAny(); 
 					}
@@ -1016,10 +1038,10 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:216:5: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:216:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			{
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:197:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:216:9: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1067,7 +1089,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:201:17: ( ( '0' .. '9' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:220:17: ( ( '0' .. '9' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -1090,7 +1112,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LOWER"
 	public final void mLOWER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:202:17: ( ( 'a' .. 'z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:221:17: ( ( 'a' .. 'z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1113,7 +1135,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "UPPER"
 	public final void mUPPER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:203:17: ( ( 'A' .. 'Z' ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:222:17: ( ( 'A' .. 'Z' ) )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -1136,7 +1158,7 @@ public class NootLexer extends Lexer {
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:204:17: ( LOWER | UPPER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:223:17: ( LOWER | UPPER )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1158,8 +1180,8 @@ public class NootLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:8: ( AND | APOSTROPHE | BECOMES | BOOL | CHAR | COMMA | DEVIDE | DO | ELSE | EQ | FALSE | FI | IF | INT | LCURLY | LESS | LESSEQ | LPAREN | MINUS | MODULO | MORE | MOREEQ | MULTIPLY | NEGATION | NEQ | NOOT | OD | OR | PLUS | PRINT | RCURLY | READ | RPAREN | SEMICOLON | THEN | TRUE | WHILE | IDENTIFIER | NUMBER | CHARACTER | COMMENT | WS )
-		int alt5=42;
+		// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:8: ( AND | APOSTROPHE | BECOMES | BOOL | CHAR | COMMA | CONST | DEVIDE | DO | ELSE | EQ | FALSE | FI | IF | INT | LCURLY | LESS | LESSEQ | LPAREN | MINUS | MODULO | MORE | MOREEQ | MULTIPLY | NEGATION | NEQ | NOOT | OD | OR | PLUS | PRINT | RCURLY | READ | RPAREN | SEMICOLON | THEN | TRUE | WHILE | IDENTIFIER | NUMBER | CHARACTER | COMMENT | WS )
+		int alt5=43;
 		alt5 = dfa5.predict(input);
 		switch (alt5) {
 			case 1 :
@@ -1205,252 +1227,259 @@ public class NootLexer extends Lexer {
 				}
 				break;
 			case 7 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:49: DEVIDE
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:49: CONST
+				{
+				mCONST(); 
+
+				}
+				break;
+			case 8 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:55: DEVIDE
 				{
 				mDEVIDE(); 
 
 				}
 				break;
-			case 8 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:56: DO
+			case 9 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:62: DO
 				{
 				mDO(); 
 
 				}
 				break;
-			case 9 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:59: ELSE
+			case 10 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:65: ELSE
 				{
 				mELSE(); 
 
 				}
 				break;
-			case 10 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:64: EQ
+			case 11 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:70: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
-			case 11 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:67: FALSE
+			case 12 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:73: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
-			case 12 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:73: FI
+			case 13 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:79: FI
 				{
 				mFI(); 
 
 				}
 				break;
-			case 13 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:76: IF
+			case 14 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:82: IF
 				{
 				mIF(); 
 
 				}
 				break;
-			case 14 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:79: INT
+			case 15 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:85: INT
 				{
 				mINT(); 
 
 				}
 				break;
-			case 15 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:83: LCURLY
+			case 16 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:89: LCURLY
 				{
 				mLCURLY(); 
 
 				}
 				break;
-			case 16 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:90: LESS
+			case 17 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:96: LESS
 				{
 				mLESS(); 
 
 				}
 				break;
-			case 17 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:95: LESSEQ
+			case 18 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:101: LESSEQ
 				{
 				mLESSEQ(); 
 
 				}
 				break;
-			case 18 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:102: LPAREN
+			case 19 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:108: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
-			case 19 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:109: MINUS
+			case 20 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:115: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
-			case 20 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:115: MODULO
+			case 21 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:121: MODULO
 				{
 				mMODULO(); 
 
 				}
 				break;
-			case 21 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:122: MORE
+			case 22 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:128: MORE
 				{
 				mMORE(); 
 
 				}
 				break;
-			case 22 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:127: MOREEQ
+			case 23 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:133: MOREEQ
 				{
 				mMOREEQ(); 
 
 				}
 				break;
-			case 23 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:134: MULTIPLY
+			case 24 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:140: MULTIPLY
 				{
 				mMULTIPLY(); 
 
 				}
 				break;
-			case 24 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:143: NEGATION
+			case 25 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:149: NEGATION
 				{
 				mNEGATION(); 
 
 				}
 				break;
-			case 25 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:152: NEQ
+			case 26 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:158: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
-			case 26 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:156: NOOT
+			case 27 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:162: NOOT
 				{
 				mNOOT(); 
 
 				}
 				break;
-			case 27 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:161: OD
+			case 28 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:167: OD
 				{
 				mOD(); 
 
 				}
 				break;
-			case 28 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:164: OR
+			case 29 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:170: OR
 				{
 				mOR(); 
 
 				}
 				break;
-			case 29 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:167: PLUS
+			case 30 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:173: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
-			case 30 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:172: PRINT
+			case 31 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:178: PRINT
 				{
 				mPRINT(); 
 
 				}
 				break;
-			case 31 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:178: RCURLY
+			case 32 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:184: RCURLY
 				{
 				mRCURLY(); 
 
 				}
 				break;
-			case 32 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:185: READ
+			case 33 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:191: READ
 				{
 				mREAD(); 
 
 				}
 				break;
-			case 33 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:190: RPAREN
+			case 34 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:196: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
-			case 34 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:197: SEMICOLON
+			case 35 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:203: SEMICOLON
 				{
 				mSEMICOLON(); 
 
 				}
 				break;
-			case 35 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:207: THEN
+			case 36 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:213: THEN
 				{
 				mTHEN(); 
 
 				}
 				break;
-			case 36 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:212: TRUE
+			case 37 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:218: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
-			case 37 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:217: WHILE
+			case 38 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:223: WHILE
 				{
 				mWHILE(); 
 
 				}
 				break;
-			case 38 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:223: IDENTIFIER
+			case 39 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:229: IDENTIFIER
 				{
 				mIDENTIFIER(); 
 
 				}
 				break;
-			case 39 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:234: NUMBER
+			case 40 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:240: NUMBER
 				{
 				mNUMBER(); 
 
 				}
 				break;
-			case 40 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:241: CHARACTER
+			case 41 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:247: CHARACTER
 				{
 				mCHARACTER(); 
 
 				}
 				break;
-			case 41 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:251: COMMENT
+			case 42 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:257: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
-			case 42 :
-				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:259: WS
+			case 43 :
+				// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:1:265: WS
 				{
 				mWS(); 
 
@@ -1463,39 +1492,40 @@ public class NootLexer extends Lexer {
 
 	protected DFA5 dfa5 = new DFA5(this);
 	static final String DFA5_eotS =
-		"\2\uffff\1\43\1\uffff\2\40\1\uffff\1\50\2\40\1\uffff\2\40\1\uffff\1\60"+
-		"\3\uffff\1\62\1\uffff\1\64\2\40\2\uffff\1\40\1\uffff\1\40\2\uffff\2\40"+
-		"\5\uffff\2\40\2\uffff\1\76\2\40\1\101\1\102\1\40\6\uffff\1\40\1\105\7"+
-		"\40\1\uffff\2\40\2\uffff\1\117\1\40\1\uffff\5\40\1\126\1\127\1\130\1\40"+
-		"\1\uffff\1\132\1\40\1\134\1\135\1\136\1\40\3\uffff\1\140\1\uffff\1\141"+
-		"\3\uffff\1\142\3\uffff";
+		"\2\uffff\1\43\1\uffff\2\40\1\uffff\1\51\2\40\1\uffff\2\40\1\uffff\1\61"+
+		"\3\uffff\1\63\1\uffff\1\65\2\40\2\uffff\1\40\1\uffff\1\40\2\uffff\2\40"+
+		"\5\uffff\3\40\2\uffff\1\100\2\40\1\103\1\104\1\40\6\uffff\1\40\1\107\10"+
+		"\40\1\uffff\2\40\2\uffff\1\122\1\40\1\uffff\5\40\1\131\1\132\1\40\1\134"+
+		"\1\40\1\uffff\1\136\1\40\1\140\1\141\1\142\1\40\2\uffff\1\144\1\uffff"+
+		"\1\145\1\uffff\1\146\3\uffff\1\147\4\uffff";
 	static final String DFA5_eofS =
-		"\143\uffff";
+		"\150\uffff";
 	static final String DFA5_minS =
 		"\1\11\1\uffff\1\101\1\uffff\1\157\1\150\1\uffff\1\57\1\157\1\154\1\uffff"+
 		"\1\141\1\146\1\uffff\1\75\3\uffff\1\75\1\uffff\1\75\1\157\1\144\2\uffff"+
-		"\1\162\1\uffff\1\145\2\uffff\2\150\5\uffff\1\157\1\141\2\uffff\1\60\1"+
-		"\163\1\154\2\60\1\164\6\uffff\1\157\1\60\1\151\1\141\1\145\1\165\1\151"+
-		"\1\154\1\162\1\uffff\1\145\1\163\2\uffff\1\60\1\164\1\uffff\1\156\1\144"+
-		"\1\156\1\145\1\154\3\60\1\145\1\uffff\1\60\1\164\3\60\1\145\3\uffff\1"+
-		"\60\1\uffff\1\60\3\uffff\1\60\3\uffff";
+		"\1\162\1\uffff\1\145\2\uffff\2\150\5\uffff\1\157\1\141\1\156\2\uffff\1"+
+		"\60\1\163\1\154\2\60\1\164\6\uffff\1\157\1\60\1\151\1\141\1\145\1\165"+
+		"\1\151\1\154\1\162\1\163\1\uffff\1\145\1\163\2\uffff\1\60\1\164\1\uffff"+
+		"\1\156\1\144\1\156\1\145\1\154\2\60\1\164\1\60\1\145\1\uffff\1\60\1\164"+
+		"\3\60\1\145\2\uffff\1\60\1\uffff\1\60\1\uffff\1\60\3\uffff\1\60\4\uffff";
 	static final String DFA5_maxS =
-		"\1\175\1\uffff\1\172\1\uffff\1\157\1\150\1\uffff\1\57\1\157\1\154\1\uffff"+
-		"\1\151\1\156\1\uffff\1\75\3\uffff\1\75\1\uffff\1\75\1\157\1\144\2\uffff"+
-		"\1\162\1\uffff\1\145\2\uffff\1\162\1\150\5\uffff\1\157\1\141\2\uffff\1"+
-		"\172\1\163\1\154\2\172\1\164\6\uffff\1\157\1\172\1\151\1\141\1\145\1\165"+
-		"\1\151\1\154\1\162\1\uffff\1\145\1\163\2\uffff\1\172\1\164\1\uffff\1\156"+
-		"\1\144\1\156\1\145\1\154\3\172\1\145\1\uffff\1\172\1\164\3\172\1\145\3"+
-		"\uffff\1\172\1\uffff\1\172\3\uffff\1\172\3\uffff";
+		"\1\175\1\uffff\1\172\1\uffff\2\157\1\uffff\1\57\1\157\1\154\1\uffff\1"+
+		"\151\1\156\1\uffff\1\75\3\uffff\1\75\1\uffff\1\75\1\157\1\144\2\uffff"+
+		"\1\162\1\uffff\1\145\2\uffff\1\162\1\150\5\uffff\1\157\1\141\1\156\2\uffff"+
+		"\1\172\1\163\1\154\2\172\1\164\6\uffff\1\157\1\172\1\151\1\141\1\145\1"+
+		"\165\1\151\1\154\1\162\1\163\1\uffff\1\145\1\163\2\uffff\1\172\1\164\1"+
+		"\uffff\1\156\1\144\1\156\1\145\1\154\2\172\1\164\1\172\1\145\1\uffff\1"+
+		"\172\1\164\3\172\1\145\2\uffff\1\172\1\uffff\1\172\1\uffff\1\172\3\uffff"+
+		"\1\172\4\uffff";
 	static final String DFA5_acceptS =
-		"\1\uffff\1\1\1\uffff\1\3\2\uffff\1\6\3\uffff\1\12\2\uffff\1\17\1\uffff"+
-		"\1\22\1\23\1\24\1\uffff\1\27\3\uffff\1\34\1\35\1\uffff\1\37\1\uffff\1"+
-		"\41\1\42\2\uffff\1\46\1\47\1\52\1\2\1\50\2\uffff\1\51\1\7\6\uffff\1\21"+
-		"\1\20\1\26\1\25\1\31\1\30\11\uffff\1\10\2\uffff\1\14\1\15\2\uffff\1\33"+
-		"\11\uffff\1\16\6\uffff\1\4\1\5\1\11\1\uffff\1\32\1\uffff\1\40\1\43\1\44"+
-		"\1\uffff\1\13\1\36\1\45";
+		"\1\uffff\1\1\1\uffff\1\3\2\uffff\1\6\3\uffff\1\13\2\uffff\1\20\1\uffff"+
+		"\1\23\1\24\1\25\1\uffff\1\30\3\uffff\1\35\1\36\1\uffff\1\40\1\uffff\1"+
+		"\42\1\43\2\uffff\1\47\1\50\1\53\1\2\1\51\3\uffff\1\52\1\10\6\uffff\1\22"+
+		"\1\21\1\27\1\26\1\32\1\31\12\uffff\1\11\2\uffff\1\15\1\16\2\uffff\1\34"+
+		"\12\uffff\1\17\6\uffff\1\4\1\5\1\uffff\1\12\1\uffff\1\33\1\uffff\1\41"+
+		"\1\44\1\45\1\uffff\1\7\1\14\1\37\1\46";
 	static final String DFA5_specialS =
-		"\143\uffff}>";
+		"\150\uffff}>";
 	static final String[] DFA5_transitionS = {
 			"\2\42\1\uffff\2\42\22\uffff\1\42\1\24\3\uffff\1\21\1\1\1\2\1\17\1\34"+
 			"\1\23\1\30\1\6\1\20\1\uffff\1\7\12\41\1\3\1\35\1\16\1\12\1\22\2\uffff"+
@@ -1505,97 +1535,102 @@ public class NootLexer extends Lexer {
 			"\32\44\6\uffff\32\44",
 			"",
 			"\1\45",
-			"\1\46",
+			"\1\46\6\uffff\1\47",
 			"",
-			"\1\47",
-			"\1\51",
+			"\1\50",
 			"\1\52",
+			"\1\53",
 			"",
-			"\1\53\7\uffff\1\54",
-			"\1\55\7\uffff\1\56",
+			"\1\54\7\uffff\1\55",
+			"\1\56\7\uffff\1\57",
 			"",
-			"\1\57",
+			"\1\60",
 			"",
 			"",
 			"",
-			"\1\61",
+			"\1\62",
 			"",
-			"\1\63",
-			"\1\65",
+			"\1\64",
 			"\1\66",
-			"",
-			"",
 			"\1\67",
+			"",
 			"",
 			"\1\70",
 			"",
-			"",
-			"\1\71\11\uffff\1\72",
-			"\1\73",
+			"\1\71",
 			"",
 			"",
-			"",
-			"",
-			"",
+			"\1\72\11\uffff\1\73",
 			"\1\74",
+			"",
+			"",
+			"",
+			"",
+			"",
 			"\1\75",
-			"",
-			"",
-			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\1\76",
 			"\1\77",
-			"\1\100",
+			"",
+			"",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\1\101",
+			"\1\102",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\1\103",
+			"\1\105",
 			"",
 			"",
 			"",
 			"",
 			"",
 			"",
-			"\1\104",
-			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"\1\106",
-			"\1\107",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"\1\110",
 			"\1\111",
 			"\1\112",
 			"\1\113",
 			"\1\114",
-			"",
 			"\1\115",
 			"\1\116",
+			"\1\117",
+			"",
+			"\1\120",
+			"\1\121",
 			"",
 			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\1\120",
-			"",
-			"\1\121",
-			"\1\122",
 			"\1\123",
+			"",
 			"\1\124",
 			"\1\125",
+			"\1\126",
+			"\1\127",
+			"\1\130",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\1\131",
-			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"\1\133",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
-			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\1\135",
+			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"\1\137",
-			"",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"\1\143",
 			"",
 			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
 			"",
+			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"",
 			"",
 			"",
 			"\12\40\7\uffff\32\40\6\uffff\32\40",
+			"",
 			"",
 			"",
 			""
@@ -1632,7 +1667,7 @@ public class NootLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( AND | APOSTROPHE | BECOMES | BOOL | CHAR | COMMA | DEVIDE | DO | ELSE | EQ | FALSE | FI | IF | INT | LCURLY | LESS | LESSEQ | LPAREN | MINUS | MODULO | MORE | MOREEQ | MULTIPLY | NEGATION | NEQ | NOOT | OD | OR | PLUS | PRINT | RCURLY | READ | RPAREN | SEMICOLON | THEN | TRUE | WHILE | IDENTIFIER | NUMBER | CHARACTER | COMMENT | WS );";
+			return "1:1: Tokens : ( AND | APOSTROPHE | BECOMES | BOOL | CHAR | COMMA | CONST | DEVIDE | DO | ELSE | EQ | FALSE | FI | IF | INT | LCURLY | LESS | LESSEQ | LPAREN | MINUS | MODULO | MORE | MOREEQ | MULTIPLY | NEGATION | NEQ | NOOT | OD | OR | PLUS | PRINT | RCURLY | READ | RPAREN | SEMICOLON | THEN | TRUE | WHILE | IDENTIFIER | NUMBER | CHARACTER | COMMENT | WS );";
 		}
 	}
 

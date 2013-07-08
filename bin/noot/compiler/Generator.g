@@ -48,7 +48,16 @@ program
     ;
     
 declaration
-    :   ^(de=(INT | BOOL | CHAR) id=IDENTIFIER
+    :   ^(de=(INT | BOOL | CHAR) id=IDENTIFIER // Constant
+            {
+              gh.declare( (DeclarationNode)de );
+            }
+          op=operand
+            {
+              gh.currentBlock().push(new Instruction("STORE",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning constant "+id.getText()));
+            }
+          declaration_extention?)
+    |   ^(de=(INT | BOOL | CHAR) id=IDENTIFIER // Variable
             {
               gh.declare( (DeclarationNode)de );
             }
@@ -56,11 +65,20 @@ declaration
     ;
     
 declaration_extention
-    :   ^(de=COMMA id=IDENTIFIER
-        {
-            gh.declare( (DeclarationNode)de );
-        }
+    :   ^(de=COMMA id=IDENTIFIER // Constant
+            {
+              gh.declare( (DeclarationNode)de );
+            }
+          op=operand
+            {
+              gh.currentBlock().push(new Instruction("STORE",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning constant "+id.getText()));
+            }
           declaration_extention?)
+    |   ^(de=COMMA id=IDENTIFIER // Variable
+            {
+              gh.declare( (DeclarationNode)de );
+            }
+           declaration_extention?)  
     ;
     
 expression returns [Node node = null;] // All statements are expressions because they all have a return value
