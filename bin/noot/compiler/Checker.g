@@ -276,14 +276,18 @@ expression returns [Node node = null;] // All statements are expressions because
         } // Compound expression
     |   ^(te=IF
             {
-              checkerHelper.holdUpcommingScope();
+              checkerHelper.holdUpcomingScope();
             }
-          e1=expression e2=expression e3=expression?)
+          e1=expression
+            {
+              boolean scopeReleased = checkerHelper.releaseUpcomingScope();
+              
+              List<Node> condition = asList(e1);
+              checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+            }
+          e2=expression e3=expression?)
         {
-          checkerHelper.releaseAndCloseScope();
-          
-          List<Node> condition = asList(e1);
-          checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+          if(!scopeReleased) checkerHelper.releaseAndCloseScope();
           
           if(e3 != null)
           {
@@ -312,15 +316,18 @@ expression returns [Node node = null;] // All statements are expressions because
         } // Conditional statement
     |   ^(te=WHILE
             {
-              checkerHelper.holdUpcommingScope();
+              checkerHelper.holdUpcomingScope();
             }
-          e1=expression e2=expression)
+          e1=expression
+            {
+              boolean scopeReleased = checkerHelper.releaseUpcomingScope();
+              
+              List<Node> condition = asList(e1);
+              checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
+            }
+          e2=expression)
         {
-        
-          List<Node> condition = asList(e1);
-          checkerHelper.checkExpressionsForType(condition,Node.NodeType.BOOL,te);
-        
-          checkerHelper.releaseAndCloseScope();
+          if(!scopeReleased) checkerHelper.releaseAndCloseScope();
           
           e2.setIgnoreReturnValue(true);
           
