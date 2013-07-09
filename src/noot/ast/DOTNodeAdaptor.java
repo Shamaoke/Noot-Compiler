@@ -14,9 +14,16 @@
  */
 package noot.ast;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DOTNodeAdaptor.
+ * 
+ * This class has been added to be able to create more meaningful
+ * DOT file visualizations. Dot file visualizations will be created
+ * when compiling a piece of Noot code. These visualizations can be
+ * opened using an application called Graphviz.
+ * 
+ * This class overrides the getText method to make it print meaningful
+ * token descriptions.
  */
 public class DOTNodeAdaptor extends NodeAdaptor {
 	

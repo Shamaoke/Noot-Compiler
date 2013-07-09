@@ -16,14 +16,14 @@ package noot.ast;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NumericalExpressionNode.
+ * 
+ * Nodes with a default numerical return type can be
+ * represented by the NumericalExpressionNode. The
+ * getNodeType() method will always return NootType.INT
  */
 public class NumericalExpressionNode extends Node {
-
-	/** The value. */
-	protected int value = 0;
 	
 	/**
 	 * Instantiates a new numerical expression node.
@@ -33,14 +33,14 @@ public class NumericalExpressionNode extends Node {
 	/**
 	 * Instantiates a new numerical expression node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public NumericalExpressionNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new numerical expression node.
 	 *
-	 * @param n the n
+	 * @param n the NumericalExpressionNode
 	 */
 	public NumericalExpressionNode(NumericalExpressionNode n) { super(n); }
 	
@@ -48,20 +48,6 @@ public class NumericalExpressionNode extends Node {
 	 * @see noot.ast.Node#dupNode()
 	 */
 	public NumericalExpressionNode dupNode() { return new NumericalExpressionNode(this); } 
-
-	/**
-	 * Get the List value of this node.
-	 *
-	 * @return the value
-	 */
-	public int getValue() { return value; }
-
-	/**
-	 * Set the List value of this node.
-	 *
-	 * @param value the new value
-	 */
-	public void setValue(int value) { this.value = value; }
 	
 	/* (non-Javadoc)
 	 * @see noot.ast.Node#getNodeType()
@@ -69,16 +55,6 @@ public class NumericalExpressionNode extends Node {
 	public NodeType getNodeType()
 	{
 		return NodeType.INT;
-	}
-
-	/* (non-Javadoc)
-	 * @see noot.ast.Node#toString()
-	 */
-	public String toString()
-	{	
-		String s = super.toString();
-		//s = s + " {NumExpr}";
-		return s;
 	}
 	
 }

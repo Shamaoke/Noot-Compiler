@@ -18,15 +18,23 @@ import noot.compiler.NootParser;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class DeclarationNode.
+ * 
+ * This node represents a declaration. It can be used to identify
+ * the type of associated IdentifierNodes. These Nodes can't be accessed
+ * through this object but this instances of DeclarationNode van be
+ * accessed through them.
+ * 
+ * The DeclarationNode also contains information about the scoping
+ * level and if it represents a constant or not.
  */
 public class DeclarationNode extends Node {
 	
-	/** The declaration level. */
+	/** The declaration scoping level. */
 	private int declarationLevel = 0;
 	
+	/** Constant, if true this declaration represents a constant . */
 	private boolean constant = false;
 	
 	/**
@@ -37,14 +45,14 @@ public class DeclarationNode extends Node {
 	/**
 	 * Instantiates a new declaration node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public DeclarationNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new declaration node.
 	 *
-	 * @param n the n
+	 * @param n the DeclarationNode
 	 */
 	public DeclarationNode(DeclarationNode n) { super(n); }
 	
@@ -54,9 +62,9 @@ public class DeclarationNode extends Node {
 	public DeclarationNode dupNode() { return new DeclarationNode(this); } 
 	
 	/**
-	 * Gets the declaration level.
-	 *
-	 * @return the declaration level
+	 * Gets the declaration scoping level.
+	 * 
+	 * @return the scoping level on which this declaration has been done
 	 */
 	public int getDeclarationLevel()
 	{
@@ -64,16 +72,19 @@ public class DeclarationNode extends Node {
 	}
 	
 	/**
-	 * Sets the declaration level.
-	 *
-	 * @param declarationLevel the new declaration level
+	 * Sets the declaration scoping level.
+	 * 
+	 * @ensure this.getDeclarationLevel() == declarationLevel
+	 * @param declarationLevel the scoping level on which this declaration has been done
 	 */
 	public void setDeclarationLevel(int declarationLevel) {
 		this.declarationLevel = declarationLevel;
 	}
 	
 	/**
-	 * Gets the identifier node.
+	 * Gets the associated identifier node used in the declaration.
+	 * This should only be used for logging and debugging not for evaluation
+	 * because other identifier nodes could be connected to this declaration.
 	 *
 	 * @return the identifier node
 	 */
@@ -87,6 +98,7 @@ public class DeclarationNode extends Node {
 	
 	/**
 	 * Gets the declared type.
+	 * Use this method to get the type of associated IdentifierNodes.
 	 *
 	 * @return the declared type
 	 */
@@ -112,10 +124,20 @@ public class DeclarationNode extends Node {
 		return NodeType.VOID;
 	}
 
+	/**
+	 * Checks if this declaration represents a constant.
+	 *
+	 * @return true, if is this declaration is a constant
+	 */
 	public boolean isConstant() {
 		return constant;
 	}
 
+	/**
+	 * Sets the if this declaration is a constant.
+	 *
+	 * @param constant true if declaration is a constant false if it is a variable
+	 */
 	public void setConstant(boolean constant) {
 		this.constant = constant;
 	}

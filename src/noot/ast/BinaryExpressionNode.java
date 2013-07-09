@@ -16,14 +16,13 @@ package noot.ast;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BinaryExpressionNode.
+ * 
+ * Nodes with a default boolean return type can be
+ * represented by the BinaryExpressionNode
  */
 public class BinaryExpressionNode extends Node {
-	
-	/** The value. */
-	protected boolean value = false;
 	
 	/**
 	 * Instantiates a new binary expression node.
@@ -49,20 +48,6 @@ public class BinaryExpressionNode extends Node {
 	 */
 	public BinaryExpressionNode dupNode() { return new BinaryExpressionNode(this); } 
 
-	/**
-	 * Get the List value of this node.
-	 *
-	 * @return the value
-	 */
-	public boolean getValue() { return value; }
-
-	/**
-	 * Set the List value of this node.
-	 *
-	 * @param value the new value
-	 */
-	public void setValue(boolean value) { this.value = value; }
-
 	/* (non-Javadoc)
 	 * @see noot.ast.Node#getNodeType()
 	 */
@@ -71,13 +56,4 @@ public class BinaryExpressionNode extends Node {
 		return NodeType.BOOL;
 	}
 	
-	/* (non-Javadoc)
-	 * @see noot.ast.Node#toString()
-	 */
-	public String toString() {
-		
-		String s = super.toString();
-		//s = s + " {BinExpr}";
-		return s;
-	}
 }

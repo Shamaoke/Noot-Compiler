@@ -25,57 +25,60 @@ import org.antlr.runtime.tree.CommonTree;
  * The Class Node.
  */
 public class Node extends CommonTree {
-	
+
 	/**
 	 * The Enum NodeType.
+	 * Use this Enumeration to check and compare
+	 * the type of Node objects
 	 */
 	public enum NodeType {
-	    
-    	/** The void. */
-    	VOID, 
- /** The int. */
- INT, 
- /** The bool. */
- BOOL, 
- /** The char. */
- CHAR 
+		/** Void NodeType. */
+		VOID, 
+		/** Integer NodeType. */
+		INT, 
+		/** Boolean NodeType. */
+		BOOL, 
+		/** Character NodeType. */
+		CHAR 
 	}
-	
+
 	/** The ignore return value. */
 	private boolean ignoreReturnValue = false;
-	
+
 	/** The Value propagating children. */
 	private ArrayList<Node> ValuePropagatingChildren = new ArrayList<Node>();
-	
-	
+
+
 
 	/**
 	 * Instantiates a new node.
 	 */
 	public Node() { super(); }
-	
+
 	/**
 	 * Instantiates a new node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public Node(Token t) { super(t); }
-	
+
 	/**
 	 * Instantiates a new node.
 	 *
-	 * @param n the n
+	 * @param n the Node
 	 */
 	public Node(Node n) { super(n); }
-	
+
 	/* (non-Javadoc)
 	 * @see org.antlr.runtime.tree.CommonTree#dupNode()
 	 */
 	public Node dupNode() { return new Node(this); } 
-	
+
 	/**
 	 * Gets the node type.
 	 *
+	 * Subclasses should override this method.
+	 * 
 	 * @return the node type
 	 */
 	public NodeType getNodeType()
@@ -83,31 +86,10 @@ public class Node extends CommonTree {
 		return NodeType.VOID;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.antlr.runtime.tree.CommonTree#toString()
-	 */
-	public String toString()
-	{	
-		String s = super.toString();
-		
-		String ignoreResultString = this.ignoreReturnValue ? " ir" : "";
-
-		if(this.getNodeType() != NodeType.VOID)
-		{
-			s = s + "[" + this.getNodeType() + ignoreResultString + "]";
-		}
-		else if (!ignoreResultString.equals(""))
-		{
-			s = s + "[" + ignoreResultString + " ]";
-		}
-		
-		return s;
-	}
-
 	/**
 	 * Should ignore return value.
 	 *
-	 * @return true, if successful
+	 * @return true, if the return value of this node should be ignored
 	 */
 	public boolean shouldIgnoreReturnValue() {
 		return ignoreReturnValue;
@@ -120,11 +102,11 @@ public class Node extends CommonTree {
 	 */
 	public void setIgnoreReturnValue(boolean ignoreReturnValue) {
 		this.ignoreReturnValue = ignoreReturnValue;
-		
+
 		for(Node child : ValuePropagatingChildren)
 			child.setIgnoreReturnValue(this.shouldIgnoreReturnValue());
 	}
-	
+
 	/**
 	 * Adds the value propagating child.
 	 *
@@ -137,7 +119,7 @@ public class Node extends CommonTree {
 			ValuePropagatingChildren.add(ValuePropagatingChild);
 		}
 	}
-	
+
 	/**
 	 * Adds the value propagating children.
 	 *
@@ -149,4 +131,25 @@ public class Node extends CommonTree {
 			this.addValuePropagatingChild(child);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.antlr.runtime.tree.CommonTree#toString()
+	 */
+	public String toString()
+	{	
+		String s = super.toString();
+
+		String ignoreResultString = this.ignoreReturnValue ? " ir" : "";
+
+		if(this.getNodeType() != NodeType.VOID)
+		{
+			s = s + "[" + this.getNodeType() + ignoreResultString + "]";
+		}
+		else if (!ignoreResultString.equals(""))
+		{
+			s = s + "[" + ignoreResultString + " ]";
+		}
+
+		return s;
+	}
+
 }
