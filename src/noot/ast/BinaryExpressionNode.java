@@ -20,7 +20,8 @@ import org.antlr.runtime.Token;
  * The Class BinaryExpressionNode.
  * 
  * Nodes with a default boolean return type can be
- * represented by the BinaryExpressionNode
+ * represented by the BinaryExpressionNode. The
+ * getNodeType() method will always return NootType.BOOL
  */
 public class BinaryExpressionNode extends Node {
 	
@@ -32,14 +33,14 @@ public class BinaryExpressionNode extends Node {
 	/**
 	 * Instantiates a new binary expression node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public BinaryExpressionNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new binary expression node.
 	 *
-	 * @param n the n
+	 * @param n the BinaryExpressionNode
 	 */
 	public BinaryExpressionNode(BinaryExpressionNode n) { super(n); }
 	

@@ -18,9 +18,11 @@ package noot.ast;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTreeAdaptor;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NodeAdaptor.
+ * 
+ * This NodeAdaptor should be used by the compiler to insure
+ * Node objects will be created instead of CommonTree objects.
  */
 public class NodeAdaptor extends CommonTreeAdaptor {
 	

@@ -16,9 +16,12 @@ package noot.ast;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CharacterNode.
+ * 
+ * Nodes with a default character return type can be
+ * represented by the CharacterExpressionNode. The
+ * getNodeType() method will always return NootType.CHAR
  */
 public class CharacterExpressionNode extends Node {
 
@@ -30,14 +33,14 @@ public class CharacterExpressionNode extends Node {
 	/**
 	 * Instantiates a new character node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public CharacterExpressionNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new character node.
 	 *
-	 * @param n the n
+	 * @param n the CharacterExpressionNode
 	 */
 	public CharacterExpressionNode(CharacterExpressionNode n) { super(n); }
 	

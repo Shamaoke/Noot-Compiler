@@ -20,7 +20,6 @@ import java.util.List;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Node.
  */
@@ -47,8 +46,6 @@ public class Node extends CommonTree {
 
 	/** The Value propagating children. */
 	private ArrayList<Node> ValuePropagatingChildren = new ArrayList<Node>();
-
-
 
 	/**
 	 * Instantiates a new node.
@@ -91,7 +88,8 @@ public class Node extends CommonTree {
 	 *
 	 * @return true, if the return value of this node should be ignored
 	 */
-	public boolean shouldIgnoreReturnValue() {
+	public boolean shouldIgnoreReturnValue()
+	{
 		return ignoreReturnValue;
 	}
 
@@ -100,7 +98,8 @@ public class Node extends CommonTree {
 	 *
 	 * @param ignoreReturnValue the new ignore return value
 	 */
-	public void setIgnoreReturnValue(boolean ignoreReturnValue) {
+	public void setIgnoreReturnValue(boolean ignoreReturnValue)
+	{
 		this.ignoreReturnValue = ignoreReturnValue;
 
 		for(Node child : ValuePropagatingChildren)
@@ -110,6 +109,7 @@ public class Node extends CommonTree {
 	/**
 	 * Adds the value propagating child.
 	 *
+	 * @require ValuePropagatingChild != null
 	 * @param ValuePropagatingChild the value propagating child
 	 */
 	public void addValuePropagatingChild(Node ValuePropagatingChild)
@@ -122,7 +122,8 @@ public class Node extends CommonTree {
 
 	/**
 	 * Adds the value propagating children.
-	 *
+	 * 
+	 * @require list != null
 	 * @param list the list
 	 */
 	public void addValuePropagatingChildren(List<Node> list)
@@ -133,6 +134,10 @@ public class Node extends CommonTree {
 	
 	/* (non-Javadoc)
 	 * @see org.antlr.runtime.tree.CommonTree#toString()
+	 * 
+	 * This method is added to be used by the DOTNodeAdaptor and
+	 * the toTreeString() method. So these contain more meaningful
+	 * information.
 	 */
 	public String toString()
 	{	
@@ -141,13 +146,9 @@ public class Node extends CommonTree {
 		String ignoreResultString = this.ignoreReturnValue ? " ir" : "";
 
 		if(this.getNodeType() != NodeType.VOID)
-		{
 			s = s + "[" + this.getNodeType() + ignoreResultString + "]";
-		}
 		else if (!ignoreResultString.equals(""))
-		{
 			s = s + "[" + ignoreResultString + " ]";
-		}
 
 		return s;
 	}

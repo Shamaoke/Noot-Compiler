@@ -77,7 +77,8 @@ public class DeclarationNode extends Node {
 	 * @ensure this.getDeclarationLevel() == declarationLevel
 	 * @param declarationLevel the scoping level on which this declaration has been done
 	 */
-	public void setDeclarationLevel(int declarationLevel) {
+	public void setDeclarationLevel(int declarationLevel)
+	{
 		this.declarationLevel = declarationLevel;
 	}
 	
@@ -90,7 +91,7 @@ public class DeclarationNode extends Node {
 	 */
 	public IdentifierNode getIdentifierNode()
 	{
-		if(this.getChild(0) != null && this.getChild(0) instanceof IdentifierNode)
+		if(this.getChild(0) != null && this.getChild(0) instanceof IdentifierNode) // This check is redundant if Antlr does a good job
 			return (IdentifierNode)this.getChild(0);
 		else
 			return null;
@@ -127,9 +128,10 @@ public class DeclarationNode extends Node {
 	/**
 	 * Checks if this declaration represents a constant.
 	 *
-	 * @return true, if is this declaration is a constant
+	 * @return true, if is this declaration is a constant false if it is a variable
 	 */
-	public boolean isConstant() {
+	public boolean isConstant()
+	{
 		return constant;
 	}
 
@@ -138,7 +140,8 @@ public class DeclarationNode extends Node {
 	 *
 	 * @param constant true if declaration is a constant false if it is a variable
 	 */
-	public void setConstant(boolean constant) {
+	public void setConstant(boolean constant)
+	{
 		this.constant = constant;
 	}
 	

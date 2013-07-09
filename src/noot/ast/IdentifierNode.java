@@ -16,13 +16,19 @@ package noot.ast;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class IdentifierNode.
+ * 
+ * This node represents an identifier. The type of IdentifierNodes
+ * is determined by there DeclarationNode. You should always couple
+ * a DeclarationNode to an IdentifierNode.
  */
 public class IdentifierNode extends Node {
 
-	/** The declaration node. */
+	/**
+	 * The declaration node associated with this identifier node.
+	 * This node will be used to determine the type of this node.
+	 */
 	private DeclarationNode declarationNode;
 
 	/**
@@ -33,14 +39,14 @@ public class IdentifierNode extends Node {
 	/**
 	 * Instantiates a new identifier node.
 	 *
-	 * @param t the t
+	 * @param t the Token
 	 */
 	public IdentifierNode(Token t) { super(t); }
 	
 	/**
 	 * Instantiates a new identifier node.
 	 *
-	 * @param n the n
+	 * @param n the IdentifierNode
 	 */
 	public IdentifierNode(IdentifierNode n) { super(n); }
 	
@@ -51,8 +57,10 @@ public class IdentifierNode extends Node {
 
 	/**
 	 * Sets the declaration node.
+	 * 
+	 * This node will be used to determine the type of this node.
 	 *
-	 * @param node the new declaration node
+	 * @param node the declaration node
 	 */
 	public void setDeclarationNode(DeclarationNode node)
 	{
@@ -61,6 +69,8 @@ public class IdentifierNode extends Node {
 	
 	/**
 	 * Gets the declaration node.
+	 * 
+	 * This can be used to check if the identifier represents a constant.
 	 *
 	 * @return the declaration node
 	 */
