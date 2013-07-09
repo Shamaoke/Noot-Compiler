@@ -69,7 +69,7 @@ public class CheckerHelper extends ScopeHelper {
 
 		if(currentDeclarationsMap.get(identifierNode.getText()) != null &&
 				currentDeclarationsMap.get(identifierNode.getText()).getDeclarationLevel() == this.scopingLevel())
-			throw new CheckerException(identifierNode.getText()+" on line: " + identifierNode.getLine() + " has already been declared on current level");
+			throw new CheckerException(identifierNode,identifierNode.getText()+" has already been declared in current scope.");
 
 		currentDeclarationsMap.put(identifierNode.getText(),node);
 	}
@@ -87,7 +87,7 @@ public class CheckerHelper extends ScopeHelper {
 
 		if(declarationNode == null)
 		{
-			throw new CheckerException(node.getText()+" on line: " + node.getLine() + " has not been declared.");
+			throw new CheckerException(node,node.getText()+" has not been declared.");
 		}
 		else
 		{
@@ -113,7 +113,7 @@ public class CheckerHelper extends ScopeHelper {
 				throw new NullPointerException("Expression(" + i + ") is null while checking for operator (" + operator.getText() + ").");
 			
 			if(expression.getNodeType() != type)
-				throw new CheckerException(expression.getNodeType() +" expression on line: " + expression.getLine() + " needs to be " + type + " in order to use it with the " + operator.getText() + " operator.");
+				throw new CheckerException(expression,expression.getNodeType() +" expression needs to be " + type + " in order to use it with the " + operator.getText() + " operator.");
 		}
 	}
 	
@@ -138,7 +138,7 @@ public class CheckerHelper extends ScopeHelper {
 			if(type == null)
 				type = expression.getNodeType();
 			else if(expression.getNodeType() != type)
-				throw new CheckerException(expression.getNodeType() +" expression on line: " + expression.getLine() + " expected to be " + type + " so all expressions have the same type, this is needed in order to use the " + operator.getText() + " operator.");
+				throw new CheckerException(expression,expression.getNodeType() +" expression expected to be " + type + " so all expressions have the same type, this is needed in order to use the " + operator.getText() + " operator.");
 		}
 	}
 

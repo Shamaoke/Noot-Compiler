@@ -1,0 +1,8 @@
+noot
+
+bool b1;
+int i1,i2;
+
+i1 := i2 := 2;
+
+b1 := if true then i2 else i1 fi; // Should throw exception here

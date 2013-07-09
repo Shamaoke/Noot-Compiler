@@ -1,0 +1,10 @@
+noot
+
+bool b1;
+int i1;
+char c1;
+
+i1 := 2;
+c1 := 'a';
+
+b1 := if true then c1 else i1 fi; // Should throw exception here

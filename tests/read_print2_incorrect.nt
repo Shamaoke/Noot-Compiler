@@ -1,0 +1,7 @@
+noot
+
+int i1,i2,i3;
+
+i1 := i2 := i3 := 4;
+
+print(print(i1,i2),4); // Should throw exception here

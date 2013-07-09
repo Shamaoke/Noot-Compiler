@@ -1,0 +1,6 @@
+noot
+
+{
+	const int i1 := 3;
+	int i2; // Should throw exception here
+};

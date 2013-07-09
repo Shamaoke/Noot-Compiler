@@ -1,0 +1,5 @@
+noot
+
+const int i1 := 1;
+
+read(i1); // Should throw exception here

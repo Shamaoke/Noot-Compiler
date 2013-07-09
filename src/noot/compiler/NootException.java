@@ -23,37 +23,39 @@ import org.antlr.runtime.tree.Tree;
  */
 public class NootException extends RecognitionException {
 	
-    /** The msg. */
+    /** The message you could use for printing for example. */
     private String msg;
     
     /** The Constant serialVersionUID. */
     public static final long serialVersionUID = 24162462L; // for Serializable
 
-    // Ctor which only requires the error message to be printed.
     /**
      * Instantiates a new noot exception.
+     * 
+     * Constructor which only requires the error message to be printed.
      *
-     * @param msg the msg
+     * @param message the message
      */
     public NootException(String msg) {
         super();
         this.msg = msg;
     }
 
-    // Ctor that takes a node of the AST tree (i.e. IDENTIFIER) and
-    // the error message to build a more informative error message.
     /**
      * Instantiates a new noot exception.
+     * 
+     * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
+     * the error message to build a more informative error message.
      *
      * @param tree the tree
      * @param msg the msg
      */
     public NootException(Tree tree, String msg) {
         super();
-        this.msg = tree.getText() +
-                " (" + tree.getLine() +
-                ":" + tree.getCharPositionInLine() +
-                ") " + msg;
+        this.msg = "" + tree.getText() +
+                "[line:" + tree.getLine() +
+                " char:" + tree.getCharPositionInLine() +
+                "] :: " + msg;
     }
 
     /* (non-Javadoc)

@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-08 20:49:35
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Checker.g 2013-07-09 11:11:53
 
     package noot.compiler;
     import noot.ast.*;
@@ -1209,7 +1209,7 @@ public class Checker extends TreeParser {
 					          checkerHelper.linkToDeclaration( (IdentifierNode) id );
 					          
 					          if(((IdentifierNode) id).getDeclarationNode().isConstant())
-					              throw new CheckerException("Reassigning a constant on line: " + te.getLine() + " this is not allowed.");
+					              throw new CheckerException(te,"Trying to reassign constant, this is not allowed.");
 					          
 					          List<Node> nodes = asList(id,e1);
 					          checkerHelper.checkExpressionsForEqualType(nodes,te);
@@ -1249,7 +1249,7 @@ public class Checker extends TreeParser {
 							              identifiers.add( (IdentifierNode) id );
 							              
 							              if(((IdentifierNode) id).getDeclarationNode().isConstant())
-							                throw new CheckerException("Reading a constant on line: " + te.getLine() + " this is not allowed.");
+							                throw new CheckerException(te,"Trying to read constant, this is not allowed.");
 							            
 							}
 							break;
@@ -1327,7 +1327,7 @@ public class Checker extends TreeParser {
 					          for(Node argumentNode : expressions)
 					          {
 					            if(argumentNode.getNodeType() == Node.NodeType.VOID)
-					              throw new CheckerException("Expression on line: " + argumentNode.getLine() + " is a void expression, this is not allowed as an argument of print.");
+					              throw new CheckerException(argumentNode,"Print argument is a void expression, this is not allowed.");
 					          } 
 					          
 					          node = te;
@@ -1398,7 +1398,7 @@ public class Checker extends TreeParser {
 					              Node lastCommand = commands.get(commands.size() - 1);
 					              
 					              if(lastCommand instanceof DeclarationNode)
-					                throw new CheckerException("Command on line:" + lastCommand.getLine() + " is a declaration, this is not allowed, the last command in a compound expression needs to be a statement.");
+					                throw new CheckerException(lastCommand,"Last command in compound expression is a declaration, this is not allowed.");
 					              
 					              ((TypeAdoptedNode) te).setTypeDefiningChild(lastCommand);
 					              ((TypeAdoptedNode) te).addValuePropagatingChild(lastCommand);

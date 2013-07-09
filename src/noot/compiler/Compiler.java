@@ -16,6 +16,7 @@
 package noot.compiler;
 
 import java.io.*;
+
 import TAM.*;
 
 import noot.ast.DOTNodeAdaptor;
@@ -45,10 +46,13 @@ public class Compiler {
 	 * @param verboseLogging the verbose logging
 	 * @param generateASTVisualization the generate ast visualization
 	 * @return true, if successful
+	 * @throws RecognitionException 
+	 * @throws IOException 
 	 */
-	public boolean compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization)
+	public boolean compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization) throws RecognitionException, IOException
 	{
 		this.verboseLogging = verboseLogging;
+		PrintStream standardPrintStream = System.out;
 
 		if(!inputFile.endsWith(".nt"))
 		{
@@ -60,95 +64,72 @@ public class Compiler {
 		String DOTFile = inputFile.substring(0, inputFile.length()-3) + ".dot";
 		String TAMFile = inputFile.substring(0, inputFile.length()-3) + ".tam";
 
-		try {
+		printForVerboseLoging("- Lexical analysis");
 
-			PrintStream standardPrintStream = System.out;
+		FileInputStream fileInputStream = new FileInputStream(inputFile);
+		NootLexer lexer = new NootLexer(new ANTLRInputStream(fileInputStream));
 
-			printForVerboseLoging("- Lexical analysis");
+		printForVerboseLoging("- Parsing");
 
-			FileInputStream fileInputStream = new FileInputStream(inputFile);
-			NootLexer lexer = new NootLexer(new ANTLRInputStream(fileInputStream));
+		NootParser parser = new NootParser(new CommonTokenStream(lexer));
+		parser.setTreeAdaptor(new NodeAdaptor());
+		CommonTree tree = (CommonTree) parser.program().getTree();
 
-			printForVerboseLoging("- Parsing");
+		printForVerboseLoging("- Contextual analysis");
+		Checker checker = new Checker(new CommonTreeNodeStream(tree));
+		checker.program();
 
-			NootParser parser = new NootParser(new CommonTokenStream(lexer));
-			parser.setTreeAdaptor(new NodeAdaptor());
-			CommonTree tree = (CommonTree) parser.program().getTree();
-
-			printForVerboseLoging("- Contextual analysis");
-			Checker checker = new Checker(new CommonTreeNodeStream(tree));
-			checker.program();
-
-			if(generateASTVisualization)
-			{
-				printForVerboseLoging("- Generating AST visualization (" + DOTFile + ")");
-
-				DOTTreeGenerator gen = new DOTTreeGenerator();
-				StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
-
-				PrintStream DOTOut = new PrintStream(new File(DOTFile));
-				DOTOut.println(st);
-				DOTOut.close();
-			}
-
-			printForVerboseLoging("- Intermediate code generation (" + intermediateFile + ")");
-
-			Generator generator = new Generator(new BufferedTreeNodeStream(tree));
-			PrintStream writeIntermediateFile = new PrintStream(new File(intermediateFile));
-
-			System.setOut(writeIntermediateFile);
-			generator.program();
-			System.setOut(standardPrintStream); 
-			writeIntermediateFile.close();
-
-			printForVerboseLoging("- Assemble to TAM (" + TAMFile + ")");
-
-			InputStream readIntermediateFile = new FileInputStream(intermediateFile);
-			OutputStream writeTAMFile = new FileOutputStream(TAMFile);
-
-			Assembler.assemble(readIntermediateFile, writeTAMFile);
-			readIntermediateFile.close();
-			writeTAMFile.close();
-
-			if(runAfterwards)
-			{
-				printForVerboseLoging("- Reading TAM");
-
-				Interpreter.loadObjectProgram(TAMFile);
-
-				printForVerboseLoging("- Execution Test");
-
-				Interpreter.interpretProgram();
-
-				if(verboseLogging)
-				{
-					printForVerboseLoging("- Execution Results");
-					Interpreter.showStatus();
-				}
-			}
-
-			return true;
-
-		} 
-		catch (RecognitionException e)
+		if(generateASTVisualization)
 		{
-			System.err.println("** COMPILE ERROR **");
-			System.err.println(e.getMessage());
-			System.err.println("Please resolve the issue and recompile.");
+			printForVerboseLoging("- Generating AST visualization (" + DOTFile + ")");
 
-			if(verboseLogging) e.printStackTrace();
+			DOTTreeGenerator gen = new DOTTreeGenerator();
+			StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
 
-			return false;
+			PrintStream DOTOut = new PrintStream(new File(DOTFile));
+			DOTOut.println(st);
+			DOTOut.close();
 		}
-		catch (Exception e)
+
+		printForVerboseLoging("- Intermediate code generation (" + intermediateFile + ")");
+
+		Generator generator = new Generator(new BufferedTreeNodeStream(tree));
+		PrintStream writeIntermediateFile = new PrintStream(new File(intermediateFile));
+
+		System.setOut(writeIntermediateFile);
+		generator.program();
+		System.setOut(standardPrintStream); 
+		writeIntermediateFile.close();
+
+		printForVerboseLoging("- Assemble to TAM (" + TAMFile + ")");
+
+		InputStream readIntermediateFile = new FileInputStream(intermediateFile);
+		OutputStream writeTAMFile = new FileOutputStream(TAMFile);
+
+		Assembler.assemble(readIntermediateFile, writeTAMFile);
+		readIntermediateFile.close();
+		writeTAMFile.close();
+
+		if(runAfterwards)
 		{
-			System.err.print("** UNEXPECTED ERROR **");
-			System.err.println(e.getMessage());
+			printForVerboseLoging("- Reading TAM");
 
-			if(verboseLogging) e.printStackTrace();
+			Interpreter.loadObjectProgram(TAMFile);
 
-			return false;
+			printForVerboseLoging("- Execution Test");
+
+			Interpreter.interpretProgram();
+
+			if(verboseLogging)
+			{
+				printForVerboseLoging("- Execution Results");
+				Interpreter.showStatus();
+			}
 		}
+
+		return true;
+
+
 	}
 
 	/**
@@ -169,10 +150,29 @@ public class Compiler {
 	public static void main(String[] args)
 	{
 		Compiler c = new Compiler();
-
+		boolean verboseLogging = true;
+		
 		if (args.length == 1)
 		{
-			c.compile(args[0], true, true, true);
+			try 
+			{
+				c.compile(args[0], true, verboseLogging, true);
+			} 
+			catch (RecognitionException e)
+			{
+				System.err.println("** COMPILE ERROR **");
+				System.err.println(e.getMessage());
+				System.err.println("Please resolve the issue and recompile.");
+
+				if(verboseLogging) e.printStackTrace();
+			}
+			catch (IOException e)
+			{
+				System.err.print("** IO ERROR **");
+				System.err.println(e.getMessage());
+
+				if(verboseLogging) e.printStackTrace();
+			}
 		}
 		else
 		{

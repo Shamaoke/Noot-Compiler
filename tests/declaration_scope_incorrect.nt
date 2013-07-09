@@ -1,0 +1,16 @@
+noot
+
+int i1;
+
+{
+	int i1,i2;	
+	i1 := i2 := 1;
+};
+
+int i2;
+
+{
+	int i1;
+	bool i1; // Should throw exception here
+	i1 := true;
+};
