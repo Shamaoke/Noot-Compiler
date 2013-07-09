@@ -82,9 +82,53 @@ tokens {
   import noot.ast.*;
 }
 
-@header {
+@lexer::rulecatch { 
+    catch (RecognitionException e) { 
+        throw e; 
+    } 
+}
+
+@parser::header {
   package noot.compiler;
   import noot.ast.*;
+}
+
+@parser::rulecatch { 
+    catch (RecognitionException e) { 
+        throw e; 
+    } 
+}
+
+@parser::members {
+
+  @Override
+/*
+ * This method is overrided because Antlr
+ * does not have a convenient way to halt the program on 
+ * a recoverable Lexer or Parser error. We will use the
+ * LexerParserException which extends RuntimeException to
+ * halt the program without the adding a throws to the
+ * deleration.
+ */
+  public void reportError(RecognitionException e) {
+      throw new LexerParserException("Parsing error on line: " + e.line);
+  }
+}
+
+@lexer::members {
+
+  @Override
+/*
+ * This method is overrided because Antlr
+ * does not have a convenient way to halt the program on 
+ * a recoverable Lexer or Parser error. We will use the
+ * LexerParserException which extends RuntimeException to
+ * halt the program without the adding a throws to the
+ * deleration.
+ */
+  public void reportError(RecognitionException e) { 
+      throw new LexerParserException("Lexing error on line: " + e.line);
+  }
 }
 
 program

@@ -24,6 +24,7 @@ import java.io.PrintStream;
 import java.nio.charset.Charset;
 
 import noot.compiler.Compiler;
+import noot.compiler.LexerParserException;
 
 import org.antlr.runtime.RecognitionException;
 import org.junit.Test;
@@ -194,6 +195,33 @@ public class CompilerTest {
 	}
 
 	/**
+	 * Test incorrect spelling.
+	 */
+	@Test
+	public void testIncorrectSpelling1()
+	{
+		assertTrue(testFile("tests/incorrect_spelling1.nt","Lexing error on line: 3\n",null));
+	}
+	
+	/**
+	 * Test incorrect spelling.
+	 */
+	@Test
+	public void testIncorrectSpelling2()
+	{
+		assertTrue(testFile("tests/incorrect_spelling2.nt","Parsing error on line: 17\n",null));
+	}
+	
+	/**
+	 * Test incorrect at runtime.
+	 */
+	@Test
+	public void testIncorrectRuntime()
+	{
+		assertTrue(testFile("tests/runtime_incorrect.nt","Program has failed due to division by zero.\n",null));
+	}
+	
+	/**
 	 * Help function to be used by the test methods. It calls the compiler and
 	 * intercepts the print to the system out. Than it compares the actual result
 	 * of the program with the expected result.
@@ -241,6 +269,10 @@ public class CompilerTest {
 		catch (IOException e)
 		{
 			return false;
+		}
+		catch (LexerParserException e)
+		{
+			System.out.println(e.getMessage());
 		}
 		finally
 		{

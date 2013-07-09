@@ -26,8 +26,6 @@ options {
     import noot.assembly.*;
 }
 
-// Alter code generation so catch-clauses get replaced with this action. 
-// This disables ANTLR error handling: CheckerExceptions are propagated upwards.
 @rulecatch { 
     catch (RecognitionException e) { 
         throw e; 

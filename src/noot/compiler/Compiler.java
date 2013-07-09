@@ -125,6 +125,10 @@ public class Compiler {
 				printForVerboseLoging("- Execution Results");
 				Interpreter.showStatus();
 			}
+			else
+			{
+				Interpreter.showFailedStatus();
+			}
 		}
 
 		return true;
@@ -151,7 +155,7 @@ public class Compiler {
 	{
 		Compiler c = new Compiler();
 		boolean verboseLogging = true;
-		
+
 		if (args.length == 1)
 		{
 			try 
@@ -172,6 +176,11 @@ public class Compiler {
 				System.err.println(e.getMessage());
 
 				if(verboseLogging) e.printStackTrace();
+			}
+			catch (LexerParserException e)
+			{
+				System.err.print("** LEXER/PARSER ERROR **");
+				System.err.println(e.getMessage());
 			}
 		}
 		else

@@ -1,0 +1,3 @@
+noot
+
+const int i1 = 1; // Should crash here
