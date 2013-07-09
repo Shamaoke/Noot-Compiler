@@ -162,7 +162,7 @@ variable_declaration_extention
     ;
     
 expression // All statements are expressions, so we don't have a seperate statement grammar rule
-    :   (IDENTIFIER BECOMES) => assignment
+    :   (IDENTIFIER BECOMES) => assignment // Local extended lookahead because of dubble match on IDENTIFIER
     |   while_statement
     |   expression_level6
     ;
@@ -248,7 +248,7 @@ NUMBER
     ;
     
 CHARACTER
-    :  APOSTROPHE LETTER APOSTROPHE
+    :  APOSTROPHE (LETTER | DIGIT | SYMBOL) APOSTROPHE
     ;
 
 COMMENT
@@ -264,4 +264,9 @@ WS
 fragment DIGIT  :   ('0'..'9') ;
 fragment LOWER  :   ('a'..'z') ;
 fragment UPPER  :   ('A'..'Z') ;
+fragment SYMBOL :   '+' | '-' | '*' | '/' | '%' | '&' | '<' | '.'
+                |   '=' | '!' | ':' | '>' | ';' | ',' | '~' | '('
+                |   ')' | '[' | ']' | '{' | '}' | '_' | '|' | '\'' 
+                |   '\"' | '#' | '$' | '@' | '^' | '?'
+                ;
 fragment LETTER :   LOWER | UPPER ;

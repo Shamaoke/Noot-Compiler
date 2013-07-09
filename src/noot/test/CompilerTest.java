@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -285,7 +286,21 @@ public class CompilerTest {
 	 */
 	private boolean testFile(String inputFile, String expectedOutput, String input)
 	{
-		System.out.println("\n** Testing " + inputFile + " **");
+		System.out.println("\n\n\n*** Testing " + inputFile + " ***");
+		
+		// For printing the content of the file
+		try {
+			FileReader fileReader = new FileReader (inputFile);
+			int inChar;
+			while ( (inChar = fileReader.read()) != -1 ) {
+			   System.out.printf ("%c", inChar);
+			}
+			fileReader.close();
+			
+			System.out.println("");
+		} catch (IOException e1) {
+			return false;
+		}
 		
 		PrintStream standardOut = System.out;
 		InputStream standardIn = System.in;
@@ -329,12 +344,12 @@ public class CompilerTest {
 			System.setOut(standardOut);
 		}
 		
-		System.out.println("- Expected Result -");
+		System.out.println("* Expected Result *");
 		System.out.print(expectedOutput);
 
 		String resultString = new String(resultOut.toByteArray(), Charset.defaultCharset());
 
-		System.out.println("- Result -");
+		System.out.println("* Result *");
 		System.out.print(resultString);
 
 		return expectedOutput.equals(resultString);

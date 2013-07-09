@@ -80,11 +80,8 @@ declaration_extention
     ;
     
 expression returns [Node node = null;] // All statements are expressions because they all have a return value
-    :   op=operand
-        {
-          node = op;
-        }
-    |   ^(te=PLUS e1=expression e2=expression?)
+    :   op=operand { node = op; }
+    |   ^(te=PLUS expression e2=expression?)
         { 
           if(!te.shouldIgnoreReturnValue())
           {
@@ -93,7 +90,7 @@ expression returns [Node node = null;] // All statements are expressions because
           }  
           node = te;
         }
-    |   ^(te=MINUS e1=expression e2=expression?)
+    |   ^(te=MINUS expression e2=expression?)
         {
           if(!te.shouldIgnoreReturnValue())
           {
@@ -109,72 +106,71 @@ expression returns [Node node = null;] // All statements are expressions because
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","not","Boolean negation"));
           node = te;
         }
-    |   ^(te=MULTIPLY e1=expression e2=expression)
+    |   ^(te=MULTIPLY expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","mult","Multiplication"));
           node = te;
         }
-    |   ^(te=DEVIDE e1=expression e2=expression)
+    |   ^(te=DEVIDE expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","div","Devide"));
           node = te;
         }
-    |   ^(te=MODULO e1=expression e2=expression)
+    |   ^(te=MODULO expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","mod","Modulo"));
           node = te;
         }
-    |   ^(te=LESSEQ e1=expression e2=expression)
+    |   ^(te=LESSEQ expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","le","Less than or equal"));
           node = te;
         }
-    |   ^(te=MOREEQ e1=expression e2=expression)
+    |   ^(te=MOREEQ expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","ge","Greater than or equal"));
           node = te;
         }
-    |   ^(te=NEQ e1=expression e2=expression)
+    |   ^(te=NEQ expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1"));
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","ne","Not equal"));
           node = te;
         }
-    |   ^(te=EQ e1=expression e2=expression)
+    |   ^(te=EQ expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1" ));
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","eq"));
           node = te;
         }
-    |   ^(te=LESS e1=expression e2=expression)
+    |   ^(te=LESS expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","lt","Less than"));
           node = te;
         }
-    |   ^(te=MORE e1=expression e2=expression)
+    |   ^(te=MORE expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","gt","Greater than"));
           node = te;
         }
-    |   ^(te=AND e1=expression e2=expression)
+    |   ^(te=AND expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","and"));
           node = te;
         }
-    |   ^(te=OR e1=expression e2=expression)
+    |   ^(te=OR expression expression)
         {
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("CALL","or"));
           node = te;
         }
-    |   ^(te=BECOMES id=IDENTIFIER e1=expression) // Assign statement
+    |   ^(te=BECOMES id=IDENTIFIER expression) // Assign statement
         {
           gh.currentBlock().push(new Instruction("STORE",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Assigning "+id.getText()));
           if(!te.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
           node = te;
         }
-    |   ^(te=READ (id=IDENTIFIER
+    |   ^(te=READ (id=IDENTIFIER // Read statement
             {
-                
               gh.currentBlock().push(new Instruction("LOADA",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading address of "+id.getText()));
               
               if(id.getNodeType() == Node.NodeType.CHAR)
@@ -194,15 +190,10 @@ expression returns [Node node = null;] // All statements are expressions because
               }
               
               if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue())
-              {
                 gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
-              }
             }
-          )+) // Read statement
-        { 
-          node = te;
-        }
-    |   ^(te=PRINT 
+          )+) { node = te; }
+    |   ^(te=PRINT // Print statement
             {
               MemoryLocation temp = null;
               if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue()) temp = gh.allocHelperRegister();
@@ -247,24 +238,16 @@ expression returns [Node node = null;] // All statements are expressions because
               if(temp != null)
               {
                 gh.currentBlock().push(new Instruction("LOAD",gh.addressOfMemoryLocation(temp),1,"Loading temp"));
-                //gh.deallocHelperRegister(temp);
               }
             }
-          )+) // Print statement
-        {
-          
-          node = te;
-        }
-    |   ^(te=LCURLY (dc=declaration | en=expression)+)
-        {
-            node = te;
-        } // Compound expression
-    |   ^(te=IF e1=expression
+          )+) { node = te; }
+    |   ^(te=LCURLY (declaration | expression)+) { node = te; } // Compound expression
+    |   ^(te=IF expression // Conditional statement
             {
               Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
               gh.currentBlock().push(jumpIfInstruction);
             }
-          e2=expression
+          expression
             {
                 Instruction jumpInstruction = new Instruction("JUMP","notset","Else (jump over else)");
                 
@@ -275,25 +258,25 @@ expression returns [Node node = null;] // All statements are expressions because
                 
                 jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
             }
-          e3=expression?)
+          expression?)
         {
           
           gh.pushBlock(); // if block is empty it won't push
           jumpInstruction.setArgument(gh.currentBlock().jumpLabel());
           
           node = te;
-        } // Conditional statement
-    |   ^(te=WHILE
-          { 
-            gh.pushBlock();
-            String loopBackTo = gh.currentBlock().jumpLabel();
-          }
-        expression
-          {
-            Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"While (jump out)");
-            gh.currentBlock().push(jumpIfInstruction);
-          }
-        expression)
+        } 
+    |   ^(te=WHILE // Loop statement
+            { 
+              gh.pushBlock();
+              String loopBackTo = gh.currentBlock().jumpLabel();
+            }
+          expression
+            {
+              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"While (jump out)");
+              gh.currentBlock().push(jumpIfInstruction);
+            }
+          expression)
         {
           gh.currentBlock().push(new Instruction("JUMP",loopBackTo,"Looping back"));
           
@@ -301,7 +284,7 @@ expression returns [Node node = null;] // All statements are expressions because
           jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
           
           node = te;
-        } // Loop statement
+        } 
     ;
     
 operand returns [Node node = null;]

@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-09 11:30:23
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Generator.g 2013-07-09 21:36:47
 
     package noot.compiler;
     import noot.ast.*;
@@ -19,8 +19,8 @@ public class Generator extends TreeParser {
 		"DO", "ELSE", "EQ", "FALSE", "FI", "IDENTIFIER", "IF", "INT", "LCURLY", 
 		"LESS", "LESSEQ", "LETTER", "LOWER", "LPAREN", "MINUS", "MODULO", "MORE", 
 		"MOREEQ", "MULTIPLY", "NEGATION", "NEQ", "NOOT", "NUMBER", "OD", "OR", 
-		"PLUS", "PRINT", "RCURLY", "READ", "RPAREN", "SEMICOLON", "THEN", "TRUE", 
-		"UPPER", "WHILE", "WS"
+		"PLUS", "PRINT", "RCURLY", "READ", "RPAREN", "SEMICOLON", "SYMBOL", "THEN", 
+		"TRUE", "UPPER", "WHILE", "WS"
 	};
 	public static final int EOF=-1;
 	public static final int AND=4;
@@ -65,11 +65,12 @@ public class Generator extends TreeParser {
 	public static final int READ=43;
 	public static final int RPAREN=44;
 	public static final int SEMICOLON=45;
-	public static final int THEN=46;
-	public static final int TRUE=47;
-	public static final int UPPER=48;
-	public static final int WHILE=49;
-	public static final int WS=50;
+	public static final int SYMBOL=46;
+	public static final int THEN=47;
+	public static final int TRUE=48;
+	public static final int UPPER=49;
+	public static final int WHILE=50;
+	public static final int WS=51;
 
 	// delegates
 	public TreeParser[] getDelegates() {
@@ -512,7 +513,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "expression"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:82:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS e1= expression (e2= expression )? ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:82:1: expression returns [Node node = null;] : (op= operand | ^(te= PLUS expression (e2= expression )? ) | ^(te= MINUS expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY expression expression ) | ^(te= DEVIDE expression expression ) | ^(te= MODULO expression expression ) | ^(te= LESSEQ expression expression ) | ^(te= MOREEQ expression expression ) | ^(te= NEQ expression expression ) | ^(te= EQ expression expression ) | ^(te= LESS expression expression ) | ^(te= MORE expression expression ) | ^(te= AND expression expression ) | ^(te= OR expression expression ) | ^(te= BECOMES id= IDENTIFIER expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY ( declaration | expression )+ ) | ^(te= IF expression expression ( expression )? ) | ^(te= WHILE expression expression ) );
 	public final Node expression() throws RecognitionException {
 		Node node =  null;;
 
@@ -520,13 +521,11 @@ public class Generator extends TreeParser {
 		Node te=null;
 		Node id=null;
 		Node op =null;
-		Node e1 =null;
 		Node e2 =null;
 		Node en =null;
-		Node e3 =null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:83:5: (op= operand | ^(te= PLUS e1= expression (e2= expression )? ) | ^(te= MINUS e1= expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY e1= expression e2= expression ) | ^(te= DEVIDE e1= expression e2= expression ) | ^(te= MODULO e1= expression e2= expression ) | ^(te= LESSEQ e1= expression e2= expression ) | ^(te= MOREEQ e1= expression e2= expression ) | ^(te= NEQ e1= expression e2= expression ) | ^(te= EQ e1= expression e2= expression ) | ^(te= LESS e1= expression e2= expression ) | ^(te= MORE e1= expression e2= expression ) | ^(te= AND e1= expression e2= expression ) | ^(te= OR e1= expression e2= expression ) | ^(te= BECOMES id= IDENTIFIER e1= expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY (dc= declaration |en= expression )+ ) | ^(te= IF e1= expression e2= expression (e3= expression )? ) | ^(te= WHILE expression expression ) )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:83:5: (op= operand | ^(te= PLUS expression (e2= expression )? ) | ^(te= MINUS expression (e2= expression )? ) | ^(te= NEGATION expression ) | ^(te= MULTIPLY expression expression ) | ^(te= DEVIDE expression expression ) | ^(te= MODULO expression expression ) | ^(te= LESSEQ expression expression ) | ^(te= MOREEQ expression expression ) | ^(te= NEQ expression expression ) | ^(te= EQ expression expression ) | ^(te= LESS expression expression ) | ^(te= MORE expression expression ) | ^(te= AND expression expression ) | ^(te= OR expression expression ) | ^(te= BECOMES id= IDENTIFIER expression ) | ^(te= READ (id= IDENTIFIER )+ ) | ^(te= PRINT (en= expression )+ ) | ^(te= LCURLY ( declaration | expression )+ ) | ^(te= IF expression expression ( expression )? ) | ^(te= WHILE expression expression ) )
 			int alt14=21;
 			switch ( input.LA(1) ) {
 			case CHARACTER:
@@ -651,21 +650,19 @@ public class Generator extends TreeParser {
 					op=operand();
 					state._fsp--;
 
-
-					          node = op;
-					        
+					 node = op; 
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:87:9: ^(te= PLUS e1= expression (e2= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:84:9: ^(te= PLUS expression (e2= expression )? )
 					{
-					te=(Node)match(input,PLUS,FOLLOW_PLUS_in_expression451); 
+					te=(Node)match(input,PLUS,FOLLOW_PLUS_in_expression443); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression455);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression445);
+					expression();
 					state._fsp--;
 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:87:35: (e2= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:84:32: (e2= expression )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==AND||LA8_0==BECOMES||LA8_0==CHARACTER||LA8_0==DEVIDE||(LA8_0 >= EQ && LA8_0 <= FALSE)||(LA8_0 >= IDENTIFIER && LA8_0 <= IF)||(LA8_0 >= LCURLY && LA8_0 <= LESSEQ)||(LA8_0 >= MINUS && LA8_0 <= NEQ)||LA8_0==NUMBER||(LA8_0 >= OR && LA8_0 <= PRINT)||LA8_0==READ||LA8_0==TRUE||LA8_0==WHILE) ) {
@@ -673,9 +670,9 @@ public class Generator extends TreeParser {
 					}
 					switch (alt8) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:87:35: e2= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:84:32: e2= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression459);
+							pushFollow(FOLLOW_expression_in_expression449);
 							e2=expression();
 							state._fsp--;
 
@@ -697,15 +694,15 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:96:9: ^(te= MINUS e1= expression (e2= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:93:9: ^(te= MINUS expression (e2= expression )? )
 					{
-					te=(Node)match(input,MINUS,FOLLOW_MINUS_in_expression484); 
+					te=(Node)match(input,MINUS,FOLLOW_MINUS_in_expression474); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression488);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression476);
+					expression();
 					state._fsp--;
 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:96:36: (e2= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:93:33: (e2= expression )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0==AND||LA9_0==BECOMES||LA9_0==CHARACTER||LA9_0==DEVIDE||(LA9_0 >= EQ && LA9_0 <= FALSE)||(LA9_0 >= IDENTIFIER && LA9_0 <= IF)||(LA9_0 >= LCURLY && LA9_0 <= LESSEQ)||(LA9_0 >= MINUS && LA9_0 <= NEQ)||LA9_0==NUMBER||(LA9_0 >= OR && LA9_0 <= PRINT)||LA9_0==READ||LA9_0==TRUE||LA9_0==WHILE) ) {
@@ -713,9 +710,9 @@ public class Generator extends TreeParser {
 					}
 					switch (alt9) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:96:36: e2= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:93:33: e2= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression492);
+							pushFollow(FOLLOW_expression_in_expression480);
 							e2=expression();
 							state._fsp--;
 
@@ -739,11 +736,11 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:107:9: ^(te= NEGATION expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:104:9: ^(te= NEGATION expression )
 					{
-					te=(Node)match(input,NEGATION,FOLLOW_NEGATION_in_expression517); 
+					te=(Node)match(input,NEGATION,FOLLOW_NEGATION_in_expression505); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression519);
+					pushFollow(FOLLOW_expression_in_expression507);
 					expression();
 					state._fsp--;
 
@@ -756,16 +753,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:112:9: ^(te= MULTIPLY e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:109:9: ^(te= MULTIPLY expression expression )
 					{
-					te=(Node)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression543); 
+					te=(Node)match(input,MULTIPLY,FOLLOW_MULTIPLY_in_expression531); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression547);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression533);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression551);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression535);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -777,16 +774,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 6 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:117:9: ^(te= DEVIDE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:114:9: ^(te= DEVIDE expression expression )
 					{
-					te=(Node)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression575); 
+					te=(Node)match(input,DEVIDE,FOLLOW_DEVIDE_in_expression559); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression579);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression561);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression583);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression563);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -798,16 +795,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 7 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:122:9: ^(te= MODULO e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:119:9: ^(te= MODULO expression expression )
 					{
-					te=(Node)match(input,MODULO,FOLLOW_MODULO_in_expression607); 
+					te=(Node)match(input,MODULO,FOLLOW_MODULO_in_expression587); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression611);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression589);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression615);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression591);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -819,16 +816,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 8 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:127:9: ^(te= LESSEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:124:9: ^(te= LESSEQ expression expression )
 					{
-					te=(Node)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression639); 
+					te=(Node)match(input,LESSEQ,FOLLOW_LESSEQ_in_expression615); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression643);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression617);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression647);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression619);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -840,16 +837,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 9 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:132:9: ^(te= MOREEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:129:9: ^(te= MOREEQ expression expression )
 					{
-					te=(Node)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression671); 
+					te=(Node)match(input,MOREEQ,FOLLOW_MOREEQ_in_expression643); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression675);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression645);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression679);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression647);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -861,16 +858,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 10 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:137:9: ^(te= NEQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:134:9: ^(te= NEQ expression expression )
 					{
-					te=(Node)match(input,NEQ,FOLLOW_NEQ_in_expression703); 
+					te=(Node)match(input,NEQ,FOLLOW_NEQ_in_expression671); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression707);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression673);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression711);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression675);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -883,16 +880,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 11 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:143:9: ^(te= EQ e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:140:9: ^(te= EQ expression expression )
 					{
-					te=(Node)match(input,EQ,FOLLOW_EQ_in_expression735); 
+					te=(Node)match(input,EQ,FOLLOW_EQ_in_expression699); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression739);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression701);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression743);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression703);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -905,16 +902,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 12 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:149:9: ^(te= LESS e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:146:9: ^(te= LESS expression expression )
 					{
-					te=(Node)match(input,LESS,FOLLOW_LESS_in_expression767); 
+					te=(Node)match(input,LESS,FOLLOW_LESS_in_expression727); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression771);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression729);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression775);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression731);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -926,16 +923,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 13 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:154:9: ^(te= MORE e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:151:9: ^(te= MORE expression expression )
 					{
-					te=(Node)match(input,MORE,FOLLOW_MORE_in_expression799); 
+					te=(Node)match(input,MORE,FOLLOW_MORE_in_expression755); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression803);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression757);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression807);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression759);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -947,16 +944,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 14 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:159:9: ^(te= AND e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:156:9: ^(te= AND expression expression )
 					{
-					te=(Node)match(input,AND,FOLLOW_AND_in_expression831); 
+					te=(Node)match(input,AND,FOLLOW_AND_in_expression783); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression835);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression785);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression839);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression787);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -968,16 +965,16 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 15 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:164:9: ^(te= OR e1= expression e2= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:161:9: ^(te= OR expression expression )
 					{
-					te=(Node)match(input,OR,FOLLOW_OR_in_expression863); 
+					te=(Node)match(input,OR,FOLLOW_OR_in_expression811); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression867);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression813);
+					expression();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expression_in_expression871);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression815);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -989,13 +986,13 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 16 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:169:9: ^(te= BECOMES id= IDENTIFIER e1= expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:166:9: ^(te= BECOMES id= IDENTIFIER expression )
 					{
-					te=(Node)match(input,BECOMES,FOLLOW_BECOMES_in_expression895); 
+					te=(Node)match(input,BECOMES,FOLLOW_BECOMES_in_expression839); 
 					match(input, Token.DOWN, null); 
-					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression899); 
-					pushFollow(FOLLOW_expression_in_expression903);
-					e1=expression();
+					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression843); 
+					pushFollow(FOLLOW_expression_in_expression845);
+					expression();
 					state._fsp--;
 
 					match(input, Token.UP, null); 
@@ -1008,11 +1005,11 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 17 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:175:9: ^(te= READ (id= IDENTIFIER )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:172:9: ^(te= READ (id= IDENTIFIER )+ )
 					{
-					te=(Node)match(input,READ,FOLLOW_READ_in_expression928); 
+					te=(Node)match(input,READ,FOLLOW_READ_in_expression870); 
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:175:19: (id= IDENTIFIER )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:172:19: (id= IDENTIFIER )+
 					int cnt10=0;
 					loop10:
 					while (true) {
@@ -1024,11 +1021,10 @@ public class Generator extends TreeParser {
 
 						switch (alt10) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:175:20: id= IDENTIFIER
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:172:20: id= IDENTIFIER
 							{
-							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression933); 
+							id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_expression875); 
 
-							                
 							              gh.currentBlock().push(new Instruction("LOADA",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading address of "+id.getText()));
 							              
 							              if(id.getNodeType() == Node.NodeType.CHAR)
@@ -1048,9 +1044,7 @@ public class Generator extends TreeParser {
 							              }
 							              
 							              if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue())
-							              {
 							                gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()+" for next expression"));
-							              }
 							            
 							}
 							break;
@@ -1065,21 +1059,19 @@ public class Generator extends TreeParser {
 
 					match(input, Token.UP, null); 
 
-					 
-					          node = te;
-					        
+					 node = te; 
 					}
 					break;
 				case 18 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:205:9: ^(te= PRINT (en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:196:9: ^(te= PRINT (en= expression )+ )
 					{
-					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression985); 
+					te=(Node)match(input,PRINT,FOLLOW_PRINT_in_expression919); 
 
 					              MemoryLocation temp = null;
 					              if(te.getChildren().size() == 1 && !te.shouldIgnoreReturnValue()) temp = gh.allocHelperRegister();
 					            
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:210:11: (en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:201:11: (en= expression )+
 					int cnt11=0;
 					loop11:
 					while (true) {
@@ -1091,9 +1083,9 @@ public class Generator extends TreeParser {
 
 						switch (alt11) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:210:12: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:201:12: en= expression
 							{
-							pushFollow(FOLLOW_expression_in_expression1015);
+							pushFollow(FOLLOW_expression_in_expression949);
 							en=expression();
 							state._fsp--;
 
@@ -1136,7 +1128,6 @@ public class Generator extends TreeParser {
 							              if(temp != null)
 							              {
 							                gh.currentBlock().push(new Instruction("LOAD",gh.addressOfMemoryLocation(temp),1,"Loading temp"));
-							                //gh.deallocHelperRegister(temp);
 							              }
 							            
 							}
@@ -1152,18 +1143,15 @@ public class Generator extends TreeParser {
 
 					match(input, Token.UP, null); 
 
-
-					          
-					          node = te;
-					        
+					 node = te; 
 					}
 					break;
 				case 19 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:258:9: ^(te= LCURLY (dc= declaration |en= expression )+ )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:244:9: ^(te= LCURLY ( declaration | expression )+ )
 					{
-					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression1067); 
+					te=(Node)match(input,LCURLY,FOLLOW_LCURLY_in_expression992); 
 					match(input, Token.DOWN, null); 
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:258:21: (dc= declaration |en= expression )+
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:244:21: ( declaration | expression )+
 					int cnt12=0;
 					loop12:
 					while (true) {
@@ -1178,19 +1166,19 @@ public class Generator extends TreeParser {
 
 						switch (alt12) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:258:22: dc= declaration
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:244:22: declaration
 							{
-							pushFollow(FOLLOW_declaration_in_expression1072);
+							pushFollow(FOLLOW_declaration_in_expression995);
 							declaration();
 							state._fsp--;
 
 							}
 							break;
 						case 2 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:258:39: en= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:244:36: expression
 							{
-							pushFollow(FOLLOW_expression_in_expression1078);
-							en=expression();
+							pushFollow(FOLLOW_expression_in_expression999);
+							expression();
 							state._fsp--;
 
 							}
@@ -1206,26 +1194,24 @@ public class Generator extends TreeParser {
 
 					match(input, Token.UP, null); 
 
-
-					            node = te;
-					        
+					 node = te; 
 					}
 					break;
 				case 20 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:262:9: ^(te= IF e1= expression e2= expression (e3= expression )? )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:245:9: ^(te= IF expression expression ( expression )? )
 					{
-					te=(Node)match(input,IF,FOLLOW_IF_in_expression1105); 
+					te=(Node)match(input,IF,FOLLOW_IF_in_expression1018); 
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1109);
-					e1=expression();
+					pushFollow(FOLLOW_expression_in_expression1020);
+					expression();
 					state._fsp--;
 
 
 					              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"If (jump to else)");
 					              gh.currentBlock().push(jumpIfInstruction);
 					            
-					pushFollow(FOLLOW_expression_in_expression1137);
-					e2=expression();
+					pushFollow(FOLLOW_expression_in_expression1047);
+					expression();
 					state._fsp--;
 
 
@@ -1238,7 +1224,7 @@ public class Generator extends TreeParser {
 					                
 					                jumpIfInstruction.setArgument(gh.currentBlock().jumpLabel());
 					            
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:13: (e3= expression )?
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:261:11: ( expression )?
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0==AND||LA13_0==BECOMES||LA13_0==CHARACTER||LA13_0==DEVIDE||(LA13_0 >= EQ && LA13_0 <= FALSE)||(LA13_0 >= IDENTIFIER && LA13_0 <= IF)||(LA13_0 >= LCURLY && LA13_0 <= LESSEQ)||(LA13_0 >= MINUS && LA13_0 <= NEQ)||LA13_0==NUMBER||(LA13_0 >= OR && LA13_0 <= PRINT)||LA13_0==READ||LA13_0==TRUE||LA13_0==WHILE) ) {
@@ -1246,10 +1232,10 @@ public class Generator extends TreeParser {
 					}
 					switch (alt13) {
 						case 1 :
-							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:278:13: e3= expression
+							// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:261:11: expression
 							{
-							pushFollow(FOLLOW_expression_in_expression1165);
-							e3=expression();
+							pushFollow(FOLLOW_expression_in_expression1073);
+							expression();
 							state._fsp--;
 
 							}
@@ -1269,23 +1255,23 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 21 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:286:9: ^(te= WHILE expression expression )
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:269:9: ^(te= WHILE expression expression )
 					{
-					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1191); 
+					te=(Node)match(input,WHILE,FOLLOW_WHILE_in_expression1099); 
 					 
-					            gh.pushBlock();
-					            String loopBackTo = gh.currentBlock().jumpLabel();
-					          
+					              gh.pushBlock();
+					              String loopBackTo = gh.currentBlock().jumpLabel();
+					            
 					match(input, Token.DOWN, null); 
-					pushFollow(FOLLOW_expression_in_expression1213);
+					pushFollow(FOLLOW_expression_in_expression1126);
 					expression();
 					state._fsp--;
 
 
-					            Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"While (jump out)");
-					            gh.currentBlock().push(jumpIfInstruction);
-					          
-					pushFollow(FOLLOW_expression_in_expression1235);
+					              Instruction jumpIfInstruction = new Instruction("JUMPIF","notset",0,"While (jump out)");
+					              gh.currentBlock().push(jumpIfInstruction);
+					            
+					pushFollow(FOLLOW_expression_in_expression1152);
 					expression();
 					state._fsp--;
 
@@ -1319,7 +1305,7 @@ public class Generator extends TreeParser {
 
 
 	// $ANTLR start "operand"
-	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:307:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
+	// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:290:1: operand returns [Node node = null;] : (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER );
 	public final Node operand() throws RecognitionException {
 		Node node =  null;;
 
@@ -1330,7 +1316,7 @@ public class Generator extends TreeParser {
 		Node c=null;
 
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:308:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:291:5: (id= IDENTIFIER |n= NUMBER |b= TRUE |b= FALSE |c= CHARACTER )
 			int alt15=5;
 			switch ( input.LA(1) ) {
 			case IDENTIFIER:
@@ -1365,9 +1351,9 @@ public class Generator extends TreeParser {
 			}
 			switch (alt15) {
 				case 1 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:308:9: id= IDENTIFIER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:291:9: id= IDENTIFIER
 					{
-					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1276); 
+					id=(Node)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_operand1193); 
 
 					          if(!id.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOAD",gh.addressOfIdentifier( (IdentifierNode)id ),1,"Loading "+id.getText()));
 					          node = id;
@@ -1375,9 +1361,9 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 2 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:313:9: n= NUMBER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:296:9: n= NUMBER
 					{
-					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1299); 
+					n=(Node)match(input,NUMBER,FOLLOW_NUMBER_in_operand1216); 
 
 					          if(!n.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL",n.getText()));
 					          node = n;
@@ -1385,9 +1371,9 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 3 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:318:9: b= TRUE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:301:9: b= TRUE
 					{
-					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1321); 
+					b=(Node)match(input,TRUE,FOLLOW_TRUE_in_operand1238); 
 
 					          if(!b.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","1","True Boolean"));
 					          node = b;
@@ -1395,9 +1381,9 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 4 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:323:9: b= FALSE
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:306:9: b= FALSE
 					{
-					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1343); 
+					b=(Node)match(input,FALSE,FOLLOW_FALSE_in_operand1260); 
 
 					          if(!b.shouldIgnoreReturnValue()) gh.currentBlock().push(new Instruction("LOADL","0","False Boolean"));
 					          node = b;
@@ -1405,9 +1391,9 @@ public class Generator extends TreeParser {
 					}
 					break;
 				case 5 :
-					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:328:9: c= CHARACTER
+					// /Users/Thijs/Development/noot/src/noot/compiler/Generator.g:311:9: c= CHARACTER
 					{
-					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1365); 
+					c=(Node)match(input,CHARACTER,FOLLOW_CHARACTER_in_operand1282); 
 
 					          if(!c.shouldIgnoreReturnValue())
 					          {
@@ -1438,84 +1424,84 @@ public class Generator extends TreeParser {
 
 
 	public static final BitSet FOLLOW_NOOT_in_program89 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_declaration_in_program92 = new BitSet(new long[]{0x00028BAFE3F623D8L});
-	public static final BitSet FOLLOW_expression_in_program96 = new BitSet(new long[]{0x00028BAFE3F623D8L});
+	public static final BitSet FOLLOW_declaration_in_program92 = new BitSet(new long[]{0x00050BAFE3F623D8L});
+	public static final BitSet FOLLOW_expression_in_program96 = new BitSet(new long[]{0x00050BAFE3F623D8L});
 	public static final BitSet FOLLOW_set_in_declaration135 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_declaration149 = new BitSet(new long[]{0x0000802000140200L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_declaration149 = new BitSet(new long[]{0x0001002000140200L});
 	public static final BitSet FOLLOW_operand_in_declaration178 = new BitSet(new long[]{0x0000000000000408L});
 	public static final BitSet FOLLOW_declaration_extention_in_declaration204 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_set_in_declaration219 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_IDENTIFIER_in_declaration233 = new BitSet(new long[]{0x0000000000000408L});
 	public static final BitSet FOLLOW_declaration_extention_in_declaration260 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_COMMA_in_declaration_extention288 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_declaration_extention292 = new BitSet(new long[]{0x0000802000140200L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_declaration_extention292 = new BitSet(new long[]{0x0001002000140200L});
 	public static final BitSet FOLLOW_operand_in_declaration_extention321 = new BitSet(new long[]{0x0000000000000408L});
 	public static final BitSet FOLLOW_declaration_extention_in_declaration_extention347 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_COMMA_in_declaration_extention362 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_IDENTIFIER_in_declaration_extention366 = new BitSet(new long[]{0x0000000000000408L});
 	public static final BitSet FOLLOW_declaration_extention_in_declaration_extention394 = new BitSet(new long[]{0x0000000000000008L});
 	public static final BitSet FOLLOW_operand_in_expression428 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_expression451 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression455 = new BitSet(new long[]{0x00028BAFE3B62258L});
-	public static final BitSet FOLLOW_expression_in_expression459 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MINUS_in_expression484 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression488 = new BitSet(new long[]{0x00028BAFE3B62258L});
-	public static final BitSet FOLLOW_expression_in_expression492 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEGATION_in_expression517 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression519 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MULTIPLY_in_expression543 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression547 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression551 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_DEVIDE_in_expression575 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression579 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression583 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MODULO_in_expression607 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression611 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression615 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LESSEQ_in_expression639 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression643 = new BitSet(new long[]{0x00028BAFE3B62250L});
+	public static final BitSet FOLLOW_PLUS_in_expression443 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression445 = new BitSet(new long[]{0x00050BAFE3B62258L});
+	public static final BitSet FOLLOW_expression_in_expression449 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MINUS_in_expression474 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression476 = new BitSet(new long[]{0x00050BAFE3B62258L});
+	public static final BitSet FOLLOW_expression_in_expression480 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_NEGATION_in_expression505 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression507 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MULTIPLY_in_expression531 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression533 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression535 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_DEVIDE_in_expression559 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression561 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression563 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MODULO_in_expression587 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression589 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression591 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LESSEQ_in_expression615 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression617 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression619 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MOREEQ_in_expression643 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression645 = new BitSet(new long[]{0x00050BAFE3B62250L});
 	public static final BitSet FOLLOW_expression_in_expression647 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MOREEQ_in_expression671 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression675 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression679 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_NEQ_in_expression703 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression707 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression711 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_EQ_in_expression735 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression739 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression743 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LESS_in_expression767 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression771 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression775 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_MORE_in_expression799 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression803 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression807 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_AND_in_expression831 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression835 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression839 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_OR_in_expression863 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression867 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression871 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_BECOMES_in_expression895 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression899 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression903 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_READ_in_expression928 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_expression933 = new BitSet(new long[]{0x0000000000100008L});
-	public static final BitSet FOLLOW_PRINT_in_expression985 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1015 = new BitSet(new long[]{0x00028BAFE3B62258L});
-	public static final BitSet FOLLOW_LCURLY_in_expression1067 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_declaration_in_expression1072 = new BitSet(new long[]{0x00028BAFE3F623D8L});
-	public static final BitSet FOLLOW_expression_in_expression1078 = new BitSet(new long[]{0x00028BAFE3F623D8L});
-	public static final BitSet FOLLOW_IF_in_expression1105 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1109 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression1137 = new BitSet(new long[]{0x00028BAFE3B62258L});
-	public static final BitSet FOLLOW_expression_in_expression1165 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WHILE_in_expression1191 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expression_in_expression1213 = new BitSet(new long[]{0x00028BAFE3B62250L});
-	public static final BitSet FOLLOW_expression_in_expression1235 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_IDENTIFIER_in_operand1276 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NUMBER_in_operand1299 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_TRUE_in_operand1321 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FALSE_in_operand1343 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHARACTER_in_operand1365 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NEQ_in_expression671 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression673 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression675 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_EQ_in_expression699 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression701 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression703 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LESS_in_expression727 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression729 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression731 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_MORE_in_expression755 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression757 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression759 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_AND_in_expression783 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression785 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression787 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_OR_in_expression811 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression813 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression815 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_BECOMES_in_expression839 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression843 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression845 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_READ_in_expression870 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_expression875 = new BitSet(new long[]{0x0000000000100008L});
+	public static final BitSet FOLLOW_PRINT_in_expression919 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression949 = new BitSet(new long[]{0x00050BAFE3B62258L});
+	public static final BitSet FOLLOW_LCURLY_in_expression992 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_declaration_in_expression995 = new BitSet(new long[]{0x00050BAFE3F623D8L});
+	public static final BitSet FOLLOW_expression_in_expression999 = new BitSet(new long[]{0x00050BAFE3F623D8L});
+	public static final BitSet FOLLOW_IF_in_expression1018 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1020 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression1047 = new BitSet(new long[]{0x00050BAFE3B62258L});
+	public static final BitSet FOLLOW_expression_in_expression1073 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WHILE_in_expression1099 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expression_in_expression1126 = new BitSet(new long[]{0x00050BAFE3B62250L});
+	public static final BitSet FOLLOW_expression_in_expression1152 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_IDENTIFIER_in_operand1193 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NUMBER_in_operand1216 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_TRUE_in_operand1238 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FALSE_in_operand1260 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHARACTER_in_operand1282 = new BitSet(new long[]{0x0000000000000002L});
 }

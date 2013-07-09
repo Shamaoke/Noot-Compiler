@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-09 13:10:07
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/compiler/Noot.g 2013-07-09 21:36:47
 
   package noot.compiler;
   import noot.ast.*;
@@ -54,11 +54,12 @@ public class NootLexer extends Lexer {
 	public static final int READ=43;
 	public static final int RPAREN=44;
 	public static final int SEMICOLON=45;
-	public static final int THEN=46;
-	public static final int TRUE=47;
-	public static final int UPPER=48;
-	public static final int WHILE=49;
-	public static final int WS=50;
+	public static final int SYMBOL=46;
+	public static final int THEN=47;
+	public static final int TRUE=48;
+	public static final int UPPER=49;
+	public static final int WHILE=50;
+	public static final int WS=51;
 
 
 	  @Override
@@ -980,13 +981,19 @@ public class NootLexer extends Lexer {
 		try {
 			int _type = CHARACTER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:251:5: ( APOSTROPHE LETTER APOSTROPHE )
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:251:8: APOSTROPHE LETTER APOSTROPHE
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:251:5: ( APOSTROPHE ( LETTER | DIGIT | SYMBOL ) APOSTROPHE )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:251:8: APOSTROPHE ( LETTER | DIGIT | SYMBOL ) APOSTROPHE
 			{
 			mAPOSTROPHE(); 
 
-			mLETTER(); 
-
+			if ( (input.LA(1) >= '!' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '_')||(input.LA(1) >= 'a' && input.LA(1) <= '~') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
 			mAPOSTROPHE(); 
 
 			}
@@ -1170,10 +1177,33 @@ public class NootLexer extends Lexer {
 	}
 	// $ANTLR end "UPPER"
 
+	// $ANTLR start "SYMBOL"
+	public final void mSYMBOL() throws RecognitionException {
+		try {
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:267:17: ( '+' | '-' | '*' | '/' | '%' | '&' | '<' | '.' | '=' | '!' | ':' | '>' | ';' | ',' | '~' | '(' | ')' | '[' | ']' | '{' | '}' | '_' | '|' | '\\'' | '\\\"' | '#' | '$' | '@' | '^' | '?' )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
+			{
+			if ( (input.LA(1) >= '!' && input.LA(1) <= '/')||(input.LA(1) >= ':' && input.LA(1) <= '@')||input.LA(1)=='['||(input.LA(1) >= ']' && input.LA(1) <= '_')||(input.LA(1) >= '{' && input.LA(1) <= '~') ) {
+				input.consume();
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
+			}
+
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "SYMBOL"
+
 	// $ANTLR start "LETTER"
 	public final void mLETTER() throws RecognitionException {
 		try {
-			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:267:17: ( LOWER | UPPER )
+			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:272:17: ( LOWER | UPPER )
 			// /Users/Thijs/Development/noot/src/noot/compiler/Noot.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1516,7 +1546,7 @@ public class NootLexer extends Lexer {
 	static final String DFA5_eofS =
 		"\150\uffff";
 	static final String DFA5_minS =
-		"\1\11\1\uffff\1\101\1\uffff\1\157\1\150\1\uffff\1\57\1\157\1\154\1\uffff"+
+		"\1\11\1\uffff\1\41\1\uffff\1\157\1\150\1\uffff\1\57\1\157\1\154\1\uffff"+
 		"\1\141\1\146\1\uffff\1\75\3\uffff\1\75\1\uffff\1\75\1\157\1\144\2\uffff"+
 		"\1\162\1\uffff\1\145\2\uffff\2\150\5\uffff\1\157\1\141\1\156\2\uffff\1"+
 		"\60\1\163\1\154\2\60\1\164\6\uffff\1\157\1\60\1\151\1\141\1\145\1\165"+
@@ -1524,7 +1554,7 @@ public class NootLexer extends Lexer {
 		"\1\156\1\144\1\156\1\145\1\154\2\60\1\164\1\60\1\145\1\uffff\1\60\1\164"+
 		"\3\60\1\145\2\uffff\1\60\1\uffff\1\60\1\uffff\1\60\3\uffff\1\60\4\uffff";
 	static final String DFA5_maxS =
-		"\1\175\1\uffff\1\172\1\uffff\2\157\1\uffff\1\57\1\157\1\154\1\uffff\1"+
+		"\1\175\1\uffff\1\176\1\uffff\2\157\1\uffff\1\57\1\157\1\154\1\uffff\1"+
 		"\151\1\156\1\uffff\1\75\3\uffff\1\75\1\uffff\1\75\1\157\1\144\2\uffff"+
 		"\1\162\1\uffff\1\145\2\uffff\1\162\1\150\5\uffff\1\157\1\141\1\156\2\uffff"+
 		"\1\172\1\163\1\154\2\172\1\164\6\uffff\1\157\1\172\1\151\1\141\1\145\1"+
@@ -1547,7 +1577,7 @@ public class NootLexer extends Lexer {
 			"\32\40\6\uffff\1\40\1\4\1\5\1\10\1\11\1\13\2\40\1\14\4\40\1\25\1\26\1"+
 			"\31\1\40\1\33\1\40\1\36\2\40\1\37\3\40\1\15\1\27\1\32",
 			"",
-			"\32\44\6\uffff\32\44",
+			"\73\44\1\uffff\3\44\1\uffff\36\44",
 			"",
 			"\1\45",
 			"\1\46\6\uffff\1\47",

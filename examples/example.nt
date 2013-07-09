@@ -1,0 +1,38 @@
+noot
+
+int a, b, c, d,l;
+char e;
+const int y := 1, x := 5;
+bool f,g,k,m;
+
+a := b := x;
+c := b + 3 * 2;
+
+read(d);
+print(d);
+
+e := 'e';
+
+f := a == 4 && b == 4 || d == 4;
+
+g := {
+		int h,i;
+		read(h,i);
+		(h > i);
+	}; // compound expression with type boolean
+
+k := if g == true then {
+		int i,j;
+		j := 5;
+		(j > i);
+	}
+else
+	false
+fi; // compound expression used with if statement
+
+m := print(k);
+
+while m == true do {
+	l := print(l + 1);
+	if l > 10 then { m := false; } fi;
+} od;
