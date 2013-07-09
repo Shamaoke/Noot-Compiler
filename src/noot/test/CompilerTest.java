@@ -25,7 +25,7 @@ import java.io.PrintStream;
 import java.nio.charset.Charset;
 
 import noot.compiler.Compiler;
-import noot.compiler.LexerParserException;
+import noot.exceptions.LexerParserException;
 
 import org.antlr.runtime.RecognitionException;
 import org.junit.Test;

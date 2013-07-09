@@ -16,6 +16,8 @@ package noot.compiler;
 
 import java.util.Stack;
 
+import noot.exceptions.NootException;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ScopeHelper.

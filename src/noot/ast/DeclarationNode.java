@@ -14,7 +14,7 @@
  */
 package noot.ast;
 
-import noot.compiler.NootParser;
+import noot.antlr.NootParser;
 
 import org.antlr.runtime.Token;
 

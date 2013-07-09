@@ -25,6 +25,7 @@ import noot.assembly.InstructionBlock;
 import noot.assembly.MemoryLocation;
 import noot.ast.DeclarationNode;
 import noot.ast.IdentifierNode;
+import noot.exceptions.GeneratorException;
 
 // TODO: Auto-generated Javadoc
 /**

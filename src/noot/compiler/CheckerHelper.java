@@ -20,6 +20,8 @@ import java.util.Stack;
 
 import noot.ast.*;
 import noot.ast.Node.NodeType;
+import noot.exceptions.CheckerException;
+import noot.exceptions.NootException;
 
 // TODO: Auto-generated Javadoc
 /**

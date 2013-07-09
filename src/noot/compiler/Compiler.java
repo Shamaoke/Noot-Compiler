@@ -19,8 +19,13 @@ import java.io.*;
 
 import TAM.*;
 
+import noot.antlr.Checker;
+import noot.antlr.Generator;
+import noot.antlr.NootLexer;
+import noot.antlr.NootParser;
 import noot.ast.DOTNodeAdaptor;
 import noot.ast.NodeAdaptor;
+import noot.exceptions.LexerParserException;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.BufferedTreeNodeStream;
