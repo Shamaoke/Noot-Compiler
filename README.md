@@ -76,3 +76,10 @@ Dot files
 -------------
 
 The generated dot files can be opened with [Graphviz](http://www.graphviz.org/).
+
+
+Credits
+-------------
+TAM is developed by David A Watt & Deryck F Brown as educational tool for their book [Programming Language Processors in Java](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/).
+
+The TAM Assembler was developed by Matthijs Bomhoff from the University of Twente.
