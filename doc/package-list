@@ -1,4 +1,5 @@
 noot.assembly
 noot.ast
 noot.compiler
+noot.exceptions
 noot.test
