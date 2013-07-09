@@ -5,9 +5,9 @@ The compiler will compile Noot to TAM (Triangle Abstract Machine) using a compil
 
 ## Usage ##
 
-To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a ```.nt``` extention. This will automaticlly generate ```.as```, ```.dot``` and ```.tam``` files. The ```.as``` you could examine the generated TAM instructions. The ```.dot``` is a visual representation of the AST. And the ```.tam``` is a file you can put into the TAM Interpreter. After compilation the program is automaticlly executed.
+To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a ```.nt``` extention. This will automaticlly generate ```.as```, ```.dot``` and ```.tam``` files. With the ```.as``` you could examine the generated TAM instructions. The ```.dot``` is a visual representation of the AST. And the ```.tam``` is a file you can put into the TAM Interpreter. After compilation the program will automaticlly be executed.
 
-To execute a compiled program again use ```java -jar TAMInterpreter.jar examples/example.tam```.
+To execute a compiled program use ```java -jar TAMInterpreter.jar examples/example.tam```.
 
 ## Code examples ##
 
@@ -25,7 +25,7 @@ read(d);
 print(d + c);
 ```
 
-Example by using compound expressions. The result of the last expression  before the closing curly bracket will fill a.
+Example with the use of compound expressions. The result of the last expression before the closing curly bracket will fill ```a```.
 
 ```
 noot
@@ -81,9 +81,21 @@ while a == true do {
 
 The generated dot files can be opened with [Graphviz](http://www.graphviz.org/).
 
-
 ## Credits ##
 
 TAM was developed by David A Watt & Deryck F Brown as educational tool for their book [Programming Language Processors in Java](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/).
 
 The TAM Assembler was developed by Matthijs Bomhoff from the University of Twente.
+
+## Lisence ##
+
+This source is subject to the BSD License.
+Please see the LICENSE file for more information.
+All other rights reserved.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) 2013 Thijs Scheepers.

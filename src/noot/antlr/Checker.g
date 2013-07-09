@@ -17,7 +17,7 @@ tree grammar Checker;
 
 options {
     tokenVocab=Noot;              // import tokens from Noot.tokens
-    ASTLabelType=Node;            // AST nodes are of type CommonTree
+    ASTLabelType=Node;            // AST nodes are of type Node
 }
 
 @header {
