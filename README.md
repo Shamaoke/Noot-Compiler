@@ -87,7 +87,7 @@ TAM was developed by David A Watt & Deryck F Brown as educational tool for their
 
 The TAM Assembler was developed by Matthijs Bomhoff from the University of Twente.
 
-## Lisence ##
+## License ##
 
 This source is subject to the BSD License.
 Please see the LICENSE file for more information.
