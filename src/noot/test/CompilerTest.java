@@ -39,6 +39,8 @@ public class CompilerTest {
 
 	/**
 	 * Test standard expressions.
+	 * 
+	 * Testing several expressions and their evaluation levels.
 	 */
 	@Test
 	public void testCorrectExpressions() {
@@ -47,6 +49,8 @@ public class CompilerTest {
 
 	/**
 	 * Test compound expressions.
+	 * 
+	 * Testing several compound expressions. Some with nested return.
 	 */
 	@Test
 	public void testCorrectCompoundExpressions() {
@@ -55,6 +59,9 @@ public class CompilerTest {
 	
 	/**
 	 * Test the read and print statements.
+	 * 
+	 * Testing several constructions of correct read and print statments.
+	 * Also in combination with the assign statements.
 	 */
 	@Test
 	public void testCorrectReadPrint() {
@@ -63,6 +70,8 @@ public class CompilerTest {
 
 	/**
 	 * Test assignments.
+	 * 
+	 * Testing several assign statements.
 	 */
 	@Test
 	public void testCorrectAssignments() {
@@ -72,6 +81,8 @@ public class CompilerTest {
 
 	/**
 	 * Test if and else statements.
+	 * 
+	 * Testing several if and else statement variants. With and without return and assign.
 	 */
 	@Test
 	public void testCorrectIfElse() {
@@ -80,6 +91,8 @@ public class CompilerTest {
 
 	/**
 	 * Test while statement.
+	 * 
+	 * Testing a simple while loop.
 	 */
 	@Test
 	public void testCorrectWhile() {
@@ -88,6 +101,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect assignment1.
+	 * 
+	 * Tries to assign with the wrong type. This should fail.
 	 */
 	@Test
 	public void testIncorrectAssignment1()
@@ -97,6 +112,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect assignment2.
+	 * 
+	 * Tries to assign a constant. This should fail.
 	 */
 	@Test
 	public void testIncorrectAssignment2()
@@ -106,6 +123,9 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect compound expressions.
+	 * 
+	 * Declaration typed as last argument in a compound expression
+	 * this is not allowed and the program should fail.
 	 */
 	@Test
 	public void testIncorrectCompoundExpressions()
@@ -115,6 +135,9 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect declaration scope.
+	 * 
+	 * Tries to declare an identifier that has already
+	 * been declared in the current scope.
 	 */
 	@Test
 	public void testIncorrectDeclarationScope()
@@ -124,6 +147,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect identifier.
+	 * 
+	 * Tries to assign an identifier that has not been declared.
 	 */
 	@Test
 	public void testIncorrectIdentifier()
@@ -133,6 +158,9 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect if else1.
+	 * 
+	 * Tries to assign an if statement with int as return to a boolean.
+	 * This should fail.
 	 */
 	@Test
 	public void testIncorrectIfElse1()
@@ -142,6 +170,10 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect if else2.
+	 * 
+	 * Tries to assign a variable with the result of an if statement with different
+	 * types. The else has an int as type and the if has an char as type. Since the
+	 * types are different the statement results as void and a void can't be assigned.
 	 */
 	@Test
 	public void testIncorrectIfElse2()
@@ -151,6 +183,10 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect if else3.
+	 * 
+	 * Tries to assign a variable with the result of an if statement without else.
+	 * This should not work since the type of an if statement
+	 * without else is void.
 	 */
 	@Test
 	public void testIncorrectIfElse3()
@@ -160,6 +196,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect read print1.
+	 * 
+	 * Tries to read a constant, this should not be allowed.
 	 */
 	@Test
 	public void testIncorrectReadPrint1()
@@ -169,6 +207,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect read print2.
+	 * 
+	 * Tries to enter a void argument into print. This should not be allowed.
 	 */
 	@Test
 	public void testIncorrectReadPrint2()
@@ -178,6 +218,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect type1.
+	 * 
+	 * Tries to enter an int into the && operator. This should not be allowed since the && operator should only except bools.
 	 */
 	@Test
 	public void testIncorrectType1()
@@ -187,6 +229,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect type2.
+	 * 
+	 * Tries to enter a bool into the > operator. This should not be allowed since the > operator should only except ints;
 	 */
 	@Test
 	public void testIncorrectType2()
@@ -196,6 +240,8 @@ public class CompilerTest {
 
 	/**
 	 * Test incorrect spelling.
+	 * 
+	 * This will generate a lexing error because a token is not spelled correctly (=).
 	 */
 	@Test
 	public void testIncorrectSpelling1()
@@ -205,6 +251,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect spelling.
+	 * 
+	 * This will generate a parsing error because an token is missing, namely the } token.
 	 */
 	@Test
 	public void testIncorrectSpelling2()
@@ -214,6 +262,8 @@ public class CompilerTest {
 	
 	/**
 	 * Test incorrect at runtime.
+	 * 
+	 * This will halt the program because of devide by zero.
 	 */
 	@Test
 	public void testIncorrectRuntime()
