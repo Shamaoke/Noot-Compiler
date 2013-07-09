@@ -6,7 +6,9 @@ Noot Language and Compiler. This is me experimenting with programming language d
 Usage
 -------------
 
-To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a .nt extention.
+To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a ```.nt``` extention. This will automaticlly generate ```.as```, ```.dot``` and ```.tam``` files. The ```.as``` you could examine the generated TAM instructions. The ```.dot``` is a visual representation of the AST. And the ```.tam``` is a file you can put into the TAM Interpreter. After compilation the program is automaticlly executed.
+
+To execute a compiled program again use ```java -jar TAMInterpreter.jar examples/example.tam```.
 
 Code examples
 -------------
@@ -85,6 +87,6 @@ The generated dot files can be opened with [Graphviz](http://www.graphviz.org/).
 
 Credits
 -------------
-TAM is developed by David A Watt & Deryck F Brown as educational tool for their book [Programming Language Processors in Java](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/).
+TAM was developed by David A Watt & Deryck F Brown as educational tool for their book [Programming Language Processors in Java](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/).
 
 The TAM Assembler was developed by Matthijs Bomhoff from the University of Twente.
