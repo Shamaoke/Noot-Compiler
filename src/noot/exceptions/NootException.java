@@ -17,7 +17,6 @@ package noot.exceptions;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NootException.
  */
@@ -38,7 +37,7 @@ public class NootException extends RecognitionException {
      */
     public NootException(String message) {
         super();
-        this.msg = msg;
+        this.msg = message;
     }
 
     /**
@@ -50,7 +49,8 @@ public class NootException extends RecognitionException {
      * @param tree the tree
      * @param message the message
      */
-    public NootException(Tree tree, String message) {
+    public NootException(Tree tree, String message)
+    {
         super();
         this.msg = "" + tree.getText() +
                 "[line:" + tree.getLine() +
@@ -62,7 +62,8 @@ public class NootException extends RecognitionException {
      * @see java.lang.Throwable#getMessage()
      */
     @Override
-    public String getMessage() {
+    public String getMessage()
+    {
         return this.msg;
     }
 }

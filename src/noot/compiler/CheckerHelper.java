@@ -102,7 +102,7 @@ public class CheckerHelper extends ScopeHelper {
 	 *
 	 * @param expressions the expressions
 	 * @param type the type
-	 * @param operator the operator
+	 * @param operator the operator, only here for logging and context information when exceptions are thrown
 	 * @throws CheckerException the checker exception
 	 */
 	public void checkExpressionsForType(List<Node> expressions, NodeType type, Node operator) throws CheckerException
@@ -123,7 +123,7 @@ public class CheckerHelper extends ScopeHelper {
 	 * Check expressions for equal type.
 	 *
 	 * @param expressions the expressions
-	 * @param operator the operator
+	 * @param operator the operator, only here for logging and context information when exceptions are thrown
 	 * @throws CheckerException the checker exception
 	 */
 	public void checkExpressionsForEqualType(List<Node> expressions, Node operator) throws CheckerException

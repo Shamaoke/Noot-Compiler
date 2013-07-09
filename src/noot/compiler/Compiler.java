@@ -44,12 +44,12 @@ public class Compiler {
 	private boolean verboseLogging = false;
 
 	/**
-	 * Compile.
+	 * Compile the input file
 	 *
 	 * @param inputFile the input file
-	 * @param runAfterwards the run afterwards
-	 * @param verboseLogging the verbose logging
-	 * @param generateASTVisualization the generate ast visualization
+	 * @param runAfterwards enter true if you want to run afterwards the program
+	 * @param verboseLogging enter true if you want verbose logging
+	 * @param generateASTVisualization enter true if you want an AST visualization to be generated
 	 * @return true, if successful
 	 * @throws RecognitionException 
 	 * @throws IOException 

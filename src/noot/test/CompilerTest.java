@@ -30,7 +30,6 @@ import noot.exceptions.LexerParserException;
 import org.antlr.runtime.RecognitionException;
 import org.junit.Test;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CompilerTest.
  *
