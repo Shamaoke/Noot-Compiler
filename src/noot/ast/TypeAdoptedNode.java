@@ -16,9 +16,18 @@ package noot.ast;
 
 import org.antlr.runtime.Token;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TypeAdoptedNode.
+ * 
+ * The Type of a TypeAdoptedNode is defined by one of its children
+ * it is important that if you use a TypeAdoptedNode that you use the
+ * setTypeDefiningChild method if you want the type to be defined
+ * by the type of a child.
+ * 
+ * This could helpful with CompoundExpessions and IfStatements because
+ * the type is dependent on a specific child.
+ * 
+ * Default type without a defined child is VOID.
  */
 public class TypeAdoptedNode extends Node {
 	
@@ -33,14 +42,14 @@ public class TypeAdoptedNode extends Node {
 		/**
 		 * Instantiates a new type adopted node.
 		 *
-		 * @param t the t
+		 * @param t the Token
 		 */
 		public TypeAdoptedNode(Token t) { super(t); }
 		
 		/**
 		 * Instantiates a new type adopted node.
 		 *
-		 * @param n the n
+		 * @param n the TypeAdoptedNode
 		 */
 		public TypeAdoptedNode(TypeAdoptedNode n) { super(n); }
 		
@@ -55,18 +64,15 @@ public class TypeAdoptedNode extends Node {
 		public NodeType getNodeType()
 		{
 			if(typeDefiningChild != null)
-			{
 				return typeDefiningChild.getNodeType();
-			}
 			else
-			{
 				return NodeType.VOID;
-			}
 		}
 		
 		/**
 		 * Gets the type defining child.
 		 *
+		 * @ensure this.childern.contains(result) && result.getNodeType() == this.getNodeType()
 		 * @return the type defining child
 		 */
 		public Node getTypeDefiningChild()
@@ -76,7 +82,9 @@ public class TypeAdoptedNode extends Node {
 		
 		/**
 		 * Sets the type defining child.
-		 *
+		 * 
+		 * @require this.childern.contains(typeDefiningChild) && typeDefiningChild != null
+		 * @ensure getTypeDefiningChild() == typeDefiningChild && getTypeDefiningChild().getNodeType() == this.getNodeType()
 		 * @param typeDefiningChild the new type defining child
 		 */
 		public void setTypeDefiningChild(Node typeDefiningChild)

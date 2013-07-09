@@ -16,26 +16,34 @@ package noot.assembly;
 
 import java.util.Stack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InstructionBlock.
+ * 
+ * Stack to represent an instruction block. An instruction block
+ * is a list of instructions starting with an instruction with a jump label.
+ * 
+ * The fist Instruction pushed to the block will get the instruction
+ * block label assigned to it.
  */
 public class InstructionBlock extends Stack<Instruction> {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	
+	/** serialVersionUID used for serialization */
+	private static final long serialVersionUID = 9189059759052574955L;
 	
 	/** The label identifier. */
 	public int labelIdentifier = -1;
 	
 	/**
 	 * Instantiates a new instruction block.
+	 * 
+	 * The labelIdentifier should be unique, this is will be
+	 * used to jump to this instruction block.
 	 *
-	 * @param aLabel the a label
+	 * @param labelIdentifier the a labelIdentifier
 	 */
-	public InstructionBlock(int aLabel)
+	public InstructionBlock(int labelIdentifier)
 	{
-		this.labelIdentifier = aLabel;
+		this.labelIdentifier = labelIdentifier;
 	}
 	
 	/* (non-Javadoc)
@@ -43,28 +51,20 @@ public class InstructionBlock extends Stack<Instruction> {
 	 */
 	public Instruction push(Instruction instruction)
 	{
-		if(this.size() == 0) instruction.setLabel(this.referenceLabel());
+		if(this.size() == 0) instruction.setLabel("L" + labelIdentifier);
 		return super.push(instruction);
 	}
 	
 	/**
-	 * Reference label.
-	 *
-	 * @return the string
-	 */
-	public String referenceLabel()
-	{
-		return "L" + Integer.toString(labelIdentifier);
-	}
-	
-	/**
 	 * Jump label.
-	 *
-	 * @return the string
+	 * 
+	 * Get label for use with the JUMP instruction.
+	 * An example output could be "L1[CB]".
+	 * 
+	 * @return a string containing the labelIdentifier with needed extra additions
 	 */
 	public String jumpLabel() // without argument = false
 	{
-
 		return "L" + Integer.toString(labelIdentifier) + "[CB]";
 	}
 	

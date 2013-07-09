@@ -14,9 +14,22 @@
  */
 package noot.assembly;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Instruction.
+ * 
+ * Instruction objects can be seen as string templates to be used
+ * for output as assembly for Noot.
+ * 
+ * The toString() method has been adjusted to print a nice representation.
+ * 
+ * An example representation is:
+ * "L0:     STORE(1)     5[SB]     ; Assigning a"
+ * 
+ * Here is "L0" the label
+ * "STORE" the instruction
+ * "1" the lengthSpecifier
+ * "5[SB]" the argument
+ * "; Assigning a" the comment
  */
 public class Instruction {
 
@@ -25,82 +38,142 @@ public class Instruction {
 
 	/** The argument. */
 	private String argument = null;
-	
+
 	/** The length specifier. */
 	private int lengthSpecifier = -1;
-	
+
 	/** The label. */
 	private String label = null;
-	
+
 	/** The comment. */
 	private String comment = null;
+
+	/**
+	 * Instantiates a new instruction.
+	 *
+	 * @param instruction the instruction
+	 */
+	public Instruction(String instruction)
+	{
+		this.instruction = instruction;
+	}
+
+	/**
+	 * Instantiates a new instruction.
+	 *
+	 * @param instruction the instruction
+	 * @param argument the argument
+	 */
+	public Instruction(String instruction, String argument)
+	{
+		this.instruction = instruction;
+		this.argument = argument;
+	}
+
+	/**
+	 * Instantiates a new instruction.
+	 *
+	 * @param instruction the instruction
+	 * @param argument the argument
+	 * @param lengthSpecifier the length specifier
+	 */
+	public Instruction(String instruction, String argument, int lengthSpecifier)
+	{
+		this.instruction = instruction;
+		this.argument = argument;
+		this.lengthSpecifier = lengthSpecifier;
+	}
+
+	/**
+	 * Instantiates a new instruction.
+	 *
+	 * @param instruction the instruction
+	 * @param argument the argument
+	 * @param comment the comment
+	 */
+	public Instruction(String instruction, String argument, String comment)
+	{
+		this.instruction = instruction;
+		this.argument = argument;
+		this.comment = comment;
+	}
+
+	/**
+	 * Instantiates a new instruction.
+	 *
+	 * @param instruction the instruction
+	 * @param argument the argument
+	 * @param lengthSpecifier the length specifier
+	 * @param comment the comment
+	 */
+	public Instruction(String instruction, String argument, int lengthSpecifier, String comment)
+	{
+		this.instruction = instruction;
+		this.argument = argument;
+		this.lengthSpecifier = lengthSpecifier;
+		this.comment = comment;
+	}
+
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
+	public String getLabel()
+	{
+		return label;
+	}
+
+	/**
+	 * Sets the label.
+	 *
+	 * @param label the new label
+	 */
+	public void setLabel(String label)
+	{
+		this.label = label;
+	}
+
+	/**
+	 * Sets the comment.
+	 *
+	 * @param comment the new comment
+	 */
+	public void setComment(String comment)
+	{
+		this.comment = comment;
+	}
+
+	/**
+	 * Sets the argument.
+	 *
+	 * @param argument the new argument
+	 */
+	public void setArgument(String argument)
+	{
+		this.argument = argument;
+	}
+
+	/**
+	 * Gets the instruction.
+	 *
+	 * @return the instruction
+	 */
+	public String getInstruction()
+	{
+		return instruction;
+	}
+
+	/**
+	 * Gets the argument.
+	 *
+	 * @return the argument
+	 */
+	public String getArgument()
+	{
+		return argument;
+	}
 	
-	/**
-	 * Instantiates a new instruction.
-	 *
-	 * @param aInstruction the a instruction
-	 */
-	public Instruction(String aInstruction)
-	{
-		this.instruction = aInstruction;
-	}
-
-	/**
-	 * Instantiates a new instruction.
-	 *
-	 * @param aInstruction the a instruction
-	 * @param aArgument the a argument
-	 */
-	public Instruction(String aInstruction, String aArgument)
-	{
-		this.instruction = aInstruction;
-		this.argument = aArgument;
-	}
-
-	/**
-	 * Instantiates a new instruction.
-	 *
-	 * @param aInstruction the a instruction
-	 * @param aArgument the a argument
-	 * @param aLengthSpecifier the a length specifier
-	 */
-	public Instruction(String aInstruction, String aArgument, int aLengthSpecifier)
-	{
-		this.instruction = aInstruction;
-		this.argument = aArgument;
-		this.lengthSpecifier = aLengthSpecifier;
-	}
-
-	/**
-	 * Instantiates a new instruction.
-	 *
-	 * @param aInstruction the a instruction
-	 * @param aArgument the a argument
-	 * @param aComment the a comment
-	 */
-	public Instruction(String aInstruction, String aArgument, String aComment)
-	{
-		this.instruction = aInstruction;
-		this.argument = aArgument;
-		this.comment = aComment;
-	}
-
-	/**
-	 * Instantiates a new instruction.
-	 *
-	 * @param aInstruction the a instruction
-	 * @param aArgument the a argument
-	 * @param aLengthSpecifier the a length specifier
-	 * @param aComment the a comment
-	 */
-	public Instruction(String aInstruction, String aArgument, int aLengthSpecifier, String aComment)
-	{
-		this.instruction = aInstruction;
-		this.argument = aArgument;
-		this.lengthSpecifier = aLengthSpecifier;
-		this.comment = aComment;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -109,32 +182,32 @@ public class Instruction {
 		String result = "";
 
 		if(label != null) result = result + label.toUpperCase() + ": ";
-		
-		int spacesToAdd = 8 - result.length();
+
+		int spacesToAdd = 8 - result.length(); // To print nice indentation
 		while(spacesToAdd > 0) 
 		{
 			result = result + " ";
 			spacesToAdd--;
 		}
-		
+
 		result = result + instruction;
-		
+
 		if(lengthSpecifier > -1) result = result + "("+ lengthSpecifier + ")";
-		
+
 		if(argument != null)
 		{
-			spacesToAdd = 20 - result.length();
+			spacesToAdd = 20 - result.length(); // To print nice indentation
 			while(spacesToAdd > 0) 
 			{
 				result = result + " ";
 				spacesToAdd--;
 			}
-				result = result + " " + argument;
+			result = result + " " + argument;
 		}
-		
+
 		if(comment != null)
 		{
-			spacesToAdd = 30 - result.length();
+			spacesToAdd = 30 - result.length(); // To print nice indentation
 			while(spacesToAdd > 0) 
 			{
 				result = result + " ";
@@ -145,59 +218,5 @@ public class Instruction {
 		}
 
 		return result + "\n";
-	}
-	
-	/**
-	 * Gets the label.
-	 *
-	 * @return the label
-	 */
-	public String getLabel() {
-		return label;
-	}
-
-	/**
-	 * Sets the label.
-	 *
-	 * @param label the new label
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	/**
-	 * Sets the comment.
-	 *
-	 * @param comment the new comment
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
-	/**
-	 * Sets the argument.
-	 *
-	 * @param argument the new argument
-	 */
-	public void setArgument(String argument) {
-		this.argument = argument;
-	}
-	
-	/**
-	 * Gets the instruction.
-	 *
-	 * @return the instruction
-	 */
-	public String getInstruction() {
-		return instruction;
-	}
-
-	/**
-	 * Gets the argument.
-	 *
-	 * @return the argument
-	 */
-	public String getArgument() {
-		return argument;
 	}
 }

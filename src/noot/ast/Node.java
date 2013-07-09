@@ -22,6 +22,10 @@ import org.antlr.runtime.tree.CommonTree;
 
 /**
  * The Class Node.
+ * 
+ * This subclass of CommonTree is used to check for the contextual constrains
+ * of the Noot language. Furthermore it is used to annotate the AST with important
+ * information such as type information and if the Node yields a return value.
  */
 public class Node extends CommonTree {
 
@@ -85,6 +89,9 @@ public class Node extends CommonTree {
 
 	/**
 	 * Should ignore return value.
+	 * 
+	 * This method will be used in the code generator to check
+	 * if this node yields a return value.
 	 *
 	 * @return true, if the return value of this node should be ignored
 	 */
@@ -95,6 +102,13 @@ public class Node extends CommonTree {
 
 	/**
 	 * Sets the ignore return value.
+	 * 
+	 * Set this value to true if the node should not yield a return value
+	 * the default behavior is that it does.
+	 * 
+	 * This will be propagated through all the ValuePropagatingChildren.
+	 * 
+	 * This important for code generation.
 	 *
 	 * @param ignoreReturnValue the new ignore return value
 	 */
@@ -108,6 +122,11 @@ public class Node extends CommonTree {
 
 	/**
 	 * Adds the value propagating child.
+	 * 
+	 * If setIgnoreReturnValue() is called on this Node it will be
+	 * propagated through all the ValuePropagatingChildren. This
+	 * is needed to support value returning in nested CompoundExpressions
+	 * for example.
 	 *
 	 * @require ValuePropagatingChild != null
 	 * @param ValuePropagatingChild the value propagating child
@@ -122,6 +141,11 @@ public class Node extends CommonTree {
 
 	/**
 	 * Adds the value propagating children.
+	 * 
+	 * If setIgnoreReturnValue() is called on this Node it will be
+	 * propagated through all the ValuePropagatingChildren. This
+	 * is needed to support value returning in nested CompoundExpressions
+	 * for example.
 	 * 
 	 * @require list != null
 	 * @param list the list

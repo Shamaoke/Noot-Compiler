@@ -16,9 +16,12 @@ package noot.assembly;
 
 import noot.ast.DeclarationNode;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MemoryLocation.
+ * 
+ * This will represent a register or memory address. To be used with
+ * or without DeclarationNode. Without DeclaratioNode should only be
+ * used for helper memory location used by the code generator.
  */
 public class MemoryLocation {
 
@@ -26,35 +29,28 @@ public class MemoryLocation {
 	private DeclarationNode declaration;
 	
 	/**
-	 * Instantiates a new memory location.
+	 * Instantiates a new memory location for a helper.
 	 */
 	public MemoryLocation() {}
 	
 	/**
-	 * Instantiates a new memory location.
+	 * Instantiates a new memory location for a declaration.
 	 *
 	 * @param declaration the declaration
 	 */
 	public MemoryLocation(DeclarationNode declaration)
 	{
-		this.setDeclaration(declaration);
+		this.declaration = declaration;
 	}
 
 	/**
-	 * Gets the declaration.
+	 * Gets the declaration if it is set.
 	 *
 	 * @return the declaration
 	 */
-	public DeclarationNode getDeclaration() {
+	public DeclarationNode getDeclaration()
+	{
 		return declaration;
 	}
 
-	/**
-	 * Sets the declaration.
-	 *
-	 * @param declaration the new declaration
-	 */
-	public void setDeclaration(DeclarationNode declaration) {
-		this.declaration = declaration;
-	}
 }
