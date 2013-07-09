@@ -90,7 +90,7 @@ The TAM Assembler was developed by Matthijs Bomhoff from the University of Twent
 ## Lisence ##
 
 This source is subject to the BSD License.
-Please see the ```LICENSE``` file for more information.
+Please see the LICENSE file for more information.
 
 All other rights reserved.
 
