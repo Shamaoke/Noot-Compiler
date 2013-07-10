@@ -38,9 +38,9 @@ public class NootException extends RecognitionException {
 	 *
 	 * @param message the message
 	 */
-	public NootException(String message) {
+	public NootException(String msg) {
 		super();
-		this.msg = message;
+		this.msg = msg;
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class NootException extends RecognitionException {
 	 * @param tree the tree
 	 * @param message the message
 	 */
-	public NootException(Tree tree, String message)
+	public NootException(Tree tree, String msg)
 	{
 		super();
 		this.msg = "" + tree.getText() +

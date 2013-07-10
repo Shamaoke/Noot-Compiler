@@ -1,9 +1,9 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/antlr/Generator.g 2013-07-10 00:04:51
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/antlr/Generator.g 2013-07-10 09:21:59
 
     package noot.antlr;
     import noot.ast.*;
     import noot.assembly.*;
-    import noot.compiler.GeneratorHelper;
+    import noot.antlr.helpers.GeneratorHelper;
     import noot.exceptions.GeneratorException;
 
 

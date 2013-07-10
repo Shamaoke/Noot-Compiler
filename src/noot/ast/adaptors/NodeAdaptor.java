@@ -12,8 +12,10 @@
  * PARTICULAR PURPOSE.
  * 
  */
-package noot.ast;
+package noot.ast.adaptors;
 
+
+import noot.ast.Node;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTreeAdaptor;

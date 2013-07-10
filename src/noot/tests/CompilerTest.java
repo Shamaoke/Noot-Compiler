@@ -12,7 +12,7 @@
  * PARTICULAR PURPOSE.
  * 
  */
-package noot.test;
+package noot.tests;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
 
-import noot.compiler.Compiler;
+import noot.Compiler;
 import noot.exceptions.LexerParserException;
 
 import org.antlr.runtime.RecognitionException;

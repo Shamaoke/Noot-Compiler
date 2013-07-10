@@ -12,7 +12,7 @@
  * PARTICULAR PURPOSE.
  * 
  */
-package noot.ast;
+package noot.ast.adaptors;
 
 /**
  * The Class DOTNodeAdaptor.

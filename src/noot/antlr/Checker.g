@@ -24,7 +24,7 @@ options {
     package noot.antlr;
     import noot.ast.*;
     import static java.util.Arrays.asList;
-    import noot.compiler.CheckerHelper;
+    import noot.antlr.helpers.CheckerHelper;
     import noot.exceptions.CheckerException;
 }
 

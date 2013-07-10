@@ -1,9 +1,9 @@
-// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/antlr/Checker.g 2013-07-10 00:04:44
+// $ANTLR 3.5 /Users/Thijs/Development/noot/src/noot/antlr/Checker.g 2013-07-10 09:26:12
 
     package noot.antlr;
     import noot.ast.*;
     import static java.util.Arrays.asList;
-    import noot.compiler.CheckerHelper;
+    import noot.antlr.helpers.CheckerHelper;
     import noot.exceptions.CheckerException;
 
 

@@ -24,7 +24,7 @@ options {
     package noot.antlr;
     import noot.ast.*;
     import noot.assembly.*;
-    import noot.compiler.GeneratorHelper;
+    import noot.antlr.helpers.GeneratorHelper;
     import noot.exceptions.GeneratorException;
 }
 

@@ -12,7 +12,7 @@
  * PARTICULAR PURPOSE.
  * 
  */
-package noot.compiler;
+package noot.antlr.helpers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
