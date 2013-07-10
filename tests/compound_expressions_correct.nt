@@ -1,19 +1,14 @@
 noot
 
-// This test should not yield any errors
-// The output should be 6 lines containing a true, 2, true, true, false, b, a
-
 int i1, i2, i3;
 bool b1;
 char c1;
-
-// Testing compound expressions
 
 i1 := 1;
 i2 := 2;
 i3 := 3;
 
-print({
+print({ // Testing compound expressions
 	const int i1 := 3;
 	int i2;
 	i2 := 5;
@@ -21,18 +16,18 @@ print({
 		const int i3 := 2;
 		(i1 + i3 == i2);
 	};
-},i2); // true, 2
+},i2); // Should print true, 2
 
 b1 := false;
 
 print({
 	const bool b1 := true;
-	print(b1); // true
-},b1); // true, false
+	print(b1); // Should print true
+},b1); // Should print true, false
 
 c1 := 'a';
 
 print({
 	char c1;
 	c1 := 'b';
-},c1); // b, a
+},c1); // Should print b, a

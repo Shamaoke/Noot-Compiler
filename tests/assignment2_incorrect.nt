@@ -2,4 +2,4 @@ noot
 
 const int i1 := 1;
 
-i1 := 1; // Should throw exception here
+i1 := 1; // Should throw exception here because a constant can't be redeclared

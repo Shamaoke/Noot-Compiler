@@ -7,4 +7,4 @@ char c1;
 i1 := 2;
 c1 := 'a';
 
-b1 := if true then c1 else i1 fi; // Should throw exception here
+b1 := if true then c1 else i1 fi; // Should throw exception here because if statement has return type void where it tries to assign a bool

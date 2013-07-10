@@ -5,4 +5,4 @@ int i1,i2;
 
 i1 := i2 := 2;
 
-b1 := if true then i2 else i1 fi; // Should throw exception here
+b1 := if true then i2 else i1 fi; // Should throw exception here because the if statement has a return type of int where it tries to assign a bool

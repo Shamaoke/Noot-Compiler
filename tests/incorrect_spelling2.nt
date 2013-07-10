@@ -14,4 +14,4 @@ print({
 		const int i3 := 2;
 		(i1 + i3 == i2);
 	};
-,i2); // Should crash here
+,i2); // Should crash here because } is missing (Parsing error)

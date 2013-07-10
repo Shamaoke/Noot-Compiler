@@ -96,7 +96,7 @@ public class CompilerTest {
 	 */
 	@Test
 	public void testCorrectWhile() {
-		assertTrue(testFile("tests/while_correct.nt","2\n3\n4\n",null));
+		assertTrue(testFile("tests/while_correct.nt","2\n3\n4\n2\n3\n4\n",null));
 	}
 	
 	/**

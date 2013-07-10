@@ -11,6 +11,6 @@ int i2;
 
 {
 	int i1;
-	bool i1; // Should throw exception here
+	bool i1; // Should throw exception here because trying to redeclare in current scope
 	i1 := true;
 };

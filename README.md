@@ -9,6 +9,12 @@ To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. 
 
 To execute a compiled program use ```java -jar TAMInterpreter.jar examples/example.tam```.
 
+## Compilation ##
+
+To compile the Noot compiler use the following command: ```javac -classpath lib/antlr-3.5-complete.jar -d bin src/noot/*.java src/TAM/*.java src/noot/antlr/*.java src/noot/antlr/helpers/*.java src/noot/ast/*.java src/noot/ast/adaptors/*.java src/noot/assembly/*.java src/noot/exceptions/*.java```
+
+This will not include the Tests.
+
 ## Code examples ##
 
 Simple read, calculate and print example:
@@ -80,6 +86,12 @@ while a == true do {
 ## .dot files ##
 
 The generated dot files can be opened with [Graphviz](http://www.graphviz.org/).
+
+## Tests ##
+
+The in- and output of the JUnit tests can be found in tests/_Results.txt.
+
+To run the tests you should open the project in Eclipse and run CompilerTest with JUnit.
 
 ## Credits ##
 

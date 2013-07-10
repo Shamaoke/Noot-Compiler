@@ -1,8 +1,5 @@
 noot
 
-// This test should not yield any errors
-// The output should be 6 lines containing true
-
 int i1, i2;
 bool b1;
 char c1, c2;
@@ -15,20 +12,20 @@ const char cc1 := 'c';
 
 // Testing expressions
 
-print(+16 + 2 * -8 == 0); // true
+print(+16 + 2 * -8 == 0); // Should print true
 
 i1 := 1;
 i2 := 2;
 
-print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6); // true
-print(i1 < i2 && ic1 <= ic2); // true
-print(ic1 * ic2 > i2 - ic1); // true
+print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6); // Should print true
+print(i1 < i2 && ic1 <= ic2); // Should print true
+print(ic1 * ic2 > i2 - ic1); // Should print true
 
 c1 := 'a';
 c2 := 'a';
 
-print(c1 == c2 && (cc1 != 'b' || !false)); // true
+print(c1 == c2 && (cc1 != 'b' || !false)); // Should print true
 
 b1 := true;
 
-print(!false && b1 == bc1 || true != false);
+print(!false && b1 == bc1 || true != false); // Should print true

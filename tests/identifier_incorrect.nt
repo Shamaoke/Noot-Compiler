@@ -7,4 +7,4 @@ int i1;
 	i1 := i2 := 1;
 };
 
-print(i2); // Should throw exception here
+print(i2); // Should throw exception here because identifier has not been declared in current scope

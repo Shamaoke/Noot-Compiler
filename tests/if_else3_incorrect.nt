@@ -5,4 +5,4 @@ int i1;
 
 i1 := 2;
 
-b1 := if true then i1 fi; // Should throw exception here
+b1 := if true then i1 fi; // Should throw exception here because if statement has return type void where it tries to assign a bool

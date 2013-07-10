@@ -1,7 +1,7 @@
 noot
 
 // This test should not yield any errors
-// The output should be 3 lines containing 2,3,4
+// The output should be 6 lines containing 2,3,4,2,3,4
 
 int i1, i2;
 bool b1;
@@ -9,9 +9,19 @@ bool b1;
 // Testing while statements
 
 b1 := true;
+i1 := 1;
 
 while b1 == true do {
 	i1 := i1 + 1;
+	if i1 >= 4 then { b1 := false; } fi;
+	print(i1);
+} od; // 2,3,4
+
+b1 := true;
+i1 := 1;
+
+while { int i3; i3 := 1; b1 == true; } do { // testing scoping
+	i1 := i1 + i3;
 	if i1 >= 4 then { b1 := false; } fi;
 	print(i1);
 } od; // 2,3,4

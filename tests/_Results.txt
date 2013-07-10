@@ -1,0 +1,522 @@
+*** Testing tests/expressions_correct.nt ***
+noot
+
+int i1, i2;
+bool b1;
+char c1, c2;
+
+// Testing constant assignments
+
+const int ic1 := 1, ic2 := 2;
+const bool bc1 := true;
+const char cc1 := 'c';
+
+// Testing expressions
+
+print(+16 + 2 * -8 == 0); // Should print true
+
+i1 := 1;
+i2 := 2;
+
+print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6); // Should print true
+print(i1 < i2 && ic1 <= ic2); // Should print true
+print(ic1 * ic2 > i2 - ic1); // Should print true
+
+c1 := 'a';
+c2 := 'a';
+
+print(c1 == c2 && (cc1 != 'b' || !false)); // Should print true
+
+b1 := true;
+
+print(!false && b1 == bc1 || true != false); // Should print true
+
+* Expected Result *
+true
+true
+true
+true
+true
+true
+* Result *
+true
+true
+true
+true
+true
+true
+
+
+
+*** Testing tests/compound_expressions_correct.nt ***
+noot
+
+int i1, i2, i3;
+bool b1;
+char c1;
+
+i1 := 1;
+i2 := 2;
+i3 := 3;
+
+print({ // Testing compound expressions
+	const int i1 := 3;
+	int i2;
+	i2 := 5;
+	{
+		const int i3 := 2;
+		(i1 + i3 == i2);
+	};
+},i2); // Should print true, 2
+
+b1 := false;
+
+print({
+	const bool b1 := true;
+	print(b1); // Should print true
+},b1); // Should print true, false
+
+c1 := 'a';
+
+print({
+	char c1;
+	c1 := 'b';
+},c1); // Should print b, a
+
+* Expected Result *
+true
+2
+true
+true
+false
+b
+a
+* Result *
+true
+2
+true
+true
+false
+b
+a
+
+
+
+*** Testing tests/read_print_correct.nt ***
+noot
+
+// This test should not yield any errors
+// The output should be 11 lines where the last four are true, 0, true, true
+
+int i1, i2, i3;
+bool b1,b2;
+char c1;
+
+// Testing read and print assignments
+
+read(i1,i2); // input 1, 2
+print(i1,i2); // 1, 2
+i3 := read(i1); // input 3
+print(i3,i1); // 3, 3
+
+read(b1,c1); // input 1, c
+b2 := print(b1); // true
+print(b2,c1); // true c
+
+print(12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6, +16 + 2 * -8); // true, 0
+b1 := print(+16 + 2 * -8 == 0); // true
+print(b1); // true
+
+* Expected Result *
+Enter integer: Enter integer: 1
+2
+Enter integer: 3
+3
+Enter boolean (0/1): Enter character: true
+true
+c
+true
+0
+true
+true
+* Result *
+Enter integer: Enter integer: 1
+2
+Enter integer: 3
+3
+Enter boolean (0/1): Enter character: true
+true
+c
+true
+0
+true
+true
+
+
+
+*** Testing tests/assignment_correct.nt ***
+noot
+
+int i1, i2;
+bool b1;
+char c1;
+
+i1 := i2 := +16 + 2 * -8; // 0
+b1 := 12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6; // true
+c1 := 'z'; // z
+
+print(i1); // Should print 0
+print(i2); // Should print 0
+print(b1); // Should print true
+print(c1); // Should print z
+
+* Expected Result *
+0
+0
+true
+z
+* Result *
+0
+0
+true
+z
+
+
+
+*** Testing tests/if_else_correct.nt ***
+noot
+
+// This test should not yield any errors
+// The output should be 5 lines containing a 2, 2, b, a, 1
+
+int i1, i2, i3;
+bool b1;
+char c1;
+
+// Testing if statements
+
+i1 := 1;
+i2 := 2;
+i3 := if { // Scoping rules
+	int i1;
+	i1 := i2;
+	(i1 == i2);
+} then { print(i1); } else { print(0); } fi;
+
+// same return type so will return int, 2
+
+print(i3); // 2
+
+c1 := 'a';
+
+if false then print(c1) fi; // void return type, nothing
+
+if true then print('b') fi; // void return type, b
+
+if false then { print(i1); } else { print(c1); } fi; // void return type because of different types in expr1 and expr2, a
+
+if { if false then false else true fi; } then { print(i1); } else { print(0); } fi; // 1
+
+* Expected Result *
+2
+2
+b
+a
+1
+* Result *
+2
+2
+b
+a
+1
+
+
+
+*** Testing tests/while_correct.nt ***
+noot
+
+// This test should not yield any errors
+// The output should be 6 lines containing 2,3,4,2,3,4
+
+int i1, i2;
+bool b1;
+
+// Testing while statements
+
+b1 := true;
+i1 := 1;
+
+while b1 == true do {
+	i1 := i1 + 1;
+	if i1 >= 4 then { b1 := false; } fi;
+	print(i1);
+} od; // 2,3,4
+
+b1 := true;
+i1 := 1;
+
+while { int i3; i3 := 1; b1 == true; } do { // testing scoping
+	i1 := i1 + i3;
+	if i1 >= 4 then { b1 := false; } fi;
+	print(i1);
+} od; // 2,3,4
+
+* Expected Result *
+2
+3
+4
+2
+3
+4
+* Result *
+2
+3
+4
+2
+3
+4
+
+
+
+*** Testing tests/assignment1_incorrect.nt ***
+noot
+
+int i1;
+
+i1 := true; // Should throw exception here
+
+* Expected Result *
+true[line:5 char:6] :: BOOL expression expected to be INT so all expressions have the same type, this is needed in order to use the := operator.
+* Result *
+true[line:5 char:6] :: BOOL expression expected to be INT so all expressions have the same type, this is needed in order to use the := operator.
+
+
+
+*** Testing tests/assignment2_incorrect.nt ***
+noot
+
+const int i1 := 1;
+
+i1 := 1; // Should throw exception here because a constant can't be redeclared
+
+* Expected Result *
+:=[line:5 char:3] :: Trying to reassign constant, this is not allowed.
+* Result *
+:=[line:5 char:3] :: Trying to reassign constant, this is not allowed.
+
+
+
+*** Testing tests/compound_expressions_incorrect.nt ***
+noot
+
+{
+	const int i1 := 3;
+	int i2; // Should throw exception here because the last command in a compound expression cant be a declaration
+};
+* Expected Result *
+int[line:5 char:1] :: Last command in compound expression is a declaration, this is not allowed.
+* Result *
+int[line:5 char:1] :: Last command in compound expression is a declaration, this is not allowed.
+
+
+
+*** Testing tests/declaration_scope_incorrect.nt ***
+noot
+
+int i1;
+
+{
+	int i1,i2;	
+	i1 := i2 := 1;
+};
+
+int i2;
+
+{
+	int i1;
+	bool i1; // Should throw exception here because trying to redeclare in current scope
+	i1 := true;
+};
+
+* Expected Result *
+i1[line:14 char:6] :: i1 has already been declared in current scope.
+* Result *
+i1[line:14 char:6] :: i1 has already been declared in current scope.
+
+
+
+*** Testing tests/identifier_incorrect.nt ***
+noot
+
+int i1;
+
+{
+	int i1,i2;	
+	i1 := i2 := 1;
+};
+
+print(i2); // Should throw exception here because identifier has not been declared in current scope
+
+* Expected Result *
+i2[line:10 char:6] :: i2 has not been declared.
+* Result *
+i2[line:10 char:6] :: i2 has not been declared.
+
+
+
+*** Testing tests/if_else1_incorrect.nt ***
+noot
+
+bool b1;
+int i1,i2;
+
+i1 := i2 := 2;
+
+b1 := if true then i2 else i1 fi; // Should throw exception here because the if statement has a return type of int where it tries to assign a bool
+
+* Expected Result *
+if[line:8 char:6] :: INT expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+* Result *
+if[line:8 char:6] :: INT expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+
+
+
+*** Testing tests/if_else2_incorrect.nt ***
+noot
+
+bool b1;
+int i1;
+char c1;
+
+i1 := 2;
+c1 := 'a';
+
+b1 := if true then c1 else i1 fi; // Should throw exception here because if statement has return type void where it tries to assign a bool
+
+* Expected Result *
+if[line:10 char:6] :: VOID expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+* Result *
+if[line:10 char:6] :: VOID expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+
+
+
+*** Testing tests/if_else3_incorrect.nt ***
+noot
+
+bool b1;
+int i1;
+
+i1 := 2;
+
+b1 := if true then i1 fi; // Should throw exception here because if statement has return type void where it tries to assign a bool
+
+* Expected Result *
+if[line:8 char:6] :: VOID expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+* Result *
+if[line:8 char:6] :: VOID expression expected to be BOOL so all expressions have the same type, this is needed in order to use the := operator.
+
+
+
+*** Testing tests/read_print1_incorrect.nt ***
+noot
+
+const int i1 := 1;
+
+read(i1); // Should throw exception here, can't read into a constant
+
+* Expected Result *
+read[line:5 char:0] :: Trying to read constant, this is not allowed.
+* Result *
+read[line:5 char:0] :: Trying to read constant, this is not allowed.
+
+
+
+*** Testing tests/read_print2_incorrect.nt ***
+noot
+
+int i1,i2,i3;
+
+i1 := i2 := i3 := 4;
+
+print(print(i1,i2),4); // Should throw exception here, print statement does not accept void expressions
+
+* Expected Result *
+print[line:7 char:6] :: Print argument is a void expression, this is not allowed.
+* Result *
+print[line:7 char:6] :: Print argument is a void expression, this is not allowed.
+
+
+
+*** Testing tests/specific_type1_incorrect.nt ***
+noot
+
+print(true && 1); // Should throw exception here because 1 does not work with && operator
+
+* Expected Result *
+1[line:3 char:14] :: INT expression needs to be BOOL in order to use it with the && operator.
+* Result *
+1[line:3 char:14] :: INT expression needs to be BOOL in order to use it with the && operator.
+
+
+
+*** Testing tests/specific_type2_incorrect.nt ***
+noot
+
+print(true > 1); // Should throw exception here because true does not work with > operator
+
+* Expected Result *
+true[line:3 char:6] :: BOOL expression needs to be INT in order to use it with the > operator.
+* Result *
+true[line:3 char:6] :: BOOL expression needs to be INT in order to use it with the > operator.
+
+
+
+*** Testing tests/incorrect_spelling1.nt ***
+noot
+
+const int i1 = 1; // Should crash here because = should be := (Lexical error)
+
+* Expected Result *
+Lexing error on line: 3
+* Result *
+Lexing error on line: 3
+
+
+
+*** Testing tests/incorrect_spelling2.nt ***
+noot
+
+int i1, i2, i3;
+
+i1 := 1;
+i2 := 2;
+i3 := 3;
+
+print({
+	const int i1 := 3;
+	int i2;
+	i2 := 5;
+	{
+		const int i3 := 2;
+		(i1 + i3 == i2);
+	};
+,i2); // Should crash here because } is missing (Parsing error)
+
+* Expected Result *
+Parsing error on line: 17
+* Result *
+Parsing error on line: 17
+
+
+
+*** Testing tests/runtime_incorrect.nt ***
+noot
+
+int i1; 
+
+i1 := 3 / 0; // This should generate a runtime crash because of division by 0
+
+* Expected Result *
+Program has failed due to division by zero.
+* Result *
+Program has failed due to division by zero.

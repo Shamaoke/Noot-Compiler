@@ -2,5 +2,5 @@ noot
 
 {
 	const int i1 := 3;
-	int i2; // Should throw exception here
+	int i2; // Should throw exception here because the last command in a compound expression cant be a declaration
 };

@@ -2,4 +2,4 @@ noot
 
 const int i1 := 1;
 
-read(i1); // Should throw exception here
+read(i1); // Should throw exception here, can't read into a constant

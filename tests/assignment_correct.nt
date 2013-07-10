@@ -1,19 +1,14 @@
 noot
 
-// This test should not yield any errors
-// The output should be 4 lines containing 0, 0, true, z
-
 int i1, i2;
 bool b1;
 char c1;
-
-// Testing variable assignments
 
 i1 := i2 := +16 + 2 * -8; // 0
 b1 := 12 / 5 * 5 + 12 % 5 == 12 && 6 >= 6; // true
 c1 := 'z'; // z
 
-print(i1);
-print(i2);
-print(b1);
-print(c1);
+print(i1); // Should print 0
+print(i2); // Should print 0
+print(b1); // Should print true
+print(c1); // Should print z
