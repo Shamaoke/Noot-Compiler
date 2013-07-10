@@ -14,7 +14,6 @@
  */
 package noot.exceptions;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LexerParserException.
  * 
@@ -40,7 +39,8 @@ public class LexerParserException extends RuntimeException {
 	/**
 	 * Instantiates a new noot exception.
 	 * 
-	 * Constructor which only requires the error message to be printed.
+	 * Constructor which can be used when later an
+	 * error message needs to be printed.
 	 *
 	 * @param msg the msg
 	 */

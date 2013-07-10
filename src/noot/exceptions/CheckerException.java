@@ -16,9 +16,10 @@ package noot.exceptions;
 
 import org.antlr.runtime.tree.Tree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CheckerException.
+ * 
+ * To be used by the Checker and the CheckerHelper.
  */
 public class CheckerException extends NootException {
 
@@ -27,8 +28,11 @@ public class CheckerException extends NootException {
 	
 	/**
 	 * Instantiates a new checker exception.
-	 *
-	 * @param msg the msg
+	 * 
+	 * Constructor which can be used when later an
+	 * error message needs to be printed.
+	 * 
+	 * @param msg the message
 	 */
 	public CheckerException(String msg)
 	{
@@ -37,6 +41,9 @@ public class CheckerException extends NootException {
 	
 	/**
 	 * Instantiates a new checker exception.
+	 *
+	 * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
+     * the error message to build a more informative error message.
 	 *
 	 * @param tree the tree
 	 * @param msg the msg

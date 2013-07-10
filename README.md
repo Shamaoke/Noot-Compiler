@@ -5,7 +5,7 @@ The compiler will compile Noot to TAM (Triangle Abstract Machine) using a compil
 
 ## Usage ##
 
-To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a ```.nt``` extention. This will automaticlly generate ```.as```, ```.dot``` and ```.tam``` files. With the ```.as``` you could examine the generated TAM instructions. The ```.dot``` is a visual representation of the AST. And the ```.tam``` is a file you can put into the TAM Interpreter. After compilation the program will automaticlly be executed.
+To run the compiler enter ```java -jar NootCompiler.jar examples/example.nt```. You should always enter a file with a ```.nt``` extention. This will automatically generate ```.as```, ```.dot``` and ```.tam``` files. With the ```.as``` you could examine the generated TAM instructions. The ```.dot``` is a visual representation of the AST. And the ```.tam``` is a file you can put into the TAM Interpreter. After compilation the program will automatically be executed.
 
 To execute a compiled program use ```java -jar TAMInterpreter.jar examples/example.tam```.
 

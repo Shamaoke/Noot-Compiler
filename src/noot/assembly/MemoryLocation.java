@@ -22,6 +22,9 @@ import noot.ast.DeclarationNode;
  * This will represent a register or memory address. To be used with
  * or without DeclarationNode. Without DeclaratioNode should only be
  * used for helper memory location used by the code generator.
+ * 
+ * To-Do: If types that require more space are added later this class
+ * could be expanded to support size.
  */
 public class MemoryLocation {
 

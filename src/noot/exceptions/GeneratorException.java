@@ -16,9 +16,10 @@ package noot.exceptions;
 
 import org.antlr.runtime.tree.Tree;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GeneratorException.
+ * 
+ * To be used by the Generator and the GeneratorHelper.
  */
 public class GeneratorException extends NootException {
 
@@ -28,7 +29,10 @@ public class GeneratorException extends NootException {
 	/**
 	 * Instantiates a new generator exception.
 	 *
-	 * @param msg the msg
+	 * Constructor which can be used when later an
+	 * error message needs to be printed.
+	 * 
+	 * @param msg the message
 	 */
 	public GeneratorException(String msg)
 	{
@@ -37,6 +41,9 @@ public class GeneratorException extends NootException {
 	
 	/**
 	 * Instantiates a new generator exception.
+	 *
+	 * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
+     * the error message to build a more informative error message.
 	 *
 	 * @param tree the tree
 	 * @param msg the msg

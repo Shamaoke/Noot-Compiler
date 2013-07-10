@@ -25,7 +25,7 @@ import noot.antlr.NootLexer;
 import noot.antlr.NootParser;
 import noot.ast.DOTNodeAdaptor;
 import noot.ast.NodeAdaptor;
-import noot.exceptions.LexerParserException;
+import noot.exceptions.*;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.BufferedTreeNodeStream;
@@ -34,27 +34,37 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.stringtemplate.StringTemplate;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Compiler.
  */
 public class Compiler {
 
-	/** The verbose logging. */
+	/**
+	 * The verbose logging.
+	 * 
+	 * If true the compiler will log more detailed information.
+	 */
 	private boolean verboseLogging = false;
 
 	/**
 	 * Compile the input file
+	 * 
+	 * You should always enter a file with a .nt extention.
+	 * This will automatically generate .as, .tam and optionally .dot
+	 * files. With the .as you could examine the generated
+	 * TAM instructions. The .dot is a visual representation
+	 * of the AST. And the .tam is a file you can put into
+	 * the TAM Interpreter. After compilation the program
+	 * will automatically be executed if runAfterwards is true.
 	 *
-	 * @param inputFile the input file
+	 * @param inputFile the input file should have the .nt extention
 	 * @param runAfterwards enter true if you want to run afterwards the program
 	 * @param verboseLogging enter true if you want verbose logging
-	 * @param generateASTVisualization enter true if you want an AST visualization to be generated
-	 * @return true, if successful
+	 * @param generateASTVisualization enter true if you want an AST visualization to be generated as a .dot file
 	 * @throws RecognitionException 
 	 * @throws IOException 
 	 */
-	public boolean compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization) throws RecognitionException, IOException
+	public void compile(String inputFile, boolean runAfterwards, boolean verboseLogging, boolean generateASTVisualization) throws RecognitionException, IOException
 	{
 		this.verboseLogging = verboseLogging;
 		PrintStream standardPrintStream = System.out;
@@ -62,31 +72,33 @@ public class Compiler {
 		if(!inputFile.endsWith(".nt"))
 		{
 			System.err.println("The input file should have the .nt extention");
-			return false;
+			return;
 		}
 
+		// Because we know the file ends with the .nt extension these string methods can be used
+		// to determine other filenames.
 		String intermediateFile = inputFile.substring(0, inputFile.length()-3) + ".as";
 		String DOTFile = inputFile.substring(0, inputFile.length()-3) + ".dot";
 		String TAMFile = inputFile.substring(0, inputFile.length()-3) + ".tam";
 
-		printForVerboseLoging("- Lexical analysis");
+		printForVerboseLogging("- Lexical analysis");
 
 		FileInputStream fileInputStream = new FileInputStream(inputFile);
 		NootLexer lexer = new NootLexer(new ANTLRInputStream(fileInputStream));
 
-		printForVerboseLoging("- Parsing");
+		printForVerboseLogging("- Parsing");
 
 		NootParser parser = new NootParser(new CommonTokenStream(lexer));
 		parser.setTreeAdaptor(new NodeAdaptor());
 		CommonTree tree = (CommonTree) parser.program().getTree();
 
-		printForVerboseLoging("- Contextual analysis");
+		printForVerboseLogging("- Contextual analysis");
 		Checker checker = new Checker(new CommonTreeNodeStream(tree));
 		checker.program();
 
 		if(generateASTVisualization)
 		{
-			printForVerboseLoging("- Generating AST visualization (" + DOTFile + ")");
+			printForVerboseLogging("- Generating AST visualization (" + DOTFile + ")");
 
 			DOTTreeGenerator gen = new DOTTreeGenerator();
 			StringTemplate st = gen.toDOT(tree,new DOTNodeAdaptor());
@@ -96,7 +108,7 @@ public class Compiler {
 			DOTOut.close();
 		}
 
-		printForVerboseLoging("- Intermediate code generation (" + intermediateFile + ")");
+		printForVerboseLogging("- Intermediate code generation (" + intermediateFile + ")");
 
 		Generator generator = new Generator(new BufferedTreeNodeStream(tree));
 		PrintStream writeIntermediateFile = new PrintStream(new File(intermediateFile));
@@ -106,7 +118,7 @@ public class Compiler {
 		System.setOut(standardPrintStream); 
 		writeIntermediateFile.close();
 
-		printForVerboseLoging("- Assemble to TAM (" + TAMFile + ")");
+		printForVerboseLogging("- Assemble to TAM (" + TAMFile + ")");
 
 		InputStream readIntermediateFile = new FileInputStream(intermediateFile);
 		OutputStream writeTAMFile = new FileOutputStream(TAMFile);
@@ -117,42 +129,43 @@ public class Compiler {
 
 		if(runAfterwards)
 		{
-			printForVerboseLoging("- Reading TAM");
+			printForVerboseLogging("- Reading TAM");
 
 			Interpreter.loadObjectProgram(TAMFile);
 
-			printForVerboseLoging("- Execution Test");
+			printForVerboseLogging("- Execution");
 
 			Interpreter.interpretProgram();
 
 			if(verboseLogging)
 			{
-				printForVerboseLoging("- Execution Results");
+				printForVerboseLogging("- Execution Results");
 				Interpreter.showStatus();
 			}
 			else
-			{
 				Interpreter.showFailedStatus();
-			}
 		}
-
-		return true;
-
-
 	}
 
 	/**
-	 * Prints the for verbose loging.
+	 * Prints out if verbose logging is enabled.
 	 *
-	 * @param out the out
+	 * @param out the string to print to System.out
 	 */
-	public void printForVerboseLoging(String out)
+	public void printForVerboseLogging(String out)
 	{
 		if(verboseLogging) System.out.println(out);
 	}
 
 	/**
 	 * The main method.
+	 * 
+	 * This method will create a compiler object and call it with all options enabled.
+	 * The first entered argument will be the location of the file that should be compiled
+	 * and executed.
+	 * 
+	 * In order for this program to work you should enter one argument linking to a .nt file
+	 * that you whish to compile.
 	 *
 	 * @param args the arguments
 	 */
@@ -166,26 +179,44 @@ public class Compiler {
 			try 
 			{
 				c.compile(args[0], true, verboseLogging, true);
-			} 
-			catch (RecognitionException e)
+			}
+			catch (LexerParserException e)
+			{
+				System.err.println("** LEXER/PARSER ERROR **");
+				System.err.println(e.getMessage());
+			}
+			catch (CheckerException e)
+			{
+				System.err.println("** CHECKER ERROR **");
+				System.err.println(e.getMessage());
+				System.err.println("Please resolve the issue and recompile.");
+			}
+			catch (GeneratorException e)
+			{
+				System.err.println("** GENERATOR ERROR **");
+				System.err.println(e.getMessage());
+				System.err.println("Please resolve the issue and recompile.");
+			}
+			catch (NootException e)
 			{
 				System.err.println("** COMPILE ERROR **");
 				System.err.println(e.getMessage());
 				System.err.println("Please resolve the issue and recompile.");
-
+			}
+			catch (RecognitionException e)
+			{
+				System.err.println("** UNEXPECTED COMPILE ERROR **");
+				System.err.println(e.getMessage());
+				System.err.println("Please resolve the issue and recompile.");
+				
 				if(verboseLogging) e.printStackTrace();
 			}
 			catch (IOException e)
 			{
-				System.err.print("** IO ERROR **");
+				System.err.println("** UNEXPECTED IO ERROR **");
 				System.err.println(e.getMessage());
 
 				if(verboseLogging) e.printStackTrace();
-			}
-			catch (LexerParserException e)
-			{
-				System.err.print("** LEXER/PARSER ERROR **");
-				System.err.println(e.getMessage());
 			}
 		}
 		else

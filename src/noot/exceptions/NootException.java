@@ -19,6 +19,8 @@ import org.antlr.runtime.tree.Tree;
 
 /**
  * The Class NootException.
+ * 
+ * To be extended and used by generic helpers like the ScopeHelper.
  */
 public class NootException extends RecognitionException {
 	
@@ -31,7 +33,8 @@ public class NootException extends RecognitionException {
     /**
      * Instantiates a new noot exception.
      * 
-     * Constructor which only requires the error message to be printed.
+     * Constructor which can be used when later an
+	 * error message needs to be printed.
      *
      * @param message the message
      */
