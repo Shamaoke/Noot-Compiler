@@ -30,12 +30,12 @@ public class MemoryLocation {
 
 	/** The declaration. */
 	private DeclarationNode declaration;
-	
+
 	/**
 	 * Instantiates a new memory location for a helper.
 	 */
 	public MemoryLocation() {}
-	
+
 	/**
 	 * Instantiates a new memory location for a declaration.
 	 *

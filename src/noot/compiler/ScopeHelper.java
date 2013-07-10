@@ -18,7 +18,6 @@ import java.util.Stack;
 
 import noot.exceptions.NootException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ScopeHelper.
  * 
@@ -29,7 +28,7 @@ import noot.exceptions.NootException;
  * will provide an generic and complete way to do this.
  */
 public class ScopeHelper {
-	
+
 	/**
 	 * The current scoping level.
 	 * Will be incremented by opening a scope
@@ -37,14 +36,14 @@ public class ScopeHelper {
 	 * @invariant scopingLevel() >= 0;
 	 */
 	private int scopingLevel = 0;
-	
+
 	/** 
 	 * The hold close scope at level integer stack.
 	 * This stack will help when an upcoming scope needs to be
 	 * held open. It holds the scope levels that needs to be held.
 	 */
 	private Stack<Integer> holdCloseScopeAtLevel = new Stack<Integer>(); // Needed for special scoping rules while and if statements
-	
+
 	/**
 	 * Open a new scope.
 	 * @ensure new.scopingLevel() == old.scopingLevel() + 1
@@ -69,7 +68,7 @@ public class ScopeHelper {
 			closeScope();
 		}
 	}
-	
+
 	/**
 	 * Close the current scope.
 	 * 
@@ -84,10 +83,10 @@ public class ScopeHelper {
 	{
 		if(scopingLevel <= 0)
 			throw new NootException("Closing scope when level is already 0");
-			
+
 		scopingLevel--;
 	}
-	
+
 	/**
 	 * Hold the next upcoming scope.
 	 * 
@@ -102,7 +101,7 @@ public class ScopeHelper {
 	{
 		holdCloseScopeAtLevel.push(new Integer(scopingLevel + 1));
 	}
-	
+
 	/**
 	 * Release the held upcoming scope for closing to be allowed again.
 	 * 
@@ -120,7 +119,7 @@ public class ScopeHelper {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Release and close scope.
 	 * 

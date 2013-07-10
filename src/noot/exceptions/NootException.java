@@ -23,50 +23,50 @@ import org.antlr.runtime.tree.Tree;
  * To be extended and used by generic helpers like the ScopeHelper.
  */
 public class NootException extends RecognitionException {
-	
-    /** The message you could use for printing for example. */
-    private String msg;
-    
-    /** The Constant serialVersionUID. */
-    public static final long serialVersionUID = 24162462L; // for Serializable
 
-    /**
-     * Instantiates a new noot exception.
-     * 
-     * Constructor which can be used when later an
+	/** The message you could use for printing for example. */
+	private String msg;
+
+	/** The Constant serialVersionUID. */
+	public static final long serialVersionUID = 24162462L; // for Serializable
+
+	/**
+	 * Instantiates a new noot exception.
+	 * 
+	 * Constructor which can be used when later an
 	 * error message needs to be printed.
-     *
-     * @param message the message
-     */
-    public NootException(String message) {
-        super();
-        this.msg = message;
-    }
+	 *
+	 * @param message the message
+	 */
+	public NootException(String message) {
+		super();
+		this.msg = message;
+	}
 
-    /**
-     * Instantiates a new noot exception.
-     * 
-     * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
-     * the error message to build a more informative error message.
-     *
-     * @param tree the tree
-     * @param message the message
-     */
-    public NootException(Tree tree, String message)
-    {
-        super();
-        this.msg = "" + tree.getText() +
-                "[line:" + tree.getLine() +
-                " char:" + tree.getCharPositionInLine() +
-                "] :: " + msg;
-    }
+	/**
+	 * Instantiates a new noot exception.
+	 * 
+	 * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
+	 * the error message to build a more informative error message.
+	 *
+	 * @param tree the tree
+	 * @param message the message
+	 */
+	public NootException(Tree tree, String message)
+	{
+		super();
+		this.msg = "" + tree.getText() +
+				"[line:" + tree.getLine() +
+				" char:" + tree.getCharPositionInLine() +
+				"] :: " + msg;
+	}
 
-    /* (non-Javadoc)
-     * @see java.lang.Throwable#getMessage()
-     */
-    @Override
-    public String getMessage()
-    {
-        return this.msg;
-    }
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
+	@Override
+	public String getMessage()
+	{
+		return this.msg;
+	}
 }

@@ -25,7 +25,7 @@ public class GeneratorException extends NootException {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6841118816451063086L;
-	
+
 	/**
 	 * Instantiates a new generator exception.
 	 *
@@ -38,12 +38,12 @@ public class GeneratorException extends NootException {
 	{
 		super(msg);
 	}
-	
+
 	/**
 	 * Instantiates a new generator exception.
 	 *
 	 * Constructor that takes a node of the AST tree (i.e. IDENTIFIER) and
-     * the error message to build a more informative error message.
+	 * the error message to build a more informative error message.
 	 *
 	 * @param tree the tree
 	 * @param msg the msg

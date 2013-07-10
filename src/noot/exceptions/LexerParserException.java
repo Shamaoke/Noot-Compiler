@@ -32,10 +32,10 @@ public class LexerParserException extends RuntimeException {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4782135047891258428L;
-	
+
 	/** The message you could use for printing for example. */
-    private String msg;
-	
+	private String msg;
+
 	/**
 	 * Instantiates a new noot exception.
 	 * 
@@ -44,17 +44,17 @@ public class LexerParserException extends RuntimeException {
 	 *
 	 * @param msg the msg
 	 */
-    public LexerParserException(String msg) {
-        super();
-        this.msg = msg;
-    }
-    
-    /* (non-Javadoc)
-     * @see java.lang.Throwable#getMessage()
-     */
-    @Override
-    public String getMessage() {
-        return this.msg;
-    }
+	public LexerParserException(String msg) {
+		super();
+		this.msg = msg;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Throwable#getMessage()
+	 */
+	@Override
+	public String getMessage() {
+		return this.msg;
+	}
 
 }

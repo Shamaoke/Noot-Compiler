@@ -208,7 +208,7 @@ public class Compiler {
 				System.err.println("** UNEXPECTED COMPILE ERROR **");
 				System.err.println(e.getMessage());
 				System.err.println("Please resolve the issue and recompile.");
-				
+
 				if(verboseLogging) e.printStackTrace();
 			}
 			catch (IOException e)
